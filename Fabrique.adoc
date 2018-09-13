@@ -30,8 +30,8 @@ value		: (name=Identifier (':' type)* '=')? expression ';';
 ----
 
 .Semantics
-Most values bind a name (which must be a link:#_identifiers[legal identifier])
-to the result of evaluating an link:#_expressions[expression].
+Most values bind a name (which must be a <<Identifiers,legal identifier>>)
+to the result of evaluating an <<Expressions,expression>>.
 It's also possible to simply use an expression without naming it, but that's
 only really useful for expressions that cause side effects (e.g., declaring
 a build step without giving it an explicit name).
@@ -44,7 +44,7 @@ from functional programming:
    a. all expressions (on the RHS) evaluate to a value with a type, so that
       type can be found when the build is configured;
    b. if an explicit type is given, Fabrique will check that the expression
-      evaluates to a link:#_subtypes[subtype of the explicit type];
+      evaluates to a <<Subtypes,subtype of the explicit type>>;
 3. value names may not be redefined within a scope;
 
 Otherwise, values share some characteristics with statements in other
@@ -85,8 +85,8 @@ An action contains:
 - [optional] arguments to the action itself (e.g., `description`) and
 - parameters that invocations of the action need to provide.
 
-Actions have a link:#_function_types[function type],
-e.g., `(file[in])=>file[out]`, and can be link:#_calls[called] like functions.
+Actions have a <<Function types,function type>>,
+e.g., `(file[in])=>file[out]`, and can be <<Calls,called>> like functions.
 
 The command to execute can include `${varname}`-style substitution patterns.
 These substitutions can capture values from the parameters required by the
@@ -95,12 +95,12 @@ there, captured from the script that the action is defined in
 (useful for selecting tools, e.g., `${cc}`).
 
 Arguments to the action (after the command) must be keyword arguments
-(see link:#_calls[calls] for more details).
+(see <<Calls>> for more details).
 A `description` argument can be used to customize build log output
 (e.g., `'Compiling ${src}'`).
 Other arguments are made available for substitution into the command.
 
-Action parameters can be of any defined link:#_types[type].
+Action parameters can be of any defined <<Types,type>>.
 Parameters of `file` type should specify whether the file in question is an
 input to the rule (`file[in]`) or an output (`file[out]`).
 This is critical for calculating the graph of build dependencies;
@@ -131,9 +131,9 @@ like_an_if_statement = if (y > 0) { y } else { -y };
 ----
 
 Unlike other popular languages, the parentheses around the condition
-(making it a link:#_parenthetical_expressions[parenthetical expression])
+(making it a <<Parenthetical expressions,parenthetical expression>>)
 and the braces around the "then" and "else" clauses
-(making them link:#_compound_expressions[compound expressions])
+(making them <<Compound expressions,compound expressions>>)
 are entirely optional:
 
 [source,fab]
