@@ -1,0 +1,13 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (value foo = {{.*}}(literal 'Hello, world!'{{[)]+}} ;)
+foo = 'Hello, world!';
+
+# CHECK: (value (expression (nameReference foo)) ;)
+foo;
+
+# CHECK: (value (expression {{.*}}(literal 42){{[)]+}} ;)
+42;

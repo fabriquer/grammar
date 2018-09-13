@@ -1,0 +1,79 @@
+= Fabrique grammar
+
+This is the grammar of the Fabrique language, together with some ANTLRv4 tooling for
+language development and parser code generation.
+Ordinary Fabrique development need only use the generated code in this repository (and,
+indeed, it will be imported as a submodule).
+Ordinary Fabrique usage does not require this repository at all.
+
+
+== Contents
+
+link:Fabrique.adoc[]::
+Documentation for the grammar.
+A work in progress.
+
+link:Fabrique.g4[]::
+The ANTLRv4 grammar for Fabrique.
+A work in progress.
+
+link:LICENSE[]::
+BSD 2-clause ("simplified") license.
+
+link:Makefile[]::
+A POSIX makefile that (re)generates C++ and Java parsers for Fabrique.
+The C++ code is for integration with Fabrique.
+The Java code is helpful for hacking on the language grammar itself, e.g.,
+with the Java-based parser and ANTLR's
+https://github.com/antlr/antlr4/blob/master/doc/getting-started.md#unix[`grun`/`TestRig`]
+tool, we can emit actionless parse trees for visualization and unit testing.
+
+link:README.adoc[]::
+This description.
+
+link:antlr[]::
+Directory for ANTLRv4 support files (under a 3-clause BSD license).
+This is currently just a JAR file containing the parser generator and `TestRig`,
+but in the future it may also contain the ANTLR C++ runtime component.
+
+link:tests[]::
+Unit tests for the grammar.
+Used to ensure that the grammar expresses what we mean for it to express,
+particularly when changing it.
+
+
+== Usage
+
+=== Build
+
+To (re)generate the parser source files, simply run `make`.
+
+
+=== Test
+
+To execute the grammar's unit tests, install
+https://pypi.org/project/lit[lit]
+and LLVM's
+https://llvm.org/docs/CommandGuide/FileCheck.html[FileCheck],
+then run `lit -sv` on the link:tests[] directory:
+
+```sh
+$ pip install lit OutputCheck
+$ lit -sv tests
+```
+
+=== Visualize
+
+To visualize a parse tree, you can use the ANTLR `org.antlr.v4.gui.TestRig`
+tool, sometimes installed with the ANTLR package as `grun` ("grammar run").
+For example, to parse the expression `1 + 2` according to our grammar, run:
+
+```sh
+$ export CLASSPATH=./generated/java
+$ echo "1 + 2" | grun Fabrique expression -tree
+(expression ())
+```
+
+You can also view graphical visualizations using the `-gui` argument instead of
+`-trace`.
+See `grun -h` for further options (`-tokens`, `-trace` and more).

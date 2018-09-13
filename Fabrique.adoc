@@ -1,0 +1,457 @@
+:source-highlighter: pygments
+:toc: right
+:toclevels: 3
+
+= The Fabrique build language
+
+== Motivation
+
+== Grammatical elements
+
+=== Values
+
+A Fabrique file is made up of [optionally-]named values.
+
+.Example
+[source,fabrique]
+----
+source_files = files(a.cc b.cc);
+count:int = source_files.length();
+
+object_files = compile(source_files);
+executable = link(object_files);
+----
+
+.Grammar
+[source,antlr-cpp]
+----
+include::Fabrique.g4[lines=34]
+include::Fabrique.g4[lines=37]
+----
+
+.Semantics
+Most values bind a name (which must be a link:#_identifiers[legal identifier])
+to the result of evaluating an link:#_expressions[expression].
+It's also possible to simply use an expression without naming it, but that's
+only really useful for expressions that cause side effects (e.g., declaring
+a build step without giving it an explicit name).
+Values are like variables in many languages, but with a few key aspects
+from functional programming:
+
+1. values are immutable, so there is no distinction between declaration and
+   assignment;
+2. a value's type may be specified explicitly or _inferred_ by Fabrique:
+   a. all expressions (on the RHS) evaluate to a value with a type, so that
+      type can be found when the build is configured;
+   b. if an explicit type is given, Fabrique will check that the expression
+      evaluates to a link:#_subtypes[subtype of the explicit type];
+3. value names may not be redefined within a scope;
+
+Otherwise, values share some characteristics with statements in other
+curly-brace languages like C and Java:
+
+1. values are terminated by a semicolon;
+2. if the value has a name, it must be followed by an equals sign.
+
+
+=== Expressions
+
+Almost everything in Fabrique is an expression that can be evaluated.
+
+
+==== Conditionals
+
+Rather than an `if` statement, Fabrique has a conditional `if`
+_expression_.
+This functions like the ternary operator in C, but is hopefully a bit more
+readable:
+
+[source,fab]
+----
+like_an_if_statement = if (y > 0) { y } else { -y };
+----
+
+Unlike other popular languages, the parentheses around the condition
+(making it a link:#_parenthetical_expressions[parenthetical expression])
+and the braces around the "then" and "else" clauses
+(making them link:#_compound_expressions[compound expressions])
+are entirely optional:
+
+[source,fab]
+----
+more_succinct = if y > 0 y else -y;
+----
+
+Whether or not to use the extra punctuation is a question of clarity and style.
+
+.Grammar
+[source,antlr-cpp]
+----
+include::Fabrique.g4[lines=53..55]
+----
+
+=== TODO
+
+==== Actions
+
+////
+	/**
+	 * A build action: transforms input file(s) to some number of output files.
+	 *
+	 * An action contains:
+	 *  * a command to run,
+	 *  * [optional] arguments to the action itself (e.g., `description`) and
+	 *  * parameters that invocations of the action need to provide.
+	 *
+	 * ```fab
+	 * action('${cc} ${flags} -c ${src} -o ${obj}', description = 'Compiling ${src}'
+	 *         <= src: file[in], obj: file[out], flags: list[string] = [])
+	 * ```
+	const Rule Action =
+		Keywords.Action
+		>> Symbols.OpenParen
+		>> PositionalArgument
+		>> -(Symbols.Comma >> KeywordArguments)
+		>> -(Symbols.Input >> Parameters)
+		>> Symbols.CloseParen
+		;
+	 */
+////
+
+
+==== Binary operators
+
+////
+binaryOperation	: logicalOperation | comparison | sum ;
+
+logicalOperation: lhs=comparison LogicOp rhs=logicalOperation ;
+LogicOp		: 'and' | 'or' | 'xor' ;
+
+logicOrCompare	: logicalOperation | comparison ;
+
+comparison	: lhs=sumOrTerm CompareOp rhs=sumOrTerm ;
+CompareOp	: '<' | '<=' | '>' | '>=' | '==' | '!=' ;
+
+sumOrTerm	: sum | term ;
+
+sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
+////
+
+
+==== Calls
+
+==== Compound expressions
+
+////
+/**
+ * A compound expression includes zero or more value definitions and ends with
+ * an expression (which the compound expression evaluates to).
+ *
+ * ```fab
+ * {
+ *   foo = 42;
+ *   bar = 3.1415926;
+ *
+ *   foo / bar
+ * }
+ * ```
+ */
+compoundExpr	: '{' (values+=value)* result=expression '}' ;
+////
+
+
+==== Field queries
+
+////
+/**
+ * A field query lets us provide a default value for a record field that may
+ * or may not exist.
+ *
+ * ```fab
+ * debug = args.debug ? false;
+ * ```
+ */
+fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
+////
+
+==== Field references
+
+==== Files
+
+////
+	/**
+	 * A file in the described build, with a name and, optionally, arguments.
+	 *
+	 * Example:
+	 * `file('foo.c', cflags = [ '-D' 'FOO' ])`
+	 */
+////
+
+==== File lists
+
+////
+	/**
+	 * File lists can include raw filenames as well as embedded file declarations,
+	 * optionally followed by arguments.
+	 *
+	 * Example:
+	 * ```
+	 * files(
+	 *   foo.c
+	 *   bar.c
+	 *   file('baz.c', cflags = [])
+	 *   ,
+	 *   arg1 = 'hello', arg2 = 42
+	 * )
+	 * ```
+	const Rule FileList =
+		Keywords.Files
+		>> Symbols.OpenParen
+		>> *(File | Filename)
+		>> -(Symbols.Comma >> KeywordArguments)
+		>> Symbols.CloseParen
+		;
+	 */
+////
+
+
+==== Foreach
+
+////
+/**
+ * A foreach loop transforms a sequence of values into another sequence,
+ * possibly of different type.
+ *
+ * ```fab
+ * y = foreach x <- [ 1 2 3 ] {
+ * 	x + 1
+ * };
+ * ```
+ *
+ * Or, equivalently:
+ *
+ * ```fab
+ * y = foreach x <- [ 1 2 3 ]
+ * 	x + 1;
+ * ```
+ */
+foreach
+	: 'foreach' Identifier (':' type)? '<-' src=expression body=expression
+	;
+////
+
+==== Functions
+
+////
+	/**
+	 * A function is a fairly conventional closure that can capture values
+	 * from its surrounding scope.
+	 *
+	 * ```fab
+	 * f = function(x:int, y:list[string]): int
+	 * {
+	 * 	x + 1
+	 * };
+	 * y = f(1);
+	 * ```
+	 *
+	 * Or, equivalently:
+	 *
+	 * ```fab
+	 * y = (function(x:int, y:list[string]) x + 1)(1);
+	 * ```
+	 */
+/**
+ * A function, much like in other languages, takes parameters and may return
+ * a value.
+ *
+ * ```fab
+ * compile = function(srcs:list[file], common_flags:list[string] = [],
+ *                    deps:list[file[in]] = []): list[file]
+ * {
+ *     foreach src <- srcs {
+ *         obj = src + '.o';
+ *         flags = (src.cxxflags ? common_flags) + default_flags.object;
+ * 
+ *         compile_one(src, obj, flags, deps);
+ *         obj
+ *     }
+ * };
+ * ```
+ */
+function	: 'function' '(' parameters ')' (':' type)? body=expression ;
+
+/*
+function:
+	functiondecl '(' parameterList ')' ':' type expression
+	{
+		SourceRange begin = Take(Parser::ParseToken($1))->source();
+		auto params = Take(NodeVec<Parameter>($3));
+		auto *retTy = $6.type;
+		auto body = TakeNode<Expression>($7);
+		SetOrDie($$, p->DefineFunction(begin, params, body, retTy));
+	}
+	|
+	functiondecl '(' parameterList ')' expression
+	{
+		SourceRange begin = Take(Parser::ParseToken($1))->source();
+		auto params = Take(NodeVec<Parameter>($3));
+		auto body = TakeNode<Expression>($5);
+		SetOrDie($$, p->DefineFunction(begin, params, body));
+	}
+	;
+*/
+
+/**
+ * Positional arguments are matched to parameters by order.
+ *
+ * ```fab
+ * f(1, 2.0)
+ * ```
+ */
+
+	/**
+	 * Keyword arguments are matched to parameters by explicit name.
+	 *
+	 * ```fab
+	 * f(a = 1, b = 2.0)
+	 * ```
+	 */
+
+	/**
+	 * Named arguments must always come after unnamed (positional) arguments.
+	 *
+	 * ```fab
+	 * f(x, y, z);
+	 * f(a = x, b = y, c = z);
+	 * f(x, c = z, b = y);
+	 * ```
+	 */
+
+	/**
+	 * Actions and functions are both callable.
+	 *
+	 * ```fab
+	 * f = function(x:int) x + 1;
+	 * a = action(...);
+	 *
+	 * result = a(version = f(42));
+	 * ```
+	 */
+
+parameters	: (parameter (',' parameter)*)? ;
+parameter	: Identifier ':' type ('=' expression)? ;
+////
+
+
+////
+
+/*
+		// Match calls after things that look vaguely call-like such as files:
+		| Call
+
+		// Put identifier references after keywords so that
+		// we don't match keywords as identifiers:
+		| NameReference
+		;
+ */
+////
+
+
+==== Literals
+
+////
+literal
+	: Boolean
+	| Integer
+	| String
+	;
+
+Boolean	: 'true' | 'false' ;
+Integer	: [0-9]+ ;
+String
+	: '\'' .*? '\''
+	| '"' .*? '"'
+	;
+////
+
+
+==== Lists
+
+////
+/**
+ * Lists are containers for like values and do not use comma separators.
+ * The type of the list is taken to be "list of the supertype of all of the
+ * list's elements".
+ *
+ * Example:
+ * ```
+ * x:int = 42;
+ * y:special_int = some_special_kind_of_int();
+ *
+ * [ 1 2 3 x y ]   # the type of this is list[int]
+ * ```
+ */
+list		: '[' (values+=expression)* ']' ;
+////
+
+
+==== Records
+
+==== Unary operations
+
+////
+unaryOperation	: ('not' | '-' | '+') expression ;
+////
+
+
+=== Types
+
+==== Subtypes
+
+////
+/**
+ * There are four syntaxes for naming types:
+ *
+ *  - function types: `(type1, type2) => resultType`
+ *  - record types: `record[field1:type2, field2:type2]`
+ *  - parametric types: `simpleName[typeArg1, typeArg2]`
+ *  - simple types: `int`, `string`, `foo`, etc.
+ */
+type
+	: functionType
+	| recordType
+	| parametricType
+	| simpleType
+	;
+
+functionType	: '(' type_list ')' '=>' type ;
+recordType	: 'record' '[' (fieldType (',' fieldType)*)? ','? ']' ;
+fieldType	: Identifier ':' type ;
+parametricType	: simpleType '[' type_list ']' ;
+simpleType	: Identifier ;
+
+type_list : type (',' type)* ','? ;
+
+////
+
+
+=== Identifiers
+
+.Grammar
+[source,antlr-cpp]
+Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
+
+
+=== Comments and whitespace
+
+Comments and whitespace look much like they do in shell scripts:
+single-line comments start with a `#` character, there are no multi-line
+comments and spaces, tabs and newlines are all ignored.
+
+.Grammar
+[source,antlr-cpp]
+----
+include::Fabrique.g4[lines=137]
+include::Fabrique.g4[lines=140]
+----
