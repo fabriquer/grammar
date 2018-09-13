@@ -6,7 +6,9 @@
 # CHECK: (value foo = {{.*}}(literal 'Hello, world!'{{[)]+}} ;)
 foo = 'Hello, world!';
 
-# CHECK: (value (expression (nameReference foo)) ;)
+# CHECK: (value (expression 
+# CHECK:   (nameReference foo)
+# CHECK:   ) ;)
 foo;
 
 # CHECK: (value (expression {{.*}}(literal 42){{[)]+}} ;)

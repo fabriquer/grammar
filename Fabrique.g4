@@ -45,7 +45,6 @@ expression
 	| fieldQuery
 	| foreach
 	| function
-	| nameReference
 	| term
 	;
 
@@ -69,7 +68,6 @@ function
 	: 'function' '(' parameters ')' (':' type)? body=expression
 	;
 
-nameReference	: Identifier ;
 
 
 //
@@ -79,6 +77,7 @@ term
 	: literal
 	| compoundExpr
 	| list
+	| nameReference
 	;
 
 literal
@@ -97,6 +96,8 @@ compoundExpr	: '{' (values+=value)* result=expression '}' ;
 
 // Zero or more expressions of (usually) like type
 list		: '[' (values+=expression)* ']' ;
+
+nameReference	: Identifier ;
 
 
 //
