@@ -146,6 +146,17 @@ sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
 
 ==== Calls
 
+////
+===== Arguments
+
+Comma-separated
+
+Keywords after positionals
+
+As with all arguments, it is not an error to have a trailing comma after the
+final argument.
+////
+
 ==== Compound expressions
 
 ////

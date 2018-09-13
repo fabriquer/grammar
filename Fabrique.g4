@@ -109,6 +109,10 @@ nameReference	: Identifier ;
 //
 // Arguments and parameters (used in quite a few places):
 //
+argument	: keywordArgument | expression ;
+keywordArgument	: Identifier '=' expression ;
+keywordArguments: (args+=keywordArgument (',' args+=keywordArgument)* ','?) ;
+
 parameters	: (parameter (',' parameter)*)? ;
 parameter	: Identifier ':' type ('=' expression)? ;
 
