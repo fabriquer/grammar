@@ -59,6 +59,65 @@ curly-brace languages like C and Java:
 Almost everything in Fabrique is an expression that can be evaluated.
 
 
+==== Build actions
+
+A _build action_ represents a step that transforms input file(s) to output
+file(s).
+Common build actions include compiling source files, linking libraries and
+executables and generating code (e.g., with `rpcgen` and `yacc`).
+Actions defined in Fabrique source files execute shell commands with string
+substitution (e.g., `'${cc} ${cflags} -c ${src} -o ${obj}'`); these commands
+are executed at build time (rather than compile time).
+
+.Examples
+[source, fab]
+----
+
+cc = action('${cc} ${flags} -c ${src} -o ${obj}', description = 'Compiling ${src}'
+	<= src: file[in], obj: file[out], flags: list[string] = []);
+
+obj:file = cc(src_file);
+----
+
+An action contains:
+
+- a command to run,
+- [optional] arguments to the action itself (e.g., `description`) and
+- parameters that invocations of the action need to provide.
+
+Actions have a link:#_function_types[function type],
+e.g., `(file[in])=>file[out]`, and can be link:#_calls[called] like functions.
+
+The command to execute can include `${varname}`-style substitution patterns.
+These substitutions can capture values from the parameters required by the
+action, or else from the arguments provided to the action, or if not found
+there, captured from the script that the action is defined in
+(useful for selecting tools, e.g., `${cc}`).
+
+Arguments to the action (after the command) must be keyword arguments
+(see link:#_calls[calls] for more details).
+A `description` argument can be used to customize build log output
+(e.g., `'Compiling ${src}'`).
+Other arguments are made available for substitution into the command.
+
+Action parameters can be of any defined link:#_types[type].
+Parameters of `file` type should specify whether the file in question is an
+input to the rule (`file[in]`) or an output (`file[out]`).
+This is critical for calculating the graph of build dependencies;
+it is an error to omit the `in` or `out` tag.
+
+.Grammar
+[source, antlr-cpp]
+----
+buildAction
+	: 'action' '(' command=expression
+		(',' keywordArguments)?
+		('<-' parameters)?
+		')'
+	;
+----
+
+
 ==== Conditionals
 
 Rather than an `if` statement, Fabrique has a conditional `if`
@@ -97,33 +156,6 @@ conditional
 ----
 
 === TODO
-
-==== Actions
-
-////
-	/**
-	 * A build action: transforms input file(s) to some number of output files.
-	 *
-	 * An action contains:
-	 *  * a command to run,
-	 *  * [optional] arguments to the action itself (e.g., `description`) and
-	 *  * parameters that invocations of the action need to provide.
-	 *
-	 * ```fab
-	 * action('${cc} ${flags} -c ${src} -o ${obj}', description = 'Compiling ${src}'
-	 *         <= src: file[in], obj: file[out], flags: list[string] = [])
-	 * ```
-	const Rule Action =
-		Keywords.Action
-		>> Symbols.OpenParen
-		>> PositionalArgument
-		>> -(Symbols.Comma >> KeywordArguments)
-		>> -(Symbols.Input >> Parameters)
-		>> Symbols.CloseParen
-		;
-	 */
-////
-
 
 ==== Binary operators
 

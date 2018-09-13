@@ -1,0 +1,66 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value simple_cxx =
+# CHECK:    (expression
+# CHECK:      (action
+# CHECK:        (literal '${CXX} -c ${src} -o ${obj}')
+# CHECK:        <-
+# CHECK:        (parameters
+# CHECK:          (parameter src :
+# CHECK:            (type
+# CHECK:              (parametricType
+# CHECK:                (simpleType list)
+# CHECK:                [
+# CHECK:                  (type_list
+# CHECK:                    [[FILE_IN:\(type \(parametricType \(simpleType file\) \[ \(type_list \(type \(simpleType in\)\)\) \]\)\)]]
+# CHECK:                  )
+# CHECK:                ]
+# CHECK:            )
+# CHECK:           )
+# CHECK:          )
+# CHECK:          ,
+# CHECK:          (parameter obj : 
+# CHECK:            [[FILE_OUT:\(type \(parametricType \(simpleType file\) \[ \(type_list \(type \(simpleType out\)\)\) \]\)\)]]
+# CHECK:          )
+# CHECK:        )
+# CHECK:      )
+# CHECK:    )
+# CHECK:  ;)
+simple_cxx = action('${CXX} -c ${src} -o ${obj}' <- src:list[file[in]], obj:file[out]);
+
+# CHECK:  (value cxx =
+# CHECK:    (action
+# CHECK:      (literal '${CXX} -c ${cxxflags} -MMD -MF ${dep} -o ${out} ${src}')
+# CHECK:      ,
+# CHECK:      (keywordArguments
+# CHECK:        (keywordArgument description =
+# CHECK:           (literal 'Compiling ${src}'))
+# CHECK:      )
+# CHECK:      <-
+# CHECK:      (parameters
+# CHECK:        (parameter src : [[FILE_IN]]
+# CHECK:        (parameter obj : [[FILE_OUT]]) ,
+# CHECK:        (parameter depfile : [[FILE_OUT]])
+# CHECK:      )
+# CHECK:    )
+# CHECK:  ;)
+cxx = action('${CXX} -c ${cxxflags} -MMD -MF ${dep} -o ${out} ${src}',
+	description = 'Compiling ${src}'
+	<- src:file[in], obj:file[out], depfile:file[out]);
+
+# CHECK:  (value lex =
+# CHECK:    (action
+# CHECK:      (literal '${LEX} -c++ --header-file=${header} --outfile=${gen} ${lex}')
+# CHECK:      <-
+# CHECK:      (parameters
+# CHECK:        (parameter lex : [[FILE_IN]]
+# CHECK:        (parameter gen : [[FILE_OUT]]) ,
+# CHECK:        (parameter header : [[FILE_OUT]])
+# CHECK:      )
+# CHECK:    )
+# CHECK:  ;)
+lex = action('${LEX} -c++ --header-file=${header} --outfile=${gen} ${lex}'
+              <- lex:file[in], gen:file[out], header:file[out]);

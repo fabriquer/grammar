@@ -80,10 +80,18 @@ unaryOperator	: ('not' | '-' | '+') expression ;
 // A term is a simple expression that represents one "thing" with no operations
 //
 term
-	: compoundExpr
+	: buildAction
+	| compoundExpr
 	| list
 	| literal
 	| nameReference
+	;
+
+buildAction
+	: 'action' '(' command=expression
+		(',' keywordArguments)?
+		('<-' parameters)?
+		')'
 	;
 
 literal
