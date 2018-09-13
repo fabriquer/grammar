@@ -5,7 +5,7 @@
 
 # CHECK:  (value simple_cxx =
 # CHECK:    (expression
-# CHECK:      (action
+# CHECK:      (buildAction
 # CHECK:        (literal '${CXX} -c ${src} -o ${obj}')
 # CHECK:        <-
 # CHECK:        (parameters
@@ -32,7 +32,7 @@
 simple_cxx = action('${CXX} -c ${src} -o ${obj}' <- src:list[file[in]], obj:file[out]);
 
 # CHECK:  (value cxx =
-# CHECK:    (action
+# CHECK:    (buildAction
 # CHECK:      (literal '${CXX} -c ${cxxflags} -MMD -MF ${dep} -o ${out} ${src}')
 # CHECK:      ,
 # CHECK:      (keywordArguments
@@ -52,7 +52,7 @@ cxx = action('${CXX} -c ${cxxflags} -MMD -MF ${dep} -o ${out} ${src}',
 	<- src:file[in], obj:file[out], depfile:file[out]);
 
 # CHECK:  (value lex =
-# CHECK:    (action
+# CHECK:    (buildAction
 # CHECK:      (literal '${LEX} -c++ --header-file=${header} --outfile=${gen} ${lex}')
 # CHECK:      <-
 # CHECK:      (parameters
