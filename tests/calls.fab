@@ -1,0 +1,46 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value
+# CHECK-LABEL: (nameReference noArguments)
+# CHECK:    ( )
+# CHECK:  )
+noArguments();
+
+# CHECK:  (value
+# CHECK-LABEL: (nameReference positionalArguments)
+# CHECK:    (positionalArguments
+# CHECK:      (literal 1)
+# CHECK:      (literal 2)
+# CHECK:      (literal 'hello')
+# CHECK:      (literal true)
+# CHECK:    )
+# CHECK:  )
+positionalArguments(1, 2, 'hello', true);
+
+# CHECK:  (value
+# CHECK-LABEL: (nameReference keywordArguments)
+# CHECK:    (arguments
+# CHECK:      (keywordArguments
+# CHECK:        (keywordArgument what = {{.*}} (literal 'hello'))
+# CHECK:        (keywordArgument who = {{.*}} (literal 'world'))
+# CHECK:      )
+# CHECK:    )
+# CHECK:  )
+keywordArguments(what='hello', who = 'world');
+
+# CHECK:  (value
+# CHECK-LABEL: (nameReference mixedArguments)
+# CHECK:    (arguments
+# CHECK:      (positionalArguments
+# CHECK:        (literal 1)
+# CHECK:        (literal 2)
+# CHECK:      )
+# CHECK:      (keywordArguments
+# CHECK:        (keywordArgument x = {{.*}} (literal 3))
+# CHECK:      )
+# CHECK:    )
+# CHECK:  )
+mixedArguments(1, 2, x=3);

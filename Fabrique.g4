@@ -40,7 +40,8 @@ value		: (name=Identifier (':' type)* '=')? expression ';';
 // Almost everything in Fabrique is an expression that can be evaluated
 //
 expression
-	: compoundExpr
+	: call
+	| compoundExpr
 	| conditional
 	| fieldQuery
 	| foreach
@@ -48,6 +49,9 @@ expression
 	| unaryOperator
 	| term
 	;
+
+// Anything with a function type can be called
+call	: term '(' arguments? ')' ;
 
 // Evaluates to one of two possibilities based on a condition
 conditional
@@ -117,9 +121,16 @@ nameReference	: Identifier ;
 //
 // Arguments and parameters (used in quite a few places):
 //
-argument	: keywordArgument | expression ;
+arguments
+	: positionalArguments ',' keywordArguments
+	| positionalArguments
+	| keywordArguments
+	;
+
 keywordArgument	: Identifier '=' expression ;
 keywordArguments: (args+=keywordArgument (',' args+=keywordArgument)* ','?) ;
+
+positionalArguments	: expression (',' expression)* ','? ;
 
 parameters	: (parameter (',' parameter)*)? ;
 parameter	: Identifier ':' type ('=' expression)? ;

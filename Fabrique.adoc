@@ -118,6 +118,48 @@ buildAction
 ----
 
 
+==== Calls
+
+Values of function type (including both <<Build actions,build actions>>
+and <<Functions,functions>>) can be _called_ using a syntax that looks like
+a lot of languages: with comma-separated arguments inside of parentheses.
+
+.Examples
+[source, fab]
+----
+noArguments();
+positionalArguments(1, 2, 'hello', true);
+keywordArguments(what='hello', who = 'world');
+mixedArguments(1, 2, x=3);
+----
+
+Arguments may be _positional_ (parameter name unspecified) or
+_keyword_ (parameter name specified).
+Positional arguments, if present, must come first — otherwise it would be
+difficult to tell which parameter you intend each argument to be passed to.
+It is permissible to use an extra comma at the end of the argument list;
+this can help reduce the sizes of diffs when parameters and arguments are
+added or removed.
+
+.Grammar
+[source, antlr-cpp]
+----
+// Anything with a function type can be called
+call	: term '(' arguments? ')' ;
+
+arguments
+	: positionalArguments ',' keywordArguments
+	| positionalArguments
+	| keywordArguments
+	;
+
+keywordArgument	: Identifier '=' expression ;
+keywordArguments: (args+=keywordArgument (',' args+=keywordArgument)* ','?) ;
+
+positionalArguments	: expression (',' expression)* ','? ;
+----
+
+
 ==== Conditionals
 
 Rather than an `if` statement, Fabrique has a conditional `if`
@@ -175,19 +217,6 @@ sumOrTerm	: sum | term ;
 sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
 ////
 
-
-==== Calls
-
-////
-===== Arguments
-
-Comma-separated
-
-Keywords after positionals
-
-As with all arguments, it is not an error to have a trailing comma after the
-final argument.
-////
 
 ==== Compound expressions
 
