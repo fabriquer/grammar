@@ -1,0 +1,35 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+#  (value p = (expression (term (literal true))) #)
+p = true;
+
+# CHECK: (value q =
+# CHECK:   (expression (unaryOperator not
+# CHECK:     (nameReference p)
+# CHECK: ;)
+q = not p;
+
+# CHECK: (value x =
+# CHECK:   (expression (unaryOperator -
+# CHECK:     (literal 42)
+# CHECK: ;)
+x = -42;
+
+# CHECK: (value y =
+# CHECK:   (expression (unaryOperator +
+# CHECK:     (literal 42)
+# CHECK: ;)
+y = +42;
+
+# CHECK: (value z =
+# CHECK:   (expression (unaryOperator -
+# CHECK:     (nameReference y)
+# CHECK: ;)
+z = -y;
+
+# CHECK: <EOF>)

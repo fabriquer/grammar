@@ -45,6 +45,7 @@ expression
 	| fieldQuery
 	| foreach
 	| function
+	| unaryOperator
 	| term
 	;
 
@@ -68,6 +69,7 @@ function
 	: 'function' '(' parameters ')' (':' type)? body=expression
 	;
 
+unaryOperator	: ('not' | '-' | '+') expression ;
 
 
 //
