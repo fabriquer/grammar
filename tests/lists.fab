@@ -1,0 +1,39 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+# CHECK: (value default_cflags =
+# CHECK:   (expression
+# CHECK:     (list [
+# CHECK:       (expression (term (literal 'a')))
+# CHECK:       (expression (term (literal 'list')))
+# CHECK:       (expression (term (literal 'of')))
+# CHECK:       (expression (term (literal 'strings')))
+# CHECK:     ])
+# CHECK:   )
+# CHECK: ;)
+default_cflags = [ 'a' 'list' 'of' 'strings'];
+
+# CHECK: (value some_numbers =
+# CHECK:   (expression
+# CHECK:     (list [
+# CHECK:       (expression (term (literal 1)))
+# CHECK:       (expression (term (literal 2)))
+# CHECK:       (expression (term (literal 3)))
+# CHECK:     ])
+# CHECK:   )
+# CHECK: ;)
+some_numbers = [ 1 2 3 ];
+
+# CHECK: (value singleton = (expression
+# CHECK:   (list [ (expression (term (literal '!'))) ])
+# CHECK: ) ;)
+singleton = [ '!' ];
+
+# CHECK: (value nothing = (expression (term (list [ ]))) ;)
+nothing = [ ];
+
+# CHECK: <EOF>)
