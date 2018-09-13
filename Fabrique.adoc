@@ -444,6 +444,7 @@ String
 list		: '[' (values+=expression)* ']' ;
 ////
 
+==== Parenthetical expressions
 
 ==== Records
 
@@ -455,6 +456,14 @@ unaryOperation	: ('not' | '-' | '+') expression ;
 
 
 === Types
+
+==== Simple types
+
+==== Parametric types
+
+==== Record types
+
+==== Function types
 
 ==== Subtypes
 
