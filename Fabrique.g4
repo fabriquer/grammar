@@ -80,9 +80,9 @@ unaryOperator	: ('not' | '-' | '+') expression ;
 // A term is a simple expression that represents one "thing" with no operations
 //
 term
-	: literal
-	| compoundExpr
+	: compoundExpr
 	| list
+	| literal
 	| nameReference
 	;
 
