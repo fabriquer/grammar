@@ -25,8 +25,8 @@ executable = link(object_files);
 .Grammar
 [source,antlr-cpp]
 ----
-include::Fabrique.g4[lines=34]
-include::Fabrique.g4[lines=37]
+file		: (values+=value)* EOF;
+value		: (name=Identifier (':' type)* '=')? expression ';';
 ----
 
 .Semantics
@@ -87,7 +87,9 @@ Whether or not to use the extra punctuation is a question of clarity and style.
 .Grammar
 [source,antlr-cpp]
 ----
-include::Fabrique.g4[lines=53..55]
+conditional
+	: 'if' condition=expression thenClause=expression elseClause=expression
+	;
 ----
 
 === TODO
@@ -452,6 +454,6 @@ comments and spaces, tabs and newlines are all ignored.
 .Grammar
 [source,antlr-cpp]
 ----
-include::Fabrique.g4[lines=137]
-include::Fabrique.g4[lines=140]
+Comment		: '#' ~[\r\n]* -> skip;
+WS		: [ \t\r\n]+ -> skip;
 ----
