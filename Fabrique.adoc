@@ -88,7 +88,11 @@ Whether or not to use the extra punctuation is a question of clarity and style.
 [source,antlr-cpp]
 ----
 conditional
-	: 'if' condition=expression thenClause=expression elseClause=expression
+	: 'if'
+	  condition=expression
+	  thenClause=expression
+	  'else'
+	  elseClause=expression
 	;
 ----
 

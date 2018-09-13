@@ -51,7 +51,11 @@ expression
 
 // Evaluates to one of two possibilities based on a condition
 conditional
-	: 'if' condition=expression thenClause=expression elseClause=expression
+	: 'if'
+	  condition=expression
+	  thenClause=expression
+	  'else'
+	  elseClause=expression
 	;
 
 // Extracts a field's value if the field exists, or else a default value

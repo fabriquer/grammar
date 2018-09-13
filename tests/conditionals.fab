@@ -1,0 +1,39 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:   (value foo = (expression (term (literal true))) ;)
+foo = true;
+
+# CHECK:   (value bar =
+# CHECK:     (expression (
+# CHECK:       conditional if
+# CHECK:       (expression (term (literal true)))
+# CHECK:       (expression (term (literal 42)))
+# CHECK:       else
+# CHECK:       (expression (term (literal 31415926)))))
+# CHECK:     ;)
+bar = if true 42 else 31415926;
+
+# CHECK:   (value baz =
+# CHECK:     (conditional if
+# CHECK:       (unaryOperator not
+# CHECK:         (nameReference foo)
+# CHECK:       )
+# CHECK:       (literal "hello")
+# CHECK:       else
+# CHECK:       (literal "world")
+# CHECK:     )
+# CHECK:   ;)
+baz = if not foo "hello" else "world";
+
+# CHECK:   (value wibble =
+# CHECK:     (conditional if
+# CHECK:       (nameReference foo)
+# CHECK:       (literal 'a')
+# CHECK:       else
+# CHECK:       (literal 'b')
+# CHECK:     )
+# CHECK:   ;)
+wibble = if foo { 'a' } else { 'b' };
