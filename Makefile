@@ -1,4 +1,5 @@
 .POSIX:
+.SUFFIXES: .adoc .html
 
 ANTLR			= java -cp $(CLASSPATH) org.antlr.v4.Tool
 ANTLRFLAGS		= -no-listener -visitor
@@ -21,7 +22,9 @@ check: java
 	lit -sv tests
 
 clean:
-	$(RM) $(GENERATED_SRC_DIR)
+	$(RM) $(GENERATED_SRC_DIR) *.html
+
+doc: Fabrique.html
 
 test: check
 
@@ -36,3 +39,6 @@ $(PARSER_JAVA_SOURCE): $(GRAMMAR)
 
 $(PARSER_JAVA_CLASS): $(PARSER_JAVA_SOURCE)
 	javac -cp $(CLASSPATH) $(GENERATED_JAVA_DIR)/*.java
+
+.adoc.html:
+	asciidoctor $<
