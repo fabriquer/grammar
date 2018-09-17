@@ -23,7 +23,7 @@ executable = link(object_files);
 ----
 
 .Grammar
-[source,antlr-cpp]
+[source,antlr]
 ----
 file		: (values+=value)* EOF;
 value		: (name=Identifier (':' type)* '=')? expression ';';
@@ -107,7 +107,7 @@ This is critical for calculating the graph of build dependencies;
 it is an error to omit the `in` or `out` tag.
 
 .Grammar
-[source, antlr-cpp]
+[source, antlr]
 ----
 buildAction
 	: 'action' '(' command=expression
@@ -142,7 +142,7 @@ this can help reduce the sizes of diffs when parameters and arguments are
 added or removed.
 
 .Grammar
-[source, antlr-cpp]
+[source, antlr]
 ----
 // Anything with a function type can be called
 call	: term '(' arguments? ')' ;
@@ -184,7 +184,7 @@ They also constrain the scope of intermediate variables, which can also help
 with clarity of expression.
 
 .Grammar
-[source, antlr-cpp]
+[source, antlr]
 ----
 // Zero or more value definitions and a result
 compoundExpr	: '{' (values+=value)* result=expression '}' ;
@@ -217,7 +217,7 @@ more_succinct = if y > 0 y else -y;
 Whether or not to use the extra punctuation is a question of clarity and style.
 
 .Grammar
-[source,antlr-cpp]
+[source,antlr]
 ----
 conditional
 	: 'if'
@@ -262,7 +262,7 @@ sophisticated.
 However, good style would suggest that you keep visual complexity under control.
 
 .Grammar
-[source, antlr-cpp]
+[source, antlr]
 ----
 // Access a field within a record
 fieldReference
@@ -310,7 +310,7 @@ call target.
 
 
 .Grammar
-[source, antlr-cpp]
+[source, antlr]
 ----
 parentheticalExpression	: '(' expression ')' ;
 ----
@@ -623,7 +623,7 @@ type_list : type (',' type)* ','? ;
 === Identifiers
 
 .Grammar
-[source,antlr-cpp]
+[source,antlr]
 Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
 
 
@@ -634,7 +634,7 @@ single-line comments start with a `#` character, there are no multi-line
 comments and spaces, tabs and newlines are all ignored.
 
 .Grammar
-[source,antlr-cpp]
+[source,antlr]
 ----
 Comment		: '#' ~[\r\n]* -> skip;
 WS		: [ \t\r\n]+ -> skip;
