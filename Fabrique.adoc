@@ -488,6 +488,8 @@ list		: '[' (values+=expression)* ']' ;
 
 ==== Records
 
+==== Terms
+
 ==== Unary operations
 
 ////
