@@ -27,6 +27,11 @@ single_quoted = 'double quotes (") are OK';
 # CHECK: ;)
 double_quoted = "single quotes (') are OK";
 
+# CHECK: (value empty_string =
+# CHECK:   (literal '')
+# CHECK: ;)
+empty_string = '';
+
 # CHECK: (value integer : (type {{.*}} int){{[)]+}}
 # CHECK:   = (expression {{.*}}(literal 42{{[)]+}} ;)
 integer:int = 42;
