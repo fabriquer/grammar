@@ -44,6 +44,7 @@ expression
 	| compoundExpr
 	| conditional
 	| fieldQuery
+	| fieldReference
 	| foreach
 	| function
 	| unaryOperator
@@ -65,6 +66,12 @@ conditional
 // Extracts a field's value if the field exists, or else a default value
 fieldQuery
 	: base=term '.' field=Identifier '?' defaultValue=expression
+	;
+
+// Access a field within a record
+fieldReference
+	: term '.' Identifier
+	| fieldReference '.' Identifier     // explicitly left-recursive
 	;
 
 // Transforms one sequence into another

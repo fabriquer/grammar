@@ -228,6 +228,50 @@ conditional
 	;
 ----
 
+
+==== Field references
+
+<<Records>> contain fields, which are accessed using the dot (`.`) operator.
+
+.Examples
+[source, fab]
+----
+# Access a single field:
+simple = foo.bar;
+
+# Access a field within a field (within a field, within a field, ...):
+nested = foo.bar.baz;
+
+# Slightly more complicated things:
+complex = (if something foo else bar).baz.wibble;
+
+veryComplex = {
+	x = record { foo = 42 };
+	y = record { bar = x };
+
+	y
+}.bar.foo;
+----
+
+
+The base of a field reference (the record containing the fields) must be a
+<<Terms,term>>, but that includes compound expressions and
+parenthetical expressions.
+Using one of those constructs, you can construct expressions that are quite
+sophisticated.
+However, good style would suggest that you keep visual complexity under control.
+
+.Grammar
+[source, antlr-cpp]
+----
+// Access a field within a record
+fieldReference
+	: term '.' Identifier
+	| fieldReference '.' Identifier     // explicitly left-recursive
+	;
+----
+
+
 ==== Parenthetical expressions
 
 An expression enclosed in parentheses is treated as a <<Terms,_term_>>
@@ -306,8 +350,6 @@ sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
  */
 fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
 ////
-
-==== Field references
 
 ==== Files
 

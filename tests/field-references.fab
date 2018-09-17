@@ -1,0 +1,40 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+
+# CHECK: (value simple =
+# CHECK:   (fieldReference (term (nameReference foo)) . bar))
+# CHECK: ;)
+simple = foo.bar;
+
+# CHECK: (value nested =
+# CHECK:   (fieldReference
+# CHECK:     (fieldReference (term (nameReference foo)) . bar)
+# CHECK:     . baz
+# CHECK:   )
+# CHECK: ;)
+nested = foo.bar.baz;
+
+# CHECK: (value complex =
+# CHECK:   (fieldReference
+# CHECK:     (fieldReference
+# CHECK:       (parentheticalExpression (
+# CHECK:         (conditional if
+# CHECK:           (nameReference something)
+# CHECK:           (nameReference foo)
+# CHECK:           else
+# CHECK:           (nameReference bar)
+# CHECK:         )
+# CHECK:       ))
+# CHECK:     )
+# CHECK:     . baz
+# CHECK:   )
+# CHECK:   . wibble
+# CHECK: ;)
+complex = (if something foo else bar).baz.wibble;
+
+# CHECK:  <EOF>)
