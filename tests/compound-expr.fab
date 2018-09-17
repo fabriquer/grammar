@@ -1,0 +1,40 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+# CHECK: (value foo =
+# CHECK:   (compoundExpr {
+foo = {
+
+	# CHECK: (value x =
+	# CHECK:   (call (term (nameReference foo)) ( )))
+	# CHECK: ;)
+	x = foo();
+
+	# CHECK: (value y =
+	# CHECK:   (call
+	# CHECK:     (nameReference bar)
+	# CHECK:     (nameReference x)
+	# CHECK:   )
+	# CHECK: ;)
+	y = bar(x);
+
+	# CHECK: (value z =
+	# CHECK:   (call
+	# CHECK:     (nameReference baz)
+	# CHECK:     (nameReference y)
+	# CHECK:   )
+	# CHECK: ;)
+	z = baz(y);
+
+	# CHECK: (expression
+	# CHECK:   (nameReference z)
+	# CHECK: )
+	z
+};
+
+# CHECK:  ;)
+# CHECK:  <EOF>)

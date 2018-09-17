@@ -160,6 +160,37 @@ positionalArguments	: expression (',' expression)* ','? ;
 ----
 
 
+==== Compound expressions
+
+A compound expression is a braced list of values followed by an expression.
+The values describe intermediate state that can be used by the final
+"result" expression.
+
+.Example
+[source, fab]
+----
+{
+	src = file(basename + '.c');
+	obj = compile(src);
+	binary = link(obj);
+
+	binary
+}
+----
+
+Compound expressions can help clarify the meaning of expressions like
+<<Conditionals,conditionals>> by adding braces.
+They also constrain the scope of intermediate variables, which can also help
+with clarity of expression.
+
+.Grammar
+[source, antlr-cpp]
+----
+// Zero or more value definitions and a result
+compoundExpr	: '{' (values+=value)* result=expression '}' ;
+----
+
+
 ==== Conditionals
 
 Rather than an `if` statement, Fabrique has a conditional `if`
@@ -215,26 +246,6 @@ CompareOp	: '<' | '<=' | '>' | '>=' | '==' | '!=' ;
 sumOrTerm	: sum | term ;
 
 sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
-////
-
-
-==== Compound expressions
-
-////
-/**
- * A compound expression includes zero or more value definitions and ends with
- * an expression (which the compound expression evaluates to).
- *
- * ```fab
- * {
- *   foo = 42;
- *   bar = 3.1415926;
- *
- *   foo / bar
- * }
- * ```
- */
-compoundExpr	: '{' (values+=value)* result=expression '}' ;
 ////
 
 
