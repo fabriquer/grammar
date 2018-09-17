@@ -128,8 +128,9 @@ Almost everything in Fabrique is an expression that can be evaluated.
 
 ==== Build actions
 
-A _build action_ represents a step that transforms input file(s) to output
-file(s).
+At the heart of a Fabrique build description is a set of _build actions_.
+Each build action represents a step that transforms
+input <<Files,file(s)>> to output <<Files,file(s)>>.
 Common build actions include compiling source files, linking libraries and
 executables and generating code (e.g., with `rpcgen` and `yacc`).
 Actions defined in Fabrique source files execute shell commands with string
