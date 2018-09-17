@@ -272,6 +272,47 @@ fieldReference
 ----
 
 
+==== Literals
+
+Fabrique (currently) supports three literal types: boolean values,
+integers and strings (single- or double-quoted).
+
+.Examples
+[source, fab]
+----
+p:bool = true;
+q = false;
+integer:int = 42;
+single_quoted = 'double quotes (") are OK';
+double_quoted = "single quotes (') are OK";
+list_of_numbers = [ 1 2 3 ];
+list_of_bools = [ true false ];
+----
+
+Boolean literals are spelled in all lower-case (`true` and `false`).
+Integers are currently specified in a base-10 representation; future versions
+of this grammar may also support binary, octal or hex literals.
+Strings may be single- or double-quoted; there is not semantic distinction
+between them, the two types exist purely for convenience of writing strings
+that contain quote characters.
+**We do not yet support escape characters.**
+
+.Grammar
+[source, antlr]
+----
+// We support boolean, numeric and string literals
+literal
+	: BoolLiteral
+	| IntLiteral
+	| StringLiteral
+	;
+
+BoolLiteral	: 'true' | 'false' ;
+IntLiteral	: [0-9]+ ;
+StringLiteral	: ('\'' .*? '\'') | ('"' .*? '"');
+----
+
+
 ==== Parenthetical expressions
 
 An expression enclosed in parentheses is treated as a <<Terms,_term_>>
@@ -530,24 +571,6 @@ parameter	: Identifier ':' type ('=' expression)? ;
 		| NameReference
 		;
  */
-////
-
-
-==== Literals
-
-////
-literal
-	: Boolean
-	| Integer
-	| String
-	;
-
-Boolean	: 'true' | 'false' ;
-Integer	: [0-9]+ ;
-String
-	: '\'' .*? '\''
-	| '"' .*? '"'
-	;
 ////
 
 

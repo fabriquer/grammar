@@ -5,26 +5,46 @@
 
 # CHECK: (file
 
-# CHECK: (value foo ={{.*}} (literal 'a string literal'{{[)]+}} ;)
-foo = 'a string literal';
+# CHECK: (value p
+# CHECK:   : (type (simpleType bool))
+# CHECK:   =
+# CHECK:   (literal true)
+# CHECK: ;)
+p:bool = true;
 
-# CHECK: (value bar : (type {{.*}} int){{[)]+}} = (expression {{.*}}(literal 42{{[)]+}} ;)
-bar:int = 42;
+# CHECK: (value q =
+# CHECK:   (literal false)
+# CHECK: ;)
+q = false;
 
-# CHECK: (value baz =
+# CHECK: (value single_quoted =
+# CHECK:   (literal 'double quotes (") are OK')
+# CHECK: ;)
+single_quoted = 'double quotes (") are OK';
+
+# CHECK: (value double_quoted =
+# CHECK:   (literal "single quotes (') are OK")
+# CHECK: ;)
+double_quoted = "single quotes (') are OK";
+
+# CHECK: (value integer : (type {{.*}} int){{[)]+}}
+# CHECK:   = (expression {{.*}}(literal 42{{[)]+}} ;)
+integer:int = 42;
+
+# CHECK: (value list_of_numbers =
 # CHECK:   list [
 # CHECK:     (literal 1)
 # CHECK:     (literal 2)
 # CHECK:     (literal 3)
 # CHECK:   ]
 # CHECK: ;)
-baz = [ 1 2 3 ];
+list_of_numbers = [ 1 2 3 ];
 
 
-# CHECK: (value wibble =
+# CHECK: (value list_of_bools =
 # CHECK:   list [
 # CHECK:     (literal true)
 # CHECK:     (literal false)
 # CHECK:   ]
 # CHECK: ;)
-wibble = [ true false ];
+list_of_bools = [ true false ];

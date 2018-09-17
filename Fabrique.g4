@@ -106,6 +106,13 @@ buildAction
 		')'
 	;
 
+// Zero or more value definitions and a result
+compoundExpr	: '{' (values+=value)* result=expression '}' ;
+
+// Zero or more expressions of (usually) like type
+list		: '[' (values+=expression)* ']' ;
+
+// We support boolean, numeric and string literals
 literal
 	: BoolLiteral
 	| IntLiteral
@@ -115,13 +122,6 @@ literal
 BoolLiteral	: 'true' | 'false' ;
 IntLiteral	: [0-9]+ ;
 StringLiteral	: ('\'' .*? '\'') | ('"' .*? '"');
-
-
-// Zero or more value definitions and a result
-compoundExpr	: '{' (values+=value)* result=expression '}' ;
-
-// Zero or more expressions of (usually) like type
-list		: '[' (values+=expression)* ']' ;
 
 nameReference	: Identifier ;
 
