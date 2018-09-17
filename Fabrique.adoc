@@ -652,9 +652,30 @@ Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
 
 === Comments and whitespace
 
-Comments and whitespace look much like they do in shell scripts:
-single-line comments start with a `#` character, there are no multi-line
-comments and spaces, tabs and newlines are all ignored.
+Comments and whitespace look much like they do in shell scripts.
+
+.Examples
+[source,fab]
+----
+# Comments can start at the beginning of a line of partway through one
+
+# Here's another comment:
+sources = files(a.c b.c);     # our source files
+
+#
+# Begin/end multiline comments are not supported: just use multiple single-line
+# comments together in a row.
+#
+----
+
+Single-line comments start with a `#` character.
+There are no multi-line comments.
+Comments are currently ignored completely.
+We may add semantics to comments in the future (a la Doxygen), but we
+haven't yet.
+
+Whitespace in Fabrique is not significant (like, e.g., Python):
+spaces, tabs and newlines are all ignored.
 
 .Grammar
 [source,antlr]
