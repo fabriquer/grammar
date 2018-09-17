@@ -8,6 +8,40 @@
 
 == Grammatical elements
 
+=== Comments and whitespace
+
+Comments and whitespace look much like they do in shell scripts.
+
+.Examples
+[source,fab]
+----
+# Comments can start at the beginning of a line of partway through one
+
+# Here's another comment:
+sources = files(a.c b.c);     # our source files
+
+#
+# Begin/end multiline comments are not supported: just use multiple single-line
+# comments together in a row.
+#
+----
+
+Single-line comments start with a `#` character.
+There are no multi-line comments.
+Comments are currently ignored completely.
+We may add semantics to comments in the future (a la Doxygen), but we
+haven't yet.
+
+Whitespace in Fabrique is not significant (like, e.g., Python):
+spaces, tabs and newlines are all ignored.
+
+.Grammar
+[source,antlr]
+----
+Comment		: '#' ~[\r\n]* -> skip;
+WS		: [ \t\r\n]+ -> skip;
+----
+
 === Values
 
 A Fabrique file is made up of [optionally-]named values.
@@ -52,6 +86,15 @@ curly-brace languages like C and Java:
 
 1. values are terminated by a semicolon;
 2. if the value has a name, it must be followed by an equals sign.
+
+
+=== Identifiers
+
+.Grammar
+[source,antlr]
+----
+Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
+----
 
 
 === Expressions
@@ -642,44 +685,3 @@ type_list : type (',' type)* ','? ;
 unaryOperation	: ('not' | '-' | '+') expression ;
 ////
 
-
-=== Identifiers
-
-.Grammar
-[source,antlr]
-Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
-
-
-=== Comments and whitespace
-
-Comments and whitespace look much like they do in shell scripts.
-
-.Examples
-[source,fab]
-----
-# Comments can start at the beginning of a line of partway through one
-
-# Here's another comment:
-sources = files(a.c b.c);     # our source files
-
-#
-# Begin/end multiline comments are not supported: just use multiple single-line
-# comments together in a row.
-#
-----
-
-Single-line comments start with a `#` character.
-There are no multi-line comments.
-Comments are currently ignored completely.
-We may add semantics to comments in the future (a la Doxygen), but we
-haven't yet.
-
-Whitespace in Fabrique is not significant (like, e.g., Python):
-spaces, tabs and newlines are all ignored.
-
-.Grammar
-[source,antlr]
-----
-Comment		: '#' ~[\r\n]* -> skip;
-WS		: [ \t\r\n]+ -> skip;
-----
