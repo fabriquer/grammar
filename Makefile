@@ -1,5 +1,5 @@
 .POSIX:
-.SUFFIXES: .adoc .html
+.SUFFIXES: .adoc .html .pdf
 
 ANTLR			= java -cp $(CLASSPATH) org.antlr.v4.Tool
 ANTLRFLAGS		= -no-listener -visitor
@@ -24,7 +24,7 @@ check: java
 clean:
 	$(RM) $(GENERATED_SRC_DIR) *.html
 
-doc: Fabrique.html
+doc: Fabrique.html Fabrique.pdf
 
 test: check
 
@@ -42,3 +42,6 @@ $(PARSER_JAVA_CLASS): $(PARSER_JAVA_SOURCE)
 
 .adoc.html:
 	asciidoctor $<
+
+.adoc.pdf:
+	asciidoctor-pdf $<
