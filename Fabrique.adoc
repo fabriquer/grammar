@@ -597,24 +597,17 @@ list		: '[' (values+=expression)* ']' ;
 
 ==== Terms
 
-==== Unary operations
+==== Types
 
-////
-unaryOperation	: ('not' | '-' | '+') expression ;
-////
+===== Simple types
 
+===== Parametric types
 
-=== Types
+===== Record types
 
-==== Simple types
+===== Function types
 
-==== Parametric types
-
-==== Record types
-
-==== Function types
-
-==== Subtypes
+===== Subtypes
 
 ////
 /**
@@ -640,6 +633,13 @@ simpleType	: Identifier ;
 
 type_list : type (',' type)* ','? ;
 
+////
+
+
+==== Unary operations
+
+////
+unaryOperation	: ('not' | '-' | '+') expression ;
 ////
 
 
