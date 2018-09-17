@@ -90,6 +90,30 @@ curly-brace languages like C and Java:
 
 === Identifiers
 
+Identifiers looks like those in many programming languages.
+
+.Examples
+[source,fab]
+----
+# This is a sensible name:
+a_valid_identifier;
+
+# This is a less-sensible but still-legal name:
+another_identifier_that_is_valid_even_if_it_is_2_long_4_G00D_STYLE;
+
+# This is not an identifier:
+1badname;
+----
+
+Fabrique identifiers currently only use characters from the ASCII character
+set.
+Careful thought will be required in the future about adding support for other
+characters.
+Identifiers must start with a letter and then may continue with letters,
+numbers and underscores.
+It is conventional (but not mandated) to use underscore-separated
+lower-case names.
+
 .Grammar
 [source,antlr]
 ----
