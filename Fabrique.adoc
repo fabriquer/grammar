@@ -340,6 +340,72 @@ fieldReference
 ----
 
 
+==== Files
+
+Files are the primary artifacts of almost any build.
+Fabrique provides two ways to describe files: individually using the `file`
+builtin or collectively using the `files` construct.
+
+
+===== File declarations
+
+Individual files can be described with the `file` builtin.
+
+.Examples
+[source,fab]
+----
+file('foo.c', cflags = [ '-D' 'FOO' ]);
+----
+
+This builtin looks like a regular function, but its name is a reserved word
+in the language and it requires that the first (positional) argument be a
+string containing a filename (usually relative to the directory containing the
+current Fabrique file).
+Additional arguments are stored as properties of the file; these properties
+can be accessed by <<Build actions,build actions>> and <<Functions,functions>>
+that accept file arguments.
+
+.Grammar
+Grammatically, a file declaration looks like <<Calls,any other call>>.
+
+
+===== File lists
+
+When describing lots of files, it can be inconvenient to wrap each of them in
+a `file` declaration.
+Fabrique also provides a dedicated syntax for describing lots of files:
+the _file list_.
+A file list is wrapped by `files()` like a call, but internally its syntax
+permits the use of raw filenames.
+
+.Examples
+[source,fab]
+----
+files(
+	foo.c
+	bar.c
+	file('baz.c', cflags = [])
+	,
+	cflags = ['-Wall'], arg2 = 42
+)
+----
+
+A file list contains a sequence of _entries_, which can be raw filenames or
+<<File declarations,file declarations>>, optionally followed by some
+keyword arguments (see <<Calls>> for details).
+Just like file declarations, the keyword arguments are turned into fields
+attached to the file list (and visible as fields each file in the list when
+the list is iterated over with a <<Foreach,foreach expression>>).
+Arguments to embedded file declarations can override arguments passed to the
+file list (e.g., `cflags` in the example above).
+
+.Grammar
+[source,antlr]
+----
+// TODO: lexical modes, etc.
+----
+
+
 ==== Foreach
 
 A foreach loop transforms one sequence into another.
@@ -502,45 +568,6 @@ sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
  */
 fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
 ////
-
-==== Files
-
-////
-	/**
-	 * A file in the described build, with a name and, optionally, arguments.
-	 *
-	 * Example:
-	 * `file('foo.c', cflags = [ '-D' 'FOO' ])`
-	 */
-////
-
-==== File lists
-
-////
-	/**
-	 * File lists can include raw filenames as well as embedded file declarations,
-	 * optionally followed by arguments.
-	 *
-	 * Example:
-	 * ```
-	 * files(
-	 *   foo.c
-	 *   bar.c
-	 *   file('baz.c', cflags = [])
-	 *   ,
-	 *   arg1 = 'hello', arg2 = 42
-	 * )
-	 * ```
-	const Rule FileList =
-		Keywords.Files
-		>> Symbols.OpenParen
-		>> *(File | Filename)
-		>> -(Symbols.Comma >> KeywordArguments)
-		>> Symbols.CloseParen
-		;
-	 */
-////
-
 
 ==== Functions
 
