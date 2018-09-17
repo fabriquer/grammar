@@ -339,6 +339,49 @@ fieldReference
 ----
 
 
+==== Foreach
+
+A foreach loop transforms one sequence into another.
+
+.Examples
+[source,fab]
+----
+# A somewhat verbose way to use foreach, a bit like a conventional for loop:
+y = foreach x <- [ 1 2 3 ]
+{
+	x + 1
+};
+
+# Equivalently, a shorter way of expressing the same thing:
+y = foreach x <- [ 1 2 3 ] x + 1;
+----
+
+Unlike most general-purpose computation languages, Fabrique doesn't have
+statements, so it doesn't have a conventional looping primitive.
+What it does have is the ability to transform one sequence of things
+(e.g., source files) into a sequence of related things (e.g., object files).
+This is much like applying a mapping operation to an iterator, but it's spelled
+`foreach` to be a bit more accessible.
+
+The `foreach` expression includes:
+
+ * the keyword `foreach`,
+ * the name of the loop variable,
+ * the sequence to map from and
+ * an expression representing the transformation of one sequence element.
+
+The entire `foreach` expression evaluates to a sequence of new elements.
+
+.Grammar
+[source,antlr]
+----
+// Transforms one sequence into another
+foreach
+	: 'foreach' Identifier (':' type)? '<-' src=expression body=expression
+	;
+----
+
+
 ==== Literals
 
 Fabrique (currently) supports three literal types: boolean values,
@@ -497,31 +540,6 @@ fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
 	 */
 ////
 
-
-==== Foreach
-
-////
-/**
- * A foreach loop transforms a sequence of values into another sequence,
- * possibly of different type.
- *
- * ```fab
- * y = foreach x <- [ 1 2 3 ] {
- * 	x + 1
- * };
- * ```
- *
- * Or, equivalently:
- *
- * ```fab
- * y = foreach x <- [ 1 2 3 ]
- * 	x + 1;
- * ```
- */
-foreach
-	: 'foreach' Identifier (':' type)? '<-' src=expression body=expression
-	;
-////
 
 ==== Functions
 
