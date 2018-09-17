@@ -89,6 +89,7 @@ term
 	| list
 	| literal
 	| nameReference
+	| parentheticalExpression
 	;
 
 buildAction
@@ -116,6 +117,8 @@ compoundExpr	: '{' (values+=value)* result=expression '}' ;
 list		: '[' (values+=expression)* ']' ;
 
 nameReference	: Identifier ;
+
+parentheticalExpression	: '(' expression ')' ;
 
 
 //

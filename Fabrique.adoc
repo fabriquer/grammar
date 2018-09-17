@@ -228,6 +228,50 @@ conditional
 	;
 ----
 
+==== Parenthetical expressions
+
+An expression enclosed in parentheses is treated as a <<Terms,_term_>>
+and can therefore appear in places that a more general expression expression
+cannot.
+It is also evaluated before subexpressions that are not inside of the
+parentheses.
+
+.Examples
+[source, fab]
+----
+# Specifying an order of operations:
+x = p and (q or r);
+
+# Choose which function we want to call:
+y = (if useF f else g)(x);
+
+# Without parentheses, g(x) is evaluated before the if condition:
+bad = if useF f else g(x);
+----
+
+Just like every other language, Fabrique has an order of operations for its
+operators, and parentheses can be used to override that order.
+In the example above, the expression for `x` will only be true if `p` is true;
+without parentheses, `r` alone would be sufficient to make `x` true.
+
+Parentheses are also helpful when we want to use an expression inside of an
+expression that only works with terms.
+For example, a <<Calls,call>> or <<Field references,field reference>>
+requires its target (the function to call or the record to look in) to be
+a term.
+The example code above shows how we can use an expression like a
+<<Conditionals,conditional>> to choose which function we want to call,
+then use that conditional within parentheses to actually specifify the
+call target.
+
+
+.Grammar
+[source, antlr-cpp]
+----
+parentheticalExpression	: '(' expression ')' ;
+----
+
+
 === TODO
 
 ==== Binary operators
@@ -483,8 +527,6 @@ String
  */
 list		: '[' (values+=expression)* ']' ;
 ////
-
-==== Parenthetical expressions
 
 ==== Records
 
