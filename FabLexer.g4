@@ -39,6 +39,7 @@ WS		: [ \t\r\n]+ -> skip ;
 
 // Keywords:
 Action		: 'action' ;
+FileListStart	: 'files(' -> pushMode(FileList) ;   // enter "file list" mode
 Foreach		: 'foreach' ;
 Function	: 'function' ;
 Else		: 'else' ;
@@ -68,3 +69,14 @@ Plus		: '+' ;
 Produces	: '->' ;
 Query		: '?' ;
 TypeSep		: ':' ;
+
+
+// The syntax of file lists is different from that of everything else.
+mode FileList ;
+
+FileListArgs	: ',' -> popMode ;
+FileListEnd	: ')' -> popMode ;
+
+FilenameLiteral	: [A-Za-z0-9_./]+ ;
+
+FileListWS	: [ \t\r\n]+ -> skip ;

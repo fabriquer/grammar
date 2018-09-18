@@ -384,14 +384,12 @@ permits the use of raw filenames.
 files(
 	foo.c
 	bar.c
-	file('baz.c', cflags = [])
 	,
 	cflags = ['-Wall'], arg2 = 42
 )
 ----
 
-A file list contains a sequence of _entries_, which can be raw filenames or
-<<File declarations,file declarations>>, optionally followed by some
+A file list contains a sequence of raw filenames, optionally followed by some
 keyword arguments (see <<Calls>> for details).
 Just like file declarations, the keyword arguments are turned into fields
 attached to the file list (and visible as fields each file in the list when
@@ -402,7 +400,18 @@ file list (e.g., `cflags` in the example above).
 .Grammar
 [source,antlr]
 ----
-// TODO: lexical modes, etc.
+// Some number of files with common properties
+fileList
+	: FileListStart FilenameLiteral*
+	  (FileListEnd | (FileListArgs keywordArguments ParenClose))
+	;
+
+// With lexer rules:
+FileListStart	: 'files(' -> pushMode(FileList) ;   // enter "file list" mode
+FileListEnd	: ')' -> popMode ;
+FileListArgs	: ',' -> popMode ;
+FilenameLiteral	: [A-Za-z0-9_./]+ ;
+FileListWS	: [ \t\r\n]+ -> skip ;
 ----
 
 

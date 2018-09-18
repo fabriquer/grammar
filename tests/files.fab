@@ -1,0 +1,43 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+
+# CHECK: (file
+
+# CHECK: (value foo =
+# CHECK:   (call
+# CHECK:     (nameReference file)
+# CHECK:     (arguments (positionalArguments
+# CHECK:       (literal 'Inputs/foo.txt')
+# CHECK:     ))
+# CHECK:   )
+# CHECK: ;)
+foo = file('Inputs/foo.txt');
+
+# CHECK: (value bar =
+# CHECK:   (fileList files( Inputs/foo.txt ))
+# CHECK: ;)
+bar = files(     Inputs/foo.txt     );
+
+# CHECK: (value baz =
+# CHECK:   (fileList files( Inputs/foo.txt Inputs/baz.txt ))
+# CHECK: ;)
+baz = files(
+	Inputs/foo.txt
+	Inputs/baz.txt
+);
+
+# CHECK: (value wibble =
+# CHECK:   (fileList files(
+# CHECK:     wibble.txt
+# CHECK:     ,
+# CHECK:     (keywordArguments
+# CHECK:       (keywordArgument subdir =
+# CHECK:         (literal 'Inputs')
+# CHECK:       )
+# CHECK:     )
+# CHECK:   ) )
+# CHECK: ;)
+wibble = files(wibble.txt, subdir = 'Inputs');
+
+# CHECK:   <EOF>)

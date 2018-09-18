@@ -95,6 +95,7 @@ unaryOperator	: (Not | Minus | Plus) expression ;
 term
 	: buildAction
 	| compoundExpr
+	| fileList
 	| list
 	| literal
 	| nameReference
@@ -110,6 +111,12 @@ buildAction
 
 // Zero or more value definitions and a result
 compoundExpr	: BraceOpen (values+=value)* result=expression BraceClose ;
+
+// Some number of files with common properties
+fileList
+	: FileListStart FilenameLiteral*
+	  (FileListEnd | (FileListArgs keywordArguments ParenClose))
+	;
 
 // Zero or more expressions of (usually) like type
 list		: BracketOpen (values+=expression)* BracketClose ;
