@@ -78,12 +78,14 @@ fieldReference
 
 // Transforms one sequence into another
 foreach
-	: Foreach Identifier (TypeSep type)? Input src=expression body=expression
+	: Foreach Identifier (TypeSep type)? Input src=expression
+	  body=expression
 	;
 
 // Transforms parameters into a result
 function
-	: Function ParenOpen parameters ParenClose (TypeSep type)? body=expression
+	: Function ParenOpen parameters ParenClose (TypeSep type)?
+	  body=expression
 	;
 
 unaryOperator	: (Not | Minus | Plus) expression ;
