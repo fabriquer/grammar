@@ -520,6 +520,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_compound_expressions">Compound expressions</a></li>
 <li><a href="#_conditionals">Conditionals</a></li>
 <li><a href="#_field_references">Field references</a></li>
+<li><a href="#_files">Files</a></li>
+<li><a href="#_foreach">Foreach</a></li>
 <li><a href="#_literals">Literals</a></li>
 <li><a href="#_parenthetical_expressions">Parenthetical expressions</a></li>
 </ul>
@@ -528,9 +530,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_binary_operators">Binary operators</a></li>
 <li><a href="#_field_queries">Field queries</a></li>
-<li><a href="#_files">Files</a></li>
-<li><a href="#_file_lists">File lists</a></li>
-<li><a href="#_foreach">Foreach</a></li>
 <li><a href="#_functions">Functions</a></li>
 <li><a href="#_lists">Lists</a></li>
 <li><a href="#_records">Records</a></li>
@@ -708,8 +707,9 @@ lower-case names.</p>
 <div class="sect3">
 <h4 id="_build_actions">Build actions</h4>
 <div class="paragraph">
-<p>A <em>build action</em> represents a step that transforms input file(s) to output
-file(s).
+<p>At the heart of a Fabrique build description is a set of <em>build actions</em>.
+Each build action represents a step that transforms
+input <a href="#_files">file(s)</a> to output <a href="#_files">file(s)</a>.
 Common build actions include compiling source files, linking libraries and
 executables and generating code (e.g., with <code>rpcgen</code> and <code>yacc</code>).
 Actions defined in Fabrique source files execute shell commands with string
@@ -942,6 +942,145 @@ However, good style would suggest that you keep visual complexity under control.
 </div>
 </div>
 <div class="sect3">
+<h4 id="_files">Files</h4>
+<div class="paragraph">
+<p>Files are the primary artifacts of almost any build.
+Fabrique provides two ways to describe files: individually using the <code>file</code>
+builtin or collectively using the <code>files</code> construct.</p>
+</div>
+<div class="sect4">
+<h5 id="_file_declarations">File declarations</h5>
+<div class="paragraph">
+<p>Individual files can be described with the <code>file</code> builtin.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fab"><span></span>file(&#39;foo.c&#39;, cflags = [ &#39;-D&#39; &#39;FOO&#39; ]);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This builtin looks like a regular function, but its name is a reserved word
+in the language and it requires that the first (positional) argument be a
+string containing a filename (usually relative to the directory containing the
+current Fabrique file).
+Additional arguments are stored as properties of the file; these properties
+can be accessed by <a href="#_build_actions">build actions</a> and <a href="#_functions">functions</a>
+that accept file arguments.</p>
+</div>
+<div class="paragraph">
+<div class="title">Grammar</div>
+<p>Grammatically, a file declaration looks like <a href="#_calls">any other call</a>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_file_lists">File lists</h5>
+<div class="paragraph">
+<p>When describing lots of files, it can be inconvenient to wrap each of them in
+a <code>file</code> declaration.
+Fabrique also provides a dedicated syntax for describing lots of files:
+the <em>file list</em>.
+A file list is wrapped by <code>files()</code> like a call, but internally its syntax
+permits the use of raw filenames.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fab"><span></span>files(
+	foo.c
+	bar.c
+	,
+	cflags = [&#39;-Wall&#39;], arg2 = 42
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A file list contains a sequence of raw filenames, optionally followed by some
+keyword arguments (see <a href="#_calls">Calls</a> for details).
+Just like file declarations, the keyword arguments are turned into fields
+attached to the file list (and visible as fields each file in the list when
+the list is iterated over with a <a href="#_foreach">foreach expression</a>).
+Arguments to embedded file declarations can override arguments passed to the
+file list (e.g., <code>cflags</code> in the example above).</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Some number of files with common properties</span><span class="tok-w"></span>
+<span class="tok-nl">fileList</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">FileListStart</span><span class="tok-w"> </span><span class="tok-no">FilenameLiteral</span><span class="tok-o">*</span><span class="tok-w"></span>
+<span class="tok-w">	  </span><span class="tok-o">(</span><span class="tok-no">FileListEnd</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-no">FileListArgs</span><span class="tok-w"> </span><span class="tok-nv">keywordArguments</span><span class="tok-w"> </span><span class="tok-no">ParenClose</span><span class="tok-o">))</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-c">// With lexer rules:</span><span class="tok-w"></span>
+<span class="tok-nl">FileListStart</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;files(&#39;</span><span class="tok-w"> </span><span class="tok-o">-&gt;</span><span class="tok-w"> </span><span class="tok-nv">pushMode</span><span class="tok-o">(</span><span class="tok-no">FileList</span><span class="tok-o">)</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w">   </span><span class="tok-c">// enter &quot;file list&quot; mode</span><span class="tok-w"></span>
+<span class="tok-nl">FileListEnd</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;)&#39;</span><span class="tok-w"> </span><span class="tok-o">-&gt;</span><span class="tok-w"> </span><span class="tok-nv">popMode</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">FileListArgs</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;,&#39;</span><span class="tok-w"> </span><span class="tok-o">-&gt;</span><span class="tok-w"> </span><span class="tok-nv">popMode</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">FilenameLiteral</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-x">A-Za-z0-9_./</span><span class="tok-p">]</span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">FileListWS</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-x"> \t\r\n</span><span class="tok-p">]</span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-o">-&gt;</span><span class="tok-w"> </span><span class="tok-nv">skip</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_foreach">Foreach</h4>
+<div class="paragraph">
+<p>A foreach loop transforms one sequence into another.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fab"><span></span># A somewhat verbose way to use foreach, a bit like a conventional for loop:
+y = foreach x &lt;- [ 1 2 3 ]
+{
+	x + 1
+};
+
+# Equivalently, a shorter way of expressing the same thing:
+y = foreach x &lt;- [ 1 2 3 ] x + 1;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unlike most general-purpose computation languages, Fabrique doesn&#8217;t have
+statements, so it doesn&#8217;t have a conventional looping primitive.
+What it does have is the ability to transform one sequence of things
+(e.g., source files) into a sequence of related things (e.g., object files).
+This is much like applying a mapping operation to an iterator, but it&#8217;s spelled
+<code>foreach</code> to be a bit more accessible.</p>
+</div>
+<div class="paragraph">
+<p>The <code>foreach</code> expression includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the keyword <code>foreach</code>,</p>
+</li>
+<li>
+<p>the name of the loop variable,</p>
+</li>
+<li>
+<p>the sequence to map from and</p>
+</li>
+<li>
+<p>an expression representing the transformation of one sequence element.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The entire <code>foreach</code> expression evaluates to a sequence of new elements.</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Transforms one sequence into another</span><span class="tok-w"></span>
+<span class="tok-nl">foreach</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;foreach&#39;</span><span class="tok-w"> </span><span class="tok-no">Identifier</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-s">&#39;:&#39;</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-o">)?</span><span class="tok-w"> </span><span class="tok-s">&#39;&lt;-&#39;</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-o">=</span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">body</span><span class="tok-o">=</span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_literals">Literals</h4>
 <div class="paragraph">
 <p>Fabrique (currently) supports three literal types: boolean values,
@@ -1042,18 +1181,6 @@ call target.</p>
 
 </div>
 <div class="sect3">
-<h4 id="_files">Files</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_file_lists">File lists</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_foreach">Foreach</h4>
-
-</div>
-<div class="sect3">
 <h4 id="_functions">Functions</h4>
 
 </div>
@@ -1102,7 +1229,7 @@ call target.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-17 12:12:02 NDT
+Last updated 2018-09-17 22:16:30 NDT
 </div>
 </div>
 </body>
