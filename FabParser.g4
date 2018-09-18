@@ -1,4 +1,4 @@
-//! @file Fabrique.g4   ANTLRv4 description of Fabrique grammar
+//! @file Fabrique.g4   ANTLRv4 description of Fabrique parser grammar
 
 /*
  * Copyright 2018 Jonathan Anderson
@@ -26,7 +26,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-grammar Fabrique;
+parser grammar FabParser;
+
+options { tokenVocab = FabLexer; }
 
 //
 // The top-level construct in a Fabrique file is an ordered list of values
@@ -34,7 +36,7 @@ grammar Fabrique;
 file		: (values+=value)* EOF;
 
 // A value (optionally) binds a name to an expression
-value		: (name=Identifier (':' type)* '=')? expression ';';
+value		: (name=Identifier (TypeSep type)* Assign)? expression End;
 
 //
 // Almost everything in Fabrique is an expression that can be evaluated
@@ -52,39 +54,39 @@ expression
 	;
 
 // Anything with a function type can be called
-call	: term '(' arguments? ')' ;
+call	: term ParenOpen arguments? ParenClose ;
 
 // Evaluates to one of two possibilities based on a condition
 conditional
-	: 'if'
+	: If
 	  condition=expression
 	  thenClause=expression
-	  'else'
+	  Else
 	  elseClause=expression
 	;
 
 // Extracts a field's value if the field exists, or else a default value
 fieldQuery
-	: base=term '.' field=Identifier '?' defaultValue=expression
+	: base=term FieldSep field=Identifier Query defaultValue=expression
 	;
 
 // Access a field within a record
 fieldReference
-	: term '.' Identifier
-	| fieldReference '.' Identifier     // explicitly left-recursive
+	: term FieldSep Identifier
+	| fieldReference FieldSep Identifier     // explicitly left-recursive
 	;
 
 // Transforms one sequence into another
 foreach
-	: 'foreach' Identifier (':' type)? '<-' src=expression body=expression
+	: Foreach Identifier (TypeSep type)? Input src=expression body=expression
 	;
 
 // Transforms parameters into a result
 function
-	: 'function' '(' parameters ')' (':' type)? body=expression
+	: Function ParenOpen parameters ParenClose (TypeSep type)? body=expression
 	;
 
-unaryOperator	: ('not' | '-' | '+') expression ;
+unaryOperator	: (Not | Minus | Plus) expression ;
 
 
 //
@@ -100,17 +102,17 @@ term
 	;
 
 buildAction
-	: 'action' '(' command=expression
-		(',' keywordArguments)?
-		('<-' parameters)?
-		')'
+	: Action ParenOpen command=expression
+		(ArgSep keywordArguments)?
+		(Input parameters)?
+		ParenClose
 	;
 
 // Zero or more value definitions and a result
-compoundExpr	: '{' (values+=value)* result=expression '}' ;
+compoundExpr	: BraceOpen (values+=value)* result=expression BraceClose ;
 
 // Zero or more expressions of (usually) like type
-list		: '[' (values+=expression)* ']' ;
+list		: BracketOpen (values+=expression)* BracketClose ;
 
 // We support boolean, numeric and string literals
 literal
@@ -119,31 +121,27 @@ literal
 	| StringLiteral
 	;
 
-BoolLiteral	: 'true' | 'false' ;
-IntLiteral	: [0-9]+ ;
-StringLiteral	: ('\'' .*? '\'') | ('"' .*? '"');
-
 nameReference	: Identifier ;
 
-parentheticalExpression	: '(' expression ')' ;
+parentheticalExpression	: ParenOpen expression ParenClose ;
 
 
 //
 // Arguments and parameters (used in quite a few places):
 //
 arguments
-	: positionalArguments ',' keywordArguments
+	: positionalArguments ArgSep keywordArguments
 	| positionalArguments
 	| keywordArguments
 	;
 
-keywordArgument	: Identifier '=' expression ;
-keywordArguments: (args+=keywordArgument (',' args+=keywordArgument)* ','?) ;
+keywordArgument	: Identifier Assign expression ;
+keywordArguments: (args+=keywordArgument (ArgSep args+=keywordArgument)* ArgSep?) ;
 
-positionalArguments	: expression (',' expression)* ','? ;
+positionalArguments	: expression (ArgSep expression)* ArgSep? ;
 
-parameters	: (parameter (',' parameter)*)? ;
-parameter	: Identifier ':' type ('=' expression)? ;
+parameters	: (parameter (ArgSep parameter)*)? ;
+parameter	: Identifier TypeSep type (Assign expression)? ;
 
 
 //
@@ -161,20 +159,10 @@ type
 	| simpleType
 	;
 
-functionType	: '(' type_list ')' '=>' type ;
-recordType	: 'record' '[' (fieldType (',' fieldType)*)? ','? ']' ;
-fieldType	: Identifier ':' type ;
-parametricType	: simpleType '[' type_list ']' ;
+functionType	: ParenOpen type_list ParenClose Produces type ;
+recordType	: Record BracketOpen (fieldType (ArgSep fieldType)*)? ArgSep? BracketClose ;
+fieldType	: Identifier TypeSep type ;
+parametricType	: simpleType BracketOpen type_list BracketClose ;
 simpleType	: Identifier ;
 
-type_list	: type (',' type)* ','? ;
-
-
-// An identifier starts with [A-Za-z_] and contains [A-Za-z0-9_]
-Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
-
-// We use shell/Python-style comments
-Comment		: '#' ~[\r\n]* -> skip;
-
-// Disregard common forms of whitespace
-WS		: [ \t\r\n]+ -> skip;
+type_list	: type (ArgSep type)* ArgSep? ;
