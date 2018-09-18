@@ -28,9 +28,6 @@
 
 lexer grammar FabLexer;
 
-// An identifier starts with [A-Za-z_] and contains [A-Za-z0-9_]
-Identifier	: [a-zA-Z] [a-zA-Z0-9_]* ;
-
 // We use shell/Python-style comments
 Comment		: '#' ~[\r\n]* -> skip ;
 
@@ -46,6 +43,9 @@ Else		: 'else' ;
 If		: 'if' ;
 Not		: 'not' ;
 Record		: 'record' ;
+
+// An identifier starts with [A-Za-z_] and contains [A-Za-z0-9_]
+Identifier	: [a-zA-Z] [a-zA-Z0-9_]* ;
 
 // Literals:
 BoolLiteral	: 'true' | 'false' ;
