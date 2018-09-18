@@ -166,7 +166,7 @@ type
 	| simpleType
 	;
 
-functionType	: ParenOpen type_list ParenClose Produces type ;
+functionType	: ParenOpen type_list? ParenClose Produces type ;
 recordType	: Record BracketOpen (fieldType (ArgSep fieldType)*)? ArgSep? BracketClose ;
 fieldType	: Identifier TypeSep type ;
 parametricType	: simpleType BracketOpen type_list BracketClose ;
