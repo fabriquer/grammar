@@ -1,0 +1,137 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+# CHECK:  (value foo =
+# CHECK:    (function function (
+# CHECK:      (parameters
+# CHECK:        (parameter ints :
+# CHECK:          [[INT_LIST:\(type \(parametricType \(simpleType list\) \[ \(type_list \(type \(simpleType int\)\)\) \]\)\)]]
+# CHECK:        )
+# CHECK:      )
+# CHECK:      : [[INT_LIST]]
+# CHECK:      (compoundExpr {
+# CHECK:        (value local_var = (expression (term (literal 42))) ;)
+# FUBAR:        (expression
+# FUBAR:          (foreach
+# FUBAR:            foreach x <-
+# FUBAR:            (nameReference ints)
+# FUBAR:            (compoundExpr {
+# FUBAR:              (call
+# FUBAR:                (nameReference f)
+# FUBAR:                (
+# FUBAR:                (arguments
+# FUBAR:                  (positionalArguments
+# FUBAR:                    (nameReference x)
+# FUBAR:                  )
+# FUBAR:                )
+# FUBAR:                )
+# FUBAR:              )
+# FUBAR:            )
+# FUBAR:          )
+# FUBAR:        )
+# FUBAR:      })
+# FUBAR:    )
+# FUBAR: ;)
+foo = function(ints:list[int]): list[int]
+{
+	local_var = 42;
+
+	foreach x <- ints
+	{
+		f(x)
+	}
+};
+
+# CHECK:  (value bar =
+# CHECK:    (function function
+# CHECK:      (parameters
+# CHECK:        (parameter names :
+# CHECK:          [[STRING_LIST:\(type \(parametricType \(simpleType list\) \[ \(type_list \(type \(simpleType string\)\)\) \]\)\)]]
+# CHECK:      )
+# CHECK:      :
+# CHECK:      [[FILE_LIST:\(type \(parametricType \(simpleType list\) \[ \(type_list \(type \(simpleType file\)\)\) \]\)\)]]
+# CHECK:      (expression
+# CHECK:        (foreach foreach name <-
+# CHECK:          (nameReference names)
+# CHECK:          (call
+# CHECK:            (nameReference file)
+# CHECK:            (arguments
+# CHECK:              (positionalArguments
+# CHECK:                (nameReference name)
+# CHECK:              )
+# CHECK:            )
+# CHECK:          )
+# CHECK:        )
+# CHECK:      )
+# CHECK:   ;)
+bar = function(names:list[string]): list[file]
+	foreach name <- names
+		file(name);
+
+# CHECK: (value baz :
+# CHECK:   (functionType
+# CHECK:     ( (type_list (type (simpleType int))) )
+# CHECK:     ->
+# CHECK:     (simpleType int)
+# CHECK:   )
+# CHECK:   =
+# CHECK:   (function
+# CHECK:     ( (parameters (parameter x : (type (simpleType int)))) )
+# CHECK:     :
+# CHECK:     (type (simpleType int))
+# CHECK:     (expression
+# CHECK:       (call
+# CHECK:         (nameReference f)
+# CHECK:         (
+# CHECK:         (arguments
+# CHECK:           (positionalArguments
+# CHECK:             (nameReference x)
+# CHECK:           )
+# CHECK:         )
+# CHECK:         )
+# CHECK:      )
+# CHECK:    )
+# CHECK: ;)
+baz:(int)->int = function(x:int): int f(x);
+
+
+# CHECK: (value wibble :
+# CHECK:   (functionType
+# CHECK:     ( )
+# CHECK:     ->
+# CHECK:     (functionType
+# CHECK:       ( )
+# CHECK:       ->
+# CHECK:       (simpleType int)
+# CHECK:     )
+# CHECK:   )
+# CHECK:   =
+# CHECK:   (function
+# CHECK:     ( parameters )
+# CHECK:     :
+# CHECK:     (functionType ( ) -> (type (simpleType int)))
+# CHECK:       (compoundExpr {
+# CHECK:         (function
+# CHECK:           ( parameters )
+# CHECK:           :
+# CHECK:           (simpleType int)
+# CHECK:           (compoundExpr {
+# CHECK:             (literal 42)
+# CHECK:           })
+# CHECK:         )
+# CHECK:       })
+# CHECK:   )
+# CHECK: ;)
+wibble:()->()->int = function(): ()->int
+{
+	function(): int
+	{
+		42
+	}
+};
+
+# CHECK: <EOF>)

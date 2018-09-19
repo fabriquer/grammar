@@ -458,6 +458,57 @@ foreach
 ----
 
 
+==== Functions
+
+As a somewhat functional language, functions are pretty important to Fabrique!
+They are, together with <<Records,records>>, the primary means of building up
+higher-level abstractions (e.g., toolchains) from lower-level abstractions
+(e.g., <<Build actions,build action>> invocation).
+
+.Examples
+[source,fab]
+----
+# These default flags will be visible in the `compile` function below
+default_flags = record
+{
+	object = [ '-fPIC' ];
+};
+
+compile = function(srcs:list[file], common_flags:list[string] = [],
+                   deps:list[file[in]] = []): list[file]
+{
+	foreach src <- srcs
+	{
+		obj = src + '.o';
+		flags = (src.cxxflags ? common_flags) + default_flags.object;
+
+		compile_one(src, obj, flags, deps);
+		obj
+	}
+};
+----
+
+As in other languages, functions take parameters and return a value.
+Parameters can have default arguments in case no arguments are passed to them
+in the function <<Calls,call>>.
+
+Fabrique functions are closures that capture values from the surrounding scope.
+This can be useful for providing <<Modules,module>>-level defaults.
+
+.Grammar
+[source,antlr]
+----
+// Transforms parameters into a result
+function
+	: 'function' '(' parameters ')' (',' type)?
+	  body=expression
+	;
+
+parameters	: (parameter (',' parameter)*)? ;
+parameter	: Identifier ',' type ('=' expression)? ;
+----
+
+
 ==== Literals
 
 Fabrique (currently) supports three literal types: boolean values,
@@ -576,123 +627,6 @@ sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
  * ```
  */
 fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
-////
-
-==== Functions
-
-////
-	/**
-	 * A function is a fairly conventional closure that can capture values
-	 * from its surrounding scope.
-	 *
-	 * ```fab
-	 * f = function(x:int, y:list[string]): int
-	 * {
-	 * 	x + 1
-	 * };
-	 * y = f(1);
-	 * ```
-	 *
-	 * Or, equivalently:
-	 *
-	 * ```fab
-	 * y = (function(x:int, y:list[string]) x + 1)(1);
-	 * ```
-	 */
-/**
- * A function, much like in other languages, takes parameters and may return
- * a value.
- *
- * ```fab
- * compile = function(srcs:list[file], common_flags:list[string] = [],
- *                    deps:list[file[in]] = []): list[file]
- * {
- *     foreach src <- srcs {
- *         obj = src + '.o';
- *         flags = (src.cxxflags ? common_flags) + default_flags.object;
- * 
- *         compile_one(src, obj, flags, deps);
- *         obj
- *     }
- * };
- * ```
- */
-function	: 'function' '(' parameters ')' (':' type)? body=expression ;
-
-/*
-function:
-	functiondecl '(' parameterList ')' ':' type expression
-	{
-		SourceRange begin = Take(Parser::ParseToken($1))->source();
-		auto params = Take(NodeVec<Parameter>($3));
-		auto *retTy = $6.type;
-		auto body = TakeNode<Expression>($7);
-		SetOrDie($$, p->DefineFunction(begin, params, body, retTy));
-	}
-	|
-	functiondecl '(' parameterList ')' expression
-	{
-		SourceRange begin = Take(Parser::ParseToken($1))->source();
-		auto params = Take(NodeVec<Parameter>($3));
-		auto body = TakeNode<Expression>($5);
-		SetOrDie($$, p->DefineFunction(begin, params, body));
-	}
-	;
-*/
-
-/**
- * Positional arguments are matched to parameters by order.
- *
- * ```fab
- * f(1, 2.0)
- * ```
- */
-
-	/**
-	 * Keyword arguments are matched to parameters by explicit name.
-	 *
-	 * ```fab
-	 * f(a = 1, b = 2.0)
-	 * ```
-	 */
-
-	/**
-	 * Named arguments must always come after unnamed (positional) arguments.
-	 *
-	 * ```fab
-	 * f(x, y, z);
-	 * f(a = x, b = y, c = z);
-	 * f(x, c = z, b = y);
-	 * ```
-	 */
-
-	/**
-	 * Actions and functions are both callable.
-	 *
-	 * ```fab
-	 * f = function(x:int) x + 1;
-	 * a = action(...);
-	 *
-	 * result = a(version = f(42));
-	 * ```
-	 */
-
-parameters	: (parameter (',' parameter)*)? ;
-parameter	: Identifier ':' type ('=' expression)? ;
-////
-
-
-////
-
-/*
-		// Match calls after things that look vaguely call-like such as files:
-		| Call
-
-		// Put identifier references after keywords so that
-		// we don't match keywords as identifiers:
-		| NameReference
-		;
- */
 ////
 
 
