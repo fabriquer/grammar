@@ -120,7 +120,7 @@ fileList
 	  (FileListEnd | (FileListArgs keywordArguments ParenClose))
 	;
 
-// Zero or more expressions of (usually) like type
+// Zero or more expressions of (some) like type
 list		: BracketOpen (values+=expression)* BracketClose ;
 
 // We support boolean, numeric and string literals

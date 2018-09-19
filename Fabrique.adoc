@@ -403,7 +403,7 @@ file list (e.g., `cflags` in the example above).
 // Some number of files with common properties
 fileList
 	: FileListStart FilenameLiteral*
-	  (FileListEnd | (FileListArgs keywordArguments ParenClose))
+	  (FileListEnd | (FileListArgs keywordArguments ')'))
 	;
 
 // With lexer rules:
@@ -550,6 +550,30 @@ StringLiteral	: ('\'' .*? '\'') | ('"' .*? '"');
 ----
 
 
+==== Lists
+
+Lists are containers for like values and do not use comma separators.
+
+.Examples
+[source,fab]
+----
+x:int = 42;
+y:special_int = some_special_kind_of_int();
+
+l:list[int] = [ 1 2 3 x y ];   # the type of this is list[int]
+----
+
+The type of the list is taken to be "list of the supertype of all of the
+list's elements".
+
+.Grammar
+[source,antlr]
+----
+// Zero or more expressions of (some) like type
+list		: BracketOpen (values+=expression)* BracketClose ;
+----
+
+
 ==== Parenthetical expressions
 
 An expression enclosed in parentheses is treated as a <<Terms,_term_>>
@@ -629,25 +653,6 @@ sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
 fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
 ////
 
-
-==== Lists
-
-////
-/**
- * Lists are containers for like values and do not use comma separators.
- * The type of the list is taken to be "list of the supertype of all of the
- * list's elements".
- *
- * Example:
- * ```
- * x:int = 42;
- * y:special_int = some_special_kind_of_int();
- *
- * [ 1 2 3 x y ]   # the type of this is list[int]
- * ```
- */
-list		: '[' (values+=expression)* ']' ;
-////
 
 ==== Records
 
