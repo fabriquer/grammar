@@ -1,0 +1,7 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+# CHECK: <EOF>)
