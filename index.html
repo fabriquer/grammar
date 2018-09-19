@@ -522,6 +522,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_field_references">Field references</a></li>
 <li><a href="#_files">Files</a></li>
 <li><a href="#_foreach">Foreach</a></li>
+<li><a href="#_functions">Functions</a></li>
 <li><a href="#_literals">Literals</a></li>
 <li><a href="#_parenthetical_expressions">Parenthetical expressions</a></li>
 </ul>
@@ -530,7 +531,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_binary_operators">Binary operators</a></li>
 <li><a href="#_field_queries">Field queries</a></li>
-<li><a href="#_functions">Functions</a></li>
 <li><a href="#_lists">Lists</a></li>
 <li><a href="#_records">Records</a></li>
 <li><a href="#_terms">Terms</a></li>
@@ -1009,7 +1009,7 @@ file list (e.g., <code>cflags</code> in the example above).</p>
 <pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Some number of files with common properties</span><span class="tok-w"></span>
 <span class="tok-nl">fileList</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">FileListStart</span><span class="tok-w"> </span><span class="tok-no">FilenameLiteral</span><span class="tok-o">*</span><span class="tok-w"></span>
-<span class="tok-w">	  </span><span class="tok-o">(</span><span class="tok-no">FileListEnd</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-no">FileListArgs</span><span class="tok-w"> </span><span class="tok-nv">keywordArguments</span><span class="tok-w"> </span><span class="tok-no">ParenClose</span><span class="tok-o">))</span><span class="tok-w"></span>
+<span class="tok-w">	  </span><span class="tok-o">(</span><span class="tok-no">FileListEnd</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-no">FileListArgs</span><span class="tok-w"> </span><span class="tok-nv">keywordArguments</span><span class="tok-w"> </span><span class="tok-s">&#39;)&#39;</span><span class="tok-o">))</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-p">;</span><span class="tok-w"></span>
 
 <span class="tok-c">// With lexer rules:</span><span class="tok-w"></span>
@@ -1077,6 +1077,60 @@ This is much like applying a mapping operation to an iterator, but it&#8217;s sp
 <span class="tok-nl">foreach</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;foreach&#39;</span><span class="tok-w"> </span><span class="tok-no">Identifier</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-s">&#39;:&#39;</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-o">)?</span><span class="tok-w"> </span><span class="tok-s">&#39;&lt;-&#39;</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-o">=</span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">body</span><span class="tok-o">=</span><span class="tok-nv">expression</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_functions">Functions</h4>
+<div class="paragraph">
+<p>As a somewhat functional language, functions are pretty important to Fabrique!
+They are, together with <a href="#_records">records</a>, the primary means of building up
+higher-level abstractions (e.g., toolchains) from lower-level abstractions
+(e.g., <a href="#_build_actions">build action</a> invocation).</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fab"><span></span># These default flags will be visible in the `compile` function below
+default_flags = record
+{
+	object = [ &#39;-fPIC&#39; ];
+};
+
+compile = function(srcs:list[file], common_flags:list[string] = [],
+                   deps:list[file[in]] = []): list[file]
+{
+	foreach src &lt;- srcs
+	{
+		obj = src + &#39;.o&#39;;
+		flags = (src.cxxflags ? common_flags) + default_flags.object;
+
+		compile_one(src, obj, flags, deps);
+		obj
+	}
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As in other languages, functions take parameters and return a value.
+Parameters can have default arguments in case no arguments are passed to them
+in the function <a href="#_calls">call</a>.</p>
+</div>
+<div class="paragraph">
+<p>Fabrique functions are closures that capture values from the surrounding scope.
+This can be useful for providing <a href="#Modules">module</a>-level defaults.</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Transforms parameters into a result</span><span class="tok-w"></span>
+<span class="tok-nl">function</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;function&#39;</span><span class="tok-w"> </span><span class="tok-s">&#39;(&#39;</span><span class="tok-w"> </span><span class="tok-nv">parameters</span><span class="tok-w"> </span><span class="tok-s">&#39;)&#39;</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-s">&#39;,&#39;</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-o">)?</span><span class="tok-w"></span>
+<span class="tok-w">	  </span><span class="tok-nv">body</span><span class="tok-o">=</span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-nl">parameters</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-nv">parameter</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-s">&#39;,&#39;</span><span class="tok-w"> </span><span class="tok-nv">parameter</span><span class="tok-o">)*)?</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">parameter</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">Identifier</span><span class="tok-w"> </span><span class="tok-s">&#39;,&#39;</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-s">&#39;=&#39;</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-o">)?</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 </div>
@@ -1181,10 +1235,6 @@ call target.</p>
 
 </div>
 <div class="sect3">
-<h4 id="_functions">Functions</h4>
-
-</div>
-<div class="sect3">
 <h4 id="_lists">Lists</h4>
 
 </div>
@@ -1229,7 +1279,7 @@ call target.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-17 22:16:30 NDT
+Last updated 2018-09-18 23:12:18 NDT
 </div>
 </div>
 </body>
