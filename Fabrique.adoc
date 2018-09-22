@@ -1,4 +1,5 @@
 :source-highlighter: pygments
+:pygments-style: tango
 :toc: right
 :toclevels: 3
 
@@ -13,7 +14,7 @@
 Comments and whitespace look much like they do in shell scripts.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 # Comments can start at the beginning of a line of partway through one
 
@@ -93,7 +94,7 @@ curly-brace languages like C and Java:
 Identifiers looks like those in many programming languages.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 # This is a sensible name:
 a_valid_identifier;
@@ -138,7 +139,7 @@ substitution (e.g., `'${cc} ${cflags} -c ${src} -o ${obj}'`); these commands
 are executed at build time (rather than compile time).
 
 .Examples
-[source, fab]
+[source, fabrique]
 ----
 
 cc = action('${cc} ${flags} -c ${src} -o ${obj}', description = 'Compiling ${src}'
@@ -193,7 +194,7 @@ and <<Functions,functions>>) can be _called_ using a syntax that looks like
 a lot of languages: with comma-separated arguments inside of parentheses.
 
 .Examples
-[source, fab]
+[source, fabrique]
 ----
 noArguments();
 positionalArguments(1, 2, 'hello', true);
@@ -235,7 +236,7 @@ The values describe intermediate state that can be used by the final
 "result" expression.
 
 .Example
-[source, fab]
+[source, fabrique]
 ----
 {
 	src = file(basename + '.c');
@@ -266,7 +267,7 @@ _expression_.
 This functions like the ternary operator in C, but is hopefully a bit more
 readable:
 
-[source,fab]
+[source, fabrique]
 ----
 like_an_if_statement = if (y > 0) { y } else { -y };
 ----
@@ -277,7 +278,7 @@ and the braces around the "then" and "else" clauses
 (making them <<Compound expressions,compound expressions>>)
 are entirely optional:
 
-[source,fab]
+[source, fabrique]
 ----
 more_succinct = if y > 0 y else -y;
 ----
@@ -302,7 +303,7 @@ conditional
 <<Records>> contain fields, which are accessed using the dot (`.`) operator.
 
 .Examples
-[source, fab]
+[source, fabrique]
 ----
 # Access a single field:
 simple = foo.bar;
@@ -352,7 +353,7 @@ builtin or collectively using the `files` construct.
 Individual files can be described with the `file` builtin.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 file('foo.c', cflags = [ '-D' 'FOO' ]);
 ----
@@ -379,7 +380,7 @@ A file list is wrapped by `files()` like a call, but internally its syntax
 permits the use of raw filenames.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 files(
 	foo.c
@@ -420,7 +421,7 @@ FileListWS	: [ \t\r\n]+ -> skip ;
 A foreach loop transforms one sequence into another.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 # A somewhat verbose way to use foreach, a bit like a conventional for loop:
 y = foreach x <- [ 1 2 3 ]
@@ -466,7 +467,7 @@ higher-level abstractions (e.g., toolchains) from lower-level abstractions
 (e.g., <<Build actions,build action>> invocation).
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 # These default flags will be visible in the `compile` function below
 default_flags = record
@@ -515,7 +516,7 @@ Fabrique (currently) supports three literal types: boolean values,
 integers and strings (single- or double-quoted).
 
 .Examples
-[source, fab]
+[source, fabrique]
 ----
 p:bool = true;
 q = false;
@@ -555,7 +556,7 @@ StringLiteral	: ('\'' .*? '\'') | ('"' .*? '"');
 Lists are containers for like values and do not use comma separators.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 x:int = 42;
 y:special_int = some_special_kind_of_int();
@@ -583,7 +584,7 @@ It is also evaluated before subexpressions that are not inside of the
 parentheses.
 
 .Examples
-[source, fab]
+[source, fabrique]
 ----
 # Specifying an order of operations:
 x = p and (q or r);
@@ -624,7 +625,7 @@ Types can be declared using the keyword `type` followed by a normal
 <<Types,type annotation>>.
 
 .Examples
-[source,fab]
+[source, fabrique]
 ----
 # An empty record type:
 foo:type = type record[];

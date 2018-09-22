@@ -1,6 +1,8 @@
 .POSIX:
 .SUFFIXES: .adoc .html .pdf
 
+ADOC			= asciidoctor
+ADOCFLAGS		= -r ./system_pygments.rb
 ANTLR			= java -cp $(CLASSPATH) org.antlr.v4.Tool
 ANTLRFLAGS		= -no-listener -visitor
 CLASSPATH		= ./antlr/antlr-4.7.1-complete.jar
@@ -41,7 +43,7 @@ $(PARSER_JAVA_CLASS): $(PARSER_JAVA_SOURCE)
 	javac -cp $(CLASSPATH) $(GENERATED_JAVA_DIR)/*.java
 
 .adoc.html:
-	asciidoctor $<
+	$(ADOC) $(ADOCFLAGS) $<
 
 .adoc.pdf:
-	asciidoctor-pdf $<
+	asciidoctor-pdf $(ADOCFLAGS) $<
