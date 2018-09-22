@@ -37,7 +37,7 @@ Whitespace in Fabrique is not significant (like, e.g., Python):
 spaces, tabs and newlines are all ignored.
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 Comment		: '#' ~[\r\n]* -> skip;
 WS		: [ \t\r\n]+ -> skip;
@@ -48,7 +48,7 @@ WS		: [ \t\r\n]+ -> skip;
 A Fabrique file is made up of [optionally-]named values.
 
 .Example
-[source,fabrique]
+[source, fabrique]
 ----
 source_files = files(a.cc b.cc);
 count:int = source_files.length();
@@ -58,7 +58,7 @@ executable = link(object_files);
 ----
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 file		: (values+=value)* EOF;
 value		: (name=Identifier (':' type)* '=')? expression ';';
@@ -116,7 +116,7 @@ It is conventional (but not mandated) to use underscore-separated
 lower-case names.
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 Identifier	: [a-zA-Z] [a-zA-Z0-9_]*;
 ----
@@ -286,7 +286,7 @@ more_succinct = if y > 0 y else -y;
 Whether or not to use the extra punctuation is a question of clarity and style.
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 conditional
 	: 'if'
@@ -399,7 +399,7 @@ Arguments to embedded file declarations can override arguments passed to the
 file list (e.g., `cflags` in the example above).
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 // Some number of files with common properties
 fileList
@@ -450,7 +450,7 @@ The `foreach` expression includes:
 The entire `foreach` expression evaluates to a sequence of new elements.
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 // Transforms one sequence into another
 foreach
@@ -497,7 +497,7 @@ Fabrique functions are closures that capture values from the surrounding scope.
 This can be useful for providing <<Modules,module>>-level defaults.
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 // Transforms parameters into a result
 function
@@ -568,7 +568,7 @@ The type of the list is taken to be "list of the supertype of all of the
 list's elements".
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 // Zero or more expressions of (some) like type
 list		: BracketOpen (values+=expression)* BracketClose ;
@@ -648,7 +648,7 @@ There is currently no support for parameterizing declared types
 (e.g., `foo[int]`).
 
 .Grammar
-[source,antlr]
+[source, antlr]
 ----
 typeDeclaration	: 'type' type ;
 ----
