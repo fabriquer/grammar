@@ -43,6 +43,7 @@ Else		: 'else' ;
 If		: 'if' ;
 Not		: 'not' ;
 Record		: 'record' ;
+Type		: 'type' ;
 
 // An identifier starts with [A-Za-z_] and contains [A-Za-z0-9_]
 Identifier	: [a-zA-Z] [a-zA-Z0-9_]* ;

@@ -102,6 +102,7 @@ term
 	| literal
 	| nameReference
 	| parentheticalExpression
+	| typeDeclaration
 	;
 
 buildAction
@@ -133,6 +134,8 @@ literal
 nameReference	: Identifier ;
 
 parentheticalExpression	: ParenOpen expression ParenClose ;
+
+typeDeclaration	: Type type ;
 
 
 //

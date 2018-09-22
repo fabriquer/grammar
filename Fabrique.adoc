@@ -618,6 +618,41 @@ parentheticalExpression	: '(' expression ')' ;
 ----
 
 
+==== Type declarations
+
+Types can be declared using the keyword `type` followed by a normal
+<<Types,type annotation>>.
+
+.Examples
+[source,fab]
+----
+# An empty record type:
+foo:type = type record[];
+
+# A more interesting record type:
+bar = type record[x:int, y:string, z:record[wibble:int]];
+
+# A parameterized type:
+baz = type list[string];
+
+# A function type:
+wibble:type = type (baz)->int;
+
+f:wibble = function (names:baz) { names.size };
+----
+
+Type declarations are like typedefs in other languages: they allow a new name
+to be used for another (possibly complicated) type.
+There is currently no support for parameterizing declared types
+(e.g., `foo[int]`).
+
+.Grammar
+[source,antlr]
+----
+typeDeclaration	: 'type' type ;
+----
+
+
 === TODO
 
 ==== Binary operators
