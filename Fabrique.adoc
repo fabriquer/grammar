@@ -16,7 +16,7 @@ Comments and whitespace look much like they do in shell scripts.
 .Examples
 [source, fabrique]
 ----
-# Comments can start at the beginning of a line of partway through one
+# Fabrique uses single-line comments that start with a '#' character
 
 # Here's another comment:
 sources = files(a.c b.c);     # our source files
