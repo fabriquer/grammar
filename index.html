@@ -432,73 +432,81 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <style>
 .listingblock .pygments .hll { background-color: #ffffcc }
 .listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
-.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
-.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
-.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
-.listingblock .pygments .tok-o { color: #666666 } /* Operator */
-.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
-.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
-.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
-.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
-.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
-.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-c { color: #8f5902; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { color: #a40000; border: 1px solid #ef2929 } /* Error */
+.listingblock .pygments .tok-g { color: #000000 } /* Generic */
+.listingblock .pygments .tok-k { color: #204a87; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-l { color: #000000 } /* Literal */
+.listingblock .pygments .tok-n { color: #000000 } /* Name */
+.listingblock .pygments .tok-o { color: #ce5c00; font-weight: bold } /* Operator */
+.listingblock .pygments .tok-x { color: #000000 } /* Other */
+.listingblock .pygments .tok-p { color: #000000; font-weight: bold } /* Punctuation */
+.listingblock .pygments .tok-ch { color: #8f5902; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #8f5902; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #8f5902; font-style: italic } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #8f5902; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #8f5902; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #8f5902; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #a40000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { color: #000000; font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #ef2929 } /* Generic.Error */
 .listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
 .listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
-.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
-.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-go { color: #000000; font-style: italic } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #8f5902 } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { color: #000000; font-weight: bold } /* Generic.Strong */
 .listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
-.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
-.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
-.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
-.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
-.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
-.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
-.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
-.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
-.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
-.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
-.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
-.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
-.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
-.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
-.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
-.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
-.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
-.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
-.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
-.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
-.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
-.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
-.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
-.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
-.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
-.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
-.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
-.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
-.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
-.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
-.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
-.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
-.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
-.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
-.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
-.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+.listingblock .pygments .tok-gt { color: #a40000; font-weight: bold } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #204a87; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #204a87; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #204a87; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #204a87; font-weight: bold } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #204a87; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #204a87; font-weight: bold } /* Keyword.Type */
+.listingblock .pygments .tok-ld { color: #000000 } /* Literal.Date */
+.listingblock .pygments .tok-m { color: #0000cf; font-weight: bold } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #4e9a06 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #c4a000 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #204a87 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #000000 } /* Name.Class */
+.listingblock .pygments .tok-no { color: #000000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #5c35cc; font-weight: bold } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #ce5c00 } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #cc0000; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #000000 } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #f57900 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #000000 } /* Name.Namespace */
+.listingblock .pygments .tok-nx { color: #000000 } /* Name.Other */
+.listingblock .pygments .tok-py { color: #000000 } /* Name.Property */
+.listingblock .pygments .tok-nt { color: #204a87; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #000000 } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #204a87; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #f8f8f8; text-decoration: underline } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #0000cf; font-weight: bold } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #0000cf; font-weight: bold } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #0000cf; font-weight: bold } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #0000cf; font-weight: bold } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #0000cf; font-weight: bold } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #4e9a06 } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #4e9a06 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #4e9a06 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #4e9a06 } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #8f5902; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #4e9a06 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #4e9a06 } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #4e9a06 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #4e9a06 } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #4e9a06 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #4e9a06 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #4e9a06 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #4e9a06 } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #3465a4 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #000000 } /* Name.Function.Magic */
+.listingblock .pygments .tok-vc { color: #000000 } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #000000 } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #000000 } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #000000 } /* Name.Variable.Magic */
+.listingblock .pygments .tok-il { color: #0000cf; font-weight: bold } /* Literal.Number.Integer.Long */
 </style>
 </head>
 <body class="article toc2 toc-right">
@@ -524,14 +532,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_foreach">Foreach</a></li>
 <li><a href="#_functions">Functions</a></li>
 <li><a href="#_literals">Literals</a></li>
+<li><a href="#_lists">Lists</a></li>
 <li><a href="#_parenthetical_expressions">Parenthetical expressions</a></li>
+<li><a href="#_type_declarations">Type declarations</a></li>
 </ul>
 </li>
 <li><a href="#_todo">TODO</a>
 <ul class="sectlevel3">
 <li><a href="#_binary_operators">Binary operators</a></li>
 <li><a href="#_field_queries">Field queries</a></li>
-<li><a href="#_lists">Lists</a></li>
 <li><a href="#_records">Records</a></li>
 <li><a href="#_terms">Terms</a></li>
 <li><a href="#_types">Types</a></li>
@@ -561,15 +570,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span># Comments can start at the beginning of a line of partway through one
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># Comments can start at the beginning of a line of partway through one</span>
 
-# Here&#39;s another comment:
-sources = files(a.c b.c);     # our source files
+<span class="tok-c1"># Here&#39;s another comment:</span>
+<span class="tok-nv">sources</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-nv">a</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"> </span><span class="tok-nv">b</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-p">);</span><span class="tok-w">     </span><span class="tok-c1"># our source files</span>
 
-#
-# Begin/end multiline comments are not supported: just use multiple single-line
-# comments together in a row.
-#</code></pre>
+<span class="tok-c1">#</span>
+<span class="tok-c1"># Begin/end multiline comments are not supported: just use multiple single-line</span>
+<span class="tok-c1"># comments together in a row.</span>
+<span class="tok-c1">#</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -599,11 +608,11 @@ spaces, tabs and newlines are all ignored.</p>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span>source_files = files(a.cc b.cc);
-count:int = source_files.length();
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">source_files</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-nv">a</span><span class="tok-o">.</span><span class="tok-nv">cc</span><span class="tok-w"> </span><span class="tok-nv">b</span><span class="tok-o">.</span><span class="tok-nv">cc</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">count</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">source_files</span><span class="tok-o">.</span><span class="tok-nv">length</span><span class="tok-p">();</span><span class="tok-w"></span>
 
-object_files = compile(source_files);
-executable = link(object_files);</code></pre>
+<span class="tok-nv">object_files</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">compile</span><span class="tok-p">(</span><span class="tok-nv">source_files</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">executable</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">link</span><span class="tok-p">(</span><span class="tok-nv">object_files</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -672,14 +681,14 @@ curly-brace languages like C and Java:</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span># This is a sensible name:
-a_valid_identifier;
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># This is a sensible name:</span>
+<span class="tok-nv">a_valid_identifier</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-# This is a less-sensible but still-legal name:
-another_identifier_that_is_valid_even_if_it_is_2_long_4_G00D_STYLE;
+<span class="tok-c1"># This is a less-sensible but still-legal name:</span>
+<span class="tok-nv">another_identifier_that_is_valid_even_if_it_is_2_long_4_G00D_STYLE</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-# This is not an identifier:
-1badname;</code></pre>
+<span class="tok-c1"># This is not an identifier:</span>
+<span class="tok-err">1</span><span class="tok-nv">badname</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -719,11 +728,11 @@ are executed at build time (rather than compile time).</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>
-cc = action(&#39;${cc} ${flags} -c ${src} -o ${obj}&#39;, description = &#39;Compiling ${src}&#39;
-	&lt;= src: file[in], obj: file[out], flags: list[string] = []);
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span>
+<span class="tok-nv">cc</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">action</span><span class="tok-p">(</span><span class="tok-s1">&#39;</span><span class="tok-dl">${</span><span class="tok-si">cc}</span><span class="tok-s1"> </span><span class="tok-dl">${</span><span class="tok-si">flags}</span><span class="tok-s1"> -c </span><span class="tok-dl">${</span><span class="tok-si">src}</span><span class="tok-s1"> -o </span><span class="tok-dl">${</span><span class="tok-si">obj}</span><span class="tok-s1">&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">description</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;Compiling </span><span class="tok-dl">${</span><span class="tok-si">src}</span><span class="tok-s1">&#39;</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">&lt;</span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">in</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">obj</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">out</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">flags</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[]);</span><span class="tok-w"></span>
 
-obj:file = cc(src_file);</code></pre>
+<span class="tok-nv">obj</span><span class="tok-p">:</span><span class="tok-nb">file</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">cc</span><span class="tok-p">(</span><span class="tok-nv">src_file</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -789,10 +798,10 @@ a lot of languages: with comma-separated arguments inside of parentheses.</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>noArguments();
-positionalArguments(1, 2, &#39;hello&#39;, true);
-keywordArguments(what=&#39;hello&#39;, who = &#39;world&#39;);
-mixedArguments(1, 2, x=3);</code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">noArguments</span><span class="tok-p">();</span><span class="tok-w"></span>
+<span class="tok-nv">positionalArguments</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-s1">&#39;hello&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">keywordArguments</span><span class="tok-p">(</span><span class="tok-nv">what</span><span class="tok-kd">=</span><span class="tok-s1">&#39;hello&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">who</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;world&#39;</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">mixedArguments</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-kd">=</span><span class="tok-mi">3</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -833,13 +842,13 @@ The values describe intermediate state that can be used by the final
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>{
-	src = file(basename + &#39;.c&#39;);
-	obj = compile(src);
-	binary = link(obj);
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">(</span><span class="tok-nv">basename</span><span class="tok-w"> + </span><span class="tok-s1">&#39;.c&#39;</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">obj</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">compile</span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">binary</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">link</span><span class="tok-p">(</span><span class="tok-nv">obj</span><span class="tok-p">);</span><span class="tok-w"></span>
 
-	binary
-}</code></pre>
+<span class="tok-w">	</span><span class="tok-nv">binary</span><span class="tok-w"></span>
+<span class="tok-p">}</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -866,7 +875,7 @@ readable:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>like_an_if_statement = if (y &gt; 0) { y } else { -y };</code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">like_an_if_statement</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-p">-</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -878,7 +887,7 @@ are entirely optional:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>more_succinct = if y &gt; 0 y else -y;</code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">more_succinct</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">-</span><span class="tok-nv">y</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -905,21 +914,21 @@ are entirely optional:</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span># Access a single field:
-simple = foo.bar;
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># Access a single field:</span>
+<span class="tok-nv">simple</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-# Access a field within a field (within a field, within a field, ...):
-nested = foo.bar.baz;
+<span class="tok-c1"># Access a field within a field (within a field, within a field, ...):</span>
+<span class="tok-nv">nested</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">baz</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-# Slightly more complicated things:
-complex = (if something foo else bar).baz.wibble;
+<span class="tok-c1"># Slightly more complicated things:</span>
+<span class="tok-nv">complex</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">something</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">bar</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-nv">baz</span><span class="tok-o">.</span><span class="tok-nv">wibble</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-veryComplex = {
-	x = record { foo = 42 };
-	y = record { bar = x };
+<span class="tok-nv">veryComplex</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">bar</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
 
-	y
-}.bar.foo;</code></pre>
+<span class="tok-w">	</span><span class="tok-nv">y</span><span class="tok-w"></span>
+<span class="tok-p">}</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">foo</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -956,7 +965,7 @@ builtin or collectively using the <code>files</code> construct.</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>file(&#39;foo.c&#39;, cflags = [ &#39;-D&#39; &#39;FOO&#39; ]);</code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nb">file</span><span class="tok-p">(</span><span class="tok-s1">&#39;foo.c&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">cflags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-s1">&#39;-D&#39;</span><span class="tok-w"> </span><span class="tok-s1">&#39;FOO&#39;</span><span class="tok-w"> </span><span class="tok-p">]);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -986,12 +995,12 @@ permits the use of raw filenames.</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>files(
-	foo.c
-	bar.c
-	,
-	cflags = [&#39;-Wall&#39;], arg2 = 42
-)</code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">,</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">cflags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-s1">&#39;-Wall&#39;</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">arg2</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-w"></span>
+<span class="tok-p">)</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1030,14 +1039,14 @@ file list (e.g., <code>cflags</code> in the example above).</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span># A somewhat verbose way to use foreach, a bit like a conventional for loop:
-y = foreach x &lt;- [ 1 2 3 ]
-{
-	x + 1
-};
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># A somewhat verbose way to use foreach, a bit like a conventional for loop:</span>
+<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">&lt;-</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"></span>
+<span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-w"> + </span><span class="tok-mi">1</span><span class="tok-w"></span>
+<span class="tok-p">};</span><span class="tok-w"></span>
 
-# Equivalently, a shorter way of expressing the same thing:
-y = foreach x &lt;- [ 1 2 3 ] x + 1;</code></pre>
+<span class="tok-c1"># Equivalently, a shorter way of expressing the same thing:</span>
+<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">&lt;-</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> + </span><span class="tok-mi">1</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1091,24 +1100,24 @@ higher-level abstractions (e.g., toolchains) from lower-level abstractions
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span># These default flags will be visible in the `compile` function below
-default_flags = record
-{
-	object = [ &#39;-fPIC&#39; ];
-};
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># These default flags will be visible in the `compile` function below</span>
+<span class="tok-nv">default_flags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"></span>
+<span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">object</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-s1">&#39;-fPIC&#39;</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
+<span class="tok-p">};</span><span class="tok-w"></span>
 
-compile = function(srcs:list[file], common_flags:list[string] = [],
-                   deps:list[file[in]] = []): list[file]
-{
-	foreach src &lt;- srcs
-	{
-		obj = src + &#39;.o&#39;;
-		flags = (src.cxxflags ? common_flags) + default_flags.object;
+<span class="tok-nv">compile</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-p">(</span><span class="tok-nv">srcs</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">common_flags</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[],</span><span class="tok-w"></span>
+<span class="tok-w">                   </span><span class="tok-nv">deps</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">in</span><span class="tok-p">]]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[]):</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">]</span><span class="tok-w"></span>
+<span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-p">&lt;-</span><span class="tok-w"> </span><span class="tok-nv">srcs</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">		</span><span class="tok-nv">obj</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-w"> + </span><span class="tok-s1">&#39;.o&#39;</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-w">		</span><span class="tok-nv">flags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-o">.</span><span class="tok-nv">cxxflags</span><span class="tok-w"> </span><span class="tok-err">?</span><span class="tok-w"> </span><span class="tok-nv">common_flags</span><span class="tok-p">)</span><span class="tok-w"> + </span><span class="tok-nv">default_flags</span><span class="tok-o">.</span><span class="tok-nv">object</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-		compile_one(src, obj, flags, deps);
-		obj
-	}
-};</code></pre>
+<span class="tok-w">		</span><span class="tok-nv">compile_one</span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">obj</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">flags</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">deps</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-w">		</span><span class="tok-nv">obj</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">}</span><span class="tok-w"></span>
+<span class="tok-p">};</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1143,13 +1152,13 @@ integers and strings (single- or double-quoted).</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span>p:bool = true;
-q = false;
-integer:int = 42;
-single_quoted = &#39;double quotes (&quot;) are OK&#39;;
-double_quoted = &quot;single quotes (&#39;) are OK&quot;;
-list_of_numbers = [ 1 2 3 ];
-list_of_bools = [ true false ];</code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">p</span><span class="tok-p">:</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">integer</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">single_quoted</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;double quotes (&quot;) are OK&#39;</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">double_quoted</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s2">&quot;single quotes (&#39;) are OK&quot;</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">list_of_numbers</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
+<span class="tok-nv">list_of_bools</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1178,6 +1187,32 @@ that contain quote characters.
 </div>
 </div>
 <div class="sect3">
+<h4 id="_lists">Lists</h4>
+<div class="paragraph">
+<p>Lists are containers for like values and do not use comma separators.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">y</span><span class="tok-p">:</span><span class="tok-nv">special_int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">some_special_kind_of_int</span><span class="tok-p">();</span><span class="tok-w"></span>
+
+<span class="tok-nv">l</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">int</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w">   </span><span class="tok-c1"># the type of this is list[int]</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The type of the list is taken to be "list of the supertype of all of the
+list&#8217;s elements".</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Zero or more expressions of (some) like type</span><span class="tok-w"></span>
+<span class="tok-nl">list</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">BracketOpen</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-nv">values</span><span class="tok-o">+=</span><span class="tok-nv">expression</span><span class="tok-o">)*</span><span class="tok-w"> </span><span class="tok-no">BracketClose</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_parenthetical_expressions">Parenthetical expressions</h4>
 <div class="paragraph">
 <p>An expression enclosed in parentheses is treated as a <a href="#_terms"><em>term</em></a>
@@ -1189,14 +1224,14 @@ parentheses.</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fab"><span></span># Specifying an order of operations:
-x = p and (q or r);
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># Specifying an order of operations:</span>
+<span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-ow">or</span><span class="tok-w"> </span><span class="tok-nv">r</span><span class="tok-p">);</span><span class="tok-w"></span>
 
-# Choose which function we want to call:
-y = (if useF f else g)(x);
+<span class="tok-c1"># Choose which function we want to call:</span>
+<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">useF</span><span class="tok-w"> </span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">g</span><span class="tok-p">)(</span><span class="tok-nv">x</span><span class="tok-p">);</span><span class="tok-w"></span>
 
-# Without parentheses, g(x) is evaluated before the if condition:
-bad = if useF f else g(x);</code></pre>
+<span class="tok-c1"># Without parentheses, g(x) is evaluated before the if condition:</span>
+<span class="tok-nv">bad</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">useF</span><span class="tok-w"> </span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">g</span><span class="tok-p">(</span><span class="tok-nv">x</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1223,6 +1258,43 @@ call target.</p>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_type_declarations">Type declarations</h4>
+<div class="paragraph">
+<p>Types can be declared using the keyword <code>type</code> followed by a normal
+<a href="#_types">type annotation</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># An empty record type:</span>
+<span class="tok-nv">foo</span><span class="tok-p">:</span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-p">[];</span><span class="tok-w"></span>
+
+<span class="tok-c1"># A more interesting record type:</span>
+<span class="tok-nv">bar</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-p">:</span><span class="tok-kt">string</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">z</span><span class="tok-p">:</span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">wibble</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">]];</span><span class="tok-w"></span>
+
+<span class="tok-c1"># A parameterized type:</span>
+<span class="tok-nv">baz</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">];</span><span class="tok-w"></span>
+
+<span class="tok-c1"># A function type:</span>
+<span class="tok-nv">wibble</span><span class="tok-p">:</span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">baz</span><span class="tok-p">)-&gt;</span><span class="tok-kt">int</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-nv">f</span><span class="tok-p">:</span><span class="tok-nv">wibble</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">names</span><span class="tok-p">:</span><span class="tok-nv">baz</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">names</span><span class="tok-o">.</span><span class="tok-nv">size</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Type declarations are like typedefs in other languages: they allow a new name
+to be used for another (possibly complicated) type.
+There is currently no support for parameterizing declared types
+(e.g., <code>foo[int]</code>).</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-nl">typeDeclaration</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;type&#39;</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_todo">TODO</h3>
@@ -1232,10 +1304,6 @@ call target.</p>
 </div>
 <div class="sect3">
 <h4 id="_field_queries">Field queries</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_lists">Lists</h4>
 
 </div>
 <div class="sect3">
@@ -1279,7 +1347,7 @@ call target.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-18 23:12:18 NDT
+Last updated 2018-09-22 15:44:56 NDT
 </div>
 </div>
 </body>
