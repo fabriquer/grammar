@@ -9,26 +9,34 @@
 p = true;
 
 # CHECK: (value q =
-# CHECK:   (expression (unaryOperator not
+# CHECK:   (expression (unaryOperation
+# CHECK:     (unaryOperator not)
 # CHECK:     (nameReference p)
+# CHECK:   ))
 # CHECK: ;)
 q = not p;
 
 # CHECK: (value x =
-# CHECK:   (expression (unaryOperator -
+# CHECK:   (expression (unaryOperation
+# CHECK:     (unaryOperator -)
 # CHECK:     (literal 42)
+# CHECK:   ))
 # CHECK: ;)
 x = -42;
 
 # CHECK: (value y =
-# CHECK:   (expression (unaryOperator +
+# CHECK:   (expression (unaryOperation
+# CHECK:     (unaryOperator +)
 # CHECK:     (literal 42)
+# CHECK:   ))
 # CHECK: ;)
 y = +42;
 
 # CHECK: (value z =
-# CHECK:   (expression (unaryOperator -
+# CHECK:   (expression (unaryOperation
+# CHECK:     (unaryOperator -)
 # CHECK:     (nameReference y)
+# CHECK:   ))
 # CHECK: ;)
 z = -y;
 

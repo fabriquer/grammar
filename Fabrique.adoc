@@ -1,5 +1,6 @@
 :source-highlighter: pygments
 :pygments-style: tango
+:stem:
 :toc: right
 :toclevels: 3
 
@@ -575,6 +576,38 @@ list		: BracketOpen (values+=expression)* BracketClose ;
 ----
 
 
+==== Operations
+
+Operations are used to transform or combine expressions.
+
+
+===== Unary operations
+
+The unary operators in Fabrique are logical `not`, numeric minus (`-`) and
+numeric positive (`+`).
+
+.Examples
+[source, fabrique]
+----
+p = not q;
+x = -y;
+z = +y;
+----
+
+Logical operators in Fabrique are always written as keywords.
+Logical negation (latexmath:[p = \lnot q]) is written with the keyword `not`
+(`p = not q`).
+Numeric unary operators are positive (`+`) and negative (`-`).
+
+.Grammar
+[source, antlr]
+----
+// Transform an expression with a single operator (e.g., logical `not`)
+unaryOperation	: unaryOperator expression ;
+unaryOperator	: Not | Minus | Plus ;
+----
+
+
 ==== Parenthetical expressions
 
 An expression enclosed in parentheses is treated as a <<Terms,_term_>>
@@ -731,11 +764,3 @@ simpleType	: Identifier ;
 type_list : type (',' type)* ','? ;
 
 ////
-
-
-==== Unary operations
-
-////
-unaryOperation	: ('not' | '-' | '+') expression ;
-////
-

@@ -49,7 +49,7 @@ expression
 	| fieldReference
 	| foreach
 	| function
-	| unaryOperator
+	| unaryOperation
 	| term
 	;
 
@@ -88,7 +88,9 @@ function
 	  body=expression
 	;
 
-unaryOperator	: (Not | Minus | Plus) expression ;
+// Transform an expression with a single operator (e.g., logical `not`)
+unaryOperation	: unaryOperator expression ;
+unaryOperator	: Not | Minus | Plus ;
 
 
 //
