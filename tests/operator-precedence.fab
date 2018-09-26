@@ -1,0 +1,49 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value l =
+# CHECK:    (expression
+# CHECK:      (expression
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference x)))
+# CHECK:          (compareOp ==)
+# CHECK:          (expression
+# CHECK:            (expression
+# CHECK:              (expression (term (literal 1)))
+# CHECK:              (multOp *)
+# CHECK:              (expression (term (literal 2))))
+# CHECK:            (addOp +)
+# CHECK:            (expression (term (literal 3)))
+# CHECK:          )
+# CHECK:        )
+# CHECK:        (logicOp xor)
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference y)))
+# CHECK:          (compareOp !=)
+# CHECK:          (expression
+# CHECK:            (expression (term (nameReference x)))
+# CHECK:            (addOp -)
+# CHECK:            (expression
+# CHECK:              (expression (term (literal 1)))
+# CHECK:              (multOp *)
+# CHECK:              (expression (term (nameReference z)))
+# CHECK:            )
+# CHECK:          )
+# CHECK:        )
+# CHECK:      )
+# CHECK:      ::
+# CHECK:      (expression
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference p)))
+# CHECK:          (logicOp or)
+# CHECK:          (expression (term (nameReference q))))
+# CHECK:        ::
+# CHECK:        (expression
+# CHECK:          (list [ (expression (term (literal false))) ])
+# CHECK:        )
+# CHECK:      )
+# CHECK:    )
+# CHECK:  ;)
+l = x == 1 * 2 + 3 xor y != x - 1 * z :: p or q :: [ false ];

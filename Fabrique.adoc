@@ -579,6 +579,10 @@ list		: BracketOpen (values+=expression)* BracketClose ;
 ==== Operations
 
 Operations are used to transform or combine expressions.
+Fabrique has both <<Unary operations,unary>> and
+<<Binary operations,binary>> operations.
+The equivalent to a C-style ternary operation is the Fabrique
+<<Conditionals,conditional expression>>.
 
 
 ===== Unary operations
@@ -606,6 +610,90 @@ Numeric unary operators are positive (`+`) and negative (`-`).
 unaryOperation	: unaryOperator expression ;
 unaryOperator	: Not | Minus | Plus ;
 ----
+
+
+==== Binary operations
+
+Fabrique supports a few arithmetic, composition and logical operators.
+
+.Examples
+[source, fabrique]
+----
+x = 1 + 2 * y;
+
+cons = 1 :: 2 :: 3 :: [];
+list_ops = 0 :: [ 1 2 ] + [ 3 4 ];
+
+eq = p == q;
+neq = p != q;
+s = p and q xor r;
+----
+
+Many of the operators supported by Fabrique are similar to those of other
+programming languages, especially functional languages.
+The supported binary operators are listed below, in order of precedence:
+
+[%header, cols="^,8"]
+|===
+| Operator(s) | Description
+
+| `*`, `/`
+| The multiplication and division operators apply to integers.
+  There is currently no support for floating-point operations in Fabrique.
+
+| `+`, `-`
+| Addition and subtraction operators also apply to integers.
+  The plus operator can also be used with lists.
+
+| `==`, `!=`
+| Equality and inequality testing behaves much as you would expect.
+
+| `and`, `or`, `xor`
+| Logical operators are specified with keywords rather than symbols.
+  They have the meanings you'd expect.
+
+| `::`
+| The _cons_ operator, like `::` in ML and F# or like `:` in Haskell,
+  constructs a list out of a _head_ (a list element) and a _tail_ (a list).
+
+|===
+
+.Grammar
+[source, antlr]
+----
+expression
+	: expression multOp expression
+	| expression addOp expression
+	| expression compareOp expression
+	| expression logicOp expression
+	| <assoc=right> expression cons=Cons expression
+	/* ... */
+	;
+
+addOp	: Plus | Minus | ScalarAdd ;
+logicOp	: And | Or | Xor ;
+multOp	: Multiply | Divide ;
+----
+
+Lexer tokens are defined for operators, some of which are used by both
+unary and binary operations:
+
+.Operator tokens
+[source, antlr]
+----
+And		: 'and' ;
+Cons		: '::' ;
+Divide		: '/' ;
+Equals		: '==' ;
+Minus		: '-' ;
+Multiply	: '*' ;
+Not		: 'not' ;
+NotEquals	: '!=' ;
+Or		: 'or' ;
+Plus		: '+' ;
+Xor		: 'xor' ;
+----
+
 
 
 ==== Parenthetical expressions
@@ -688,25 +776,6 @@ typeDeclaration	: 'type' type ;
 
 
 === TODO
-
-==== Binary operators
-
-////
-binaryOperation	: logicalOperation | comparison | sum ;
-
-logicalOperation: lhs=comparison LogicOp rhs=logicalOperation ;
-LogicOp		: 'and' | 'or' | 'xor' ;
-
-logicOrCompare	: logicalOperation | comparison ;
-
-comparison	: lhs=sumOrTerm CompareOp rhs=sumOrTerm ;
-CompareOp	: '<' | '<=' | '>' | '>=' | '==' | '!=' ;
-
-sumOrTerm	: sum | term ;
-
-sum		: lhs=term ('+' | '::' | '.+') rhs=sumOrTerm ;
-////
-
 
 ==== Field queries
 

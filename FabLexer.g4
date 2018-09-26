@@ -41,7 +41,6 @@ Foreach		: 'foreach' ;
 Function	: 'function' ;
 Else		: 'else' ;
 If		: 'if' ;
-Not		: 'not' ;
 Record		: 'record' ;
 Type		: 'type' ;
 
@@ -50,7 +49,20 @@ BoolLiteral	: 'true' | 'false' ;
 IntLiteral	: [0-9]+ ;
 StringLiteral	: ('\'' .*? '\'') | ('"' .*? '"') ;
 
-// Symbols:
+// Operators:
+And		: 'and' ;
+Cons		: '::' ;
+Divide		: '/' ;
+Equals		: '==' ;
+Minus		: '-' ;
+Multiply	: '*' ;
+Not		: 'not' ;
+NotEquals	: '!=' ;
+Or		: 'or' ;
+Plus		: '+' ;
+Xor		: 'xor' ;
+
+// Other symbols:
 ArgSep		: ',' ;
 Assign		: '=' ;
 BraceOpen	: '{' ;
@@ -60,10 +72,8 @@ BracketClose	: ']' ;
 End		: ';' ;
 FieldSep	: '.' ;
 Input		: '<-' ;
-Minus		: '-' ;
 ParenOpen	: '(' ;
 ParenClose	: ')' ;
-Plus		: '+' ;
 Produces	: '->' ;
 Query		: '?' ;
 TypeSep		: ':' ;

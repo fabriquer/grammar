@@ -42,8 +42,12 @@ value		: (name=Identifier (TypeSep type)* Assign)? expression End;
 // Almost everything in Fabrique is an expression that can be evaluated
 //
 expression
-	: call
-	| compoundExpr
+	: expression multOp expression
+	| expression addOp expression
+	| expression compareOp expression
+	| expression logicOp expression
+	| <assoc=right> expression cons=Cons expression
+	| call
 	| conditional
 	| fieldQuery
 	| fieldReference
@@ -52,6 +56,11 @@ expression
 	| unaryOperation
 	| term
 	;
+
+addOp	: Minus | Plus ;
+compareOp : Equals | NotEquals ;
+logicOp	: And | Or | Xor ;
+multOp	: Multiply | Divide ;
 
 // Anything with a function type can be called
 call	: term ParenOpen arguments? ParenClose ;

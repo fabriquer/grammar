@@ -1,0 +1,74 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (value p =
+# CHECK:   (expression
+# CHECK:     (expression (term (literal true)))
+# CHECK:     (logicOp xor)
+# CHECK:     (expression (term (literal false)))
+# CHECK:   )
+# CHECK: ;)
+p = true xor false;
+
+# CHECK: (value q =
+# CHECK:   (expression
+# CHECK:     (expression
+# CHECK:       (expression (term (literal true)))
+# CHECK:       (logicOp and)
+# CHECK:       (expression (term (literal false)))
+# CHECK:     )
+# CHECK:     (logicOp or)
+# CHECK:     (expression (term (nameReference p)))
+# CHECK:   )
+# CHECK: ;)
+q = true and false or p;
+
+# CHECK: (value x =
+# CHECK:   (expression
+# CHECK:     (expression
+# CHECK:       (expression (term (literal 1)))
+# CHECK:       (addOp +)
+# CHECK:       (expression (term (literal 2)))
+# CHECK:     )
+# CHECK:     (addOp -)
+# CHECK:     (expression (term (literal 3)))
+# CHECK:   )
+# CHECK: ;)
+x = 1 + 2 - 3;
+
+# CHECK: (value y =
+# CHECK:   (expression
+# CHECK:     (expression
+# CHECK:       (expression (term (literal 3)))
+# CHECK:       (multOp *)
+# CHECK:       (expression (term (literal 2)))
+# CHECK:     )
+# CHECK:     (multOp /)
+# CHECK:     (expression (term (literal 1)))
+# CHECK:   )
+# CHECK: ;)
+y = 3 * 2 / 1;
+
+# CHECK: (value concat =
+# CHECK:   (expression
+# CHECK:     (expression
+# CHECK:       (expression
+# CHECK:         (expression (term (literal 0)))
+# CHECK:         (addOp ::)
+# CHECK:         (expression (term (list [
+# CHECK:           (literal 1)
+# CHECK:           (literal 2)
+# CHECK:         )))
+# CHECK:       )
+# CHECK:     (addOp +)
+# CHECK:     (expression (term (list [
+# CHECK:       (literal 3)
+# CHECK:       (literal 4)
+# CHECK:     )))
+# CHECK:   )
+# CHECK:   (addOp .+)
+# CHECK:   (expression (term (literal 5)))
+# CHECK: ;)
+concat = 0 :: [ 1 2 ] + [ 3 4 ] .+ 5;
