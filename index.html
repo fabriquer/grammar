@@ -533,18 +533,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_functions">Functions</a></li>
 <li><a href="#_literals">Literals</a></li>
 <li><a href="#_lists">Lists</a></li>
+<li><a href="#_operations">Operations</a></li>
+<li><a href="#_binary_operations">Binary operations</a></li>
 <li><a href="#_parenthetical_expressions">Parenthetical expressions</a></li>
 <li><a href="#_type_declarations">Type declarations</a></li>
 </ul>
 </li>
 <li><a href="#_todo">TODO</a>
 <ul class="sectlevel3">
-<li><a href="#_binary_operators">Binary operators</a></li>
 <li><a href="#_field_queries">Field queries</a></li>
 <li><a href="#_records">Records</a></li>
 <li><a href="#_terms">Terms</a></li>
 <li><a href="#_types">Types</a></li>
-<li><a href="#_unary_operations">Unary operations</a></li>
 </ul>
 </li>
 </ul>
@@ -573,7 +573,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># Fabrique uses single-line comments that start with a &#39;#&#39; character</span>
 
 <span class="tok-c1"># Here&#39;s another comment:</span>
-<span class="tok-nv">sources</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-nv">a</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"> </span><span class="tok-nv">b</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-p">);</span><span class="tok-w">     </span><span class="tok-c1"># our source files</span>
+<span class="tok-nv">sources</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-nv">a</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"> </span><span class="tok-nv">b</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-p">);</span><span class="tok-w">     </span><span class="tok-c1"># our source files</span>
 
 <span class="tok-c1">#</span>
 <span class="tok-c1"># Begin/end multiline comments are not supported: just use multiple single-line</span>
@@ -608,11 +608,11 @@ spaces, tabs and newlines are all ignored.</p>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">source_files</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-nv">a</span><span class="tok-o">.</span><span class="tok-nv">cc</span><span class="tok-w"> </span><span class="tok-nv">b</span><span class="tok-o">.</span><span class="tok-nv">cc</span><span class="tok-p">);</span><span class="tok-w"></span>
-<span class="tok-nv">count</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">source_files</span><span class="tok-o">.</span><span class="tok-nv">length</span><span class="tok-p">();</span><span class="tok-w"></span>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">source_files</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">files</span><span class="tok-p">(</span><span class="tok-nv">a</span><span class="tok-o">.</span><span class="tok-nv">cc</span><span class="tok-w"> </span><span class="tok-nv">b</span><span class="tok-o">.</span><span class="tok-nv">cc</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">count</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">source_files</span><span class="tok-o">.</span><span class="tok-nv">length</span><span class="tok-p">();</span><span class="tok-w"></span>
 
-<span class="tok-nv">object_files</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">compile</span><span class="tok-p">(</span><span class="tok-nv">source_files</span><span class="tok-p">);</span><span class="tok-w"></span>
-<span class="tok-nv">executable</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">link</span><span class="tok-p">(</span><span class="tok-nv">object_files</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
+<span class="tok-nv">object_files</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">compile</span><span class="tok-p">(</span><span class="tok-nv">source_files</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">executable</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">link</span><span class="tok-p">(</span><span class="tok-nv">object_files</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -729,10 +729,10 @@ are executed at build time (rather than compile time).</p>
 <div class="title">Examples</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span>
-<span class="tok-nv">cc</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">action</span><span class="tok-p">(</span><span class="tok-s1">&#39;</span><span class="tok-dl">${</span><span class="tok-si">cc}</span><span class="tok-s1"> </span><span class="tok-dl">${</span><span class="tok-si">flags}</span><span class="tok-s1"> -c </span><span class="tok-dl">${</span><span class="tok-si">src}</span><span class="tok-s1"> -o </span><span class="tok-dl">${</span><span class="tok-si">obj}</span><span class="tok-s1">&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">description</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;Compiling </span><span class="tok-dl">${</span><span class="tok-si">src}</span><span class="tok-s1">&#39;</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-p">&lt;</span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">in</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">obj</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">out</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">flags</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[]);</span><span class="tok-w"></span>
+<span class="tok-nv">cc</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">action</span><span class="tok-p">(</span><span class="tok-s1">&#39;</span><span class="tok-dl">${</span><span class="tok-si">cc}</span><span class="tok-s1"> </span><span class="tok-dl">${</span><span class="tok-si">flags}</span><span class="tok-s1"> -c </span><span class="tok-dl">${</span><span class="tok-si">src}</span><span class="tok-s1"> -o </span><span class="tok-dl">${</span><span class="tok-si">obj}</span><span class="tok-s1">&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">description</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;Compiling </span><span class="tok-dl">${</span><span class="tok-si">src}</span><span class="tok-s1">&#39;</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">&lt;</span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">in</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">obj</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">out</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">flags</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[]);</span><span class="tok-w"></span>
 
-<span class="tok-nv">obj</span><span class="tok-p">:</span><span class="tok-nb">file</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">cc</span><span class="tok-p">(</span><span class="tok-nv">src_file</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
+<span class="tok-nv">obj</span><span class="tok-p">:</span><span class="tok-nb">file</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">cc</span><span class="tok-p">(</span><span class="tok-nv">src_file</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -800,8 +800,8 @@ a lot of languages: with comma-separated arguments inside of parentheses.</p>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">noArguments</span><span class="tok-p">();</span><span class="tok-w"></span>
 <span class="tok-nv">positionalArguments</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-s1">&#39;hello&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">);</span><span class="tok-w"></span>
-<span class="tok-nv">keywordArguments</span><span class="tok-p">(</span><span class="tok-nv">what</span><span class="tok-kd">=</span><span class="tok-s1">&#39;hello&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">who</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;world&#39;</span><span class="tok-p">);</span><span class="tok-w"></span>
-<span class="tok-nv">mixedArguments</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-kd">=</span><span class="tok-mi">3</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
+<span class="tok-nv">keywordArguments</span><span class="tok-p">(</span><span class="tok-nv">what</span><span class="tok-o">=</span><span class="tok-s1">&#39;hello&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">who</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;world&#39;</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">mixedArguments</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-o">=</span><span class="tok-mi">3</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -843,9 +843,9 @@ The values describe intermediate state that can be used by the final
 <div class="title">Example</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-p">{</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">(</span><span class="tok-nv">basename</span><span class="tok-w"> + </span><span class="tok-s1">&#39;.c&#39;</span><span class="tok-p">);</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">obj</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">compile</span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-p">);</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">binary</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">link</span><span class="tok-p">(</span><span class="tok-nv">obj</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nb">file</span><span class="tok-p">(</span><span class="tok-nv">basename</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-s1">&#39;.c&#39;</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">obj</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">compile</span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">binary</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">link</span><span class="tok-p">(</span><span class="tok-nv">obj</span><span class="tok-p">);</span><span class="tok-w"></span>
 
 <span class="tok-w">	</span><span class="tok-nv">binary</span><span class="tok-w"></span>
 <span class="tok-p">}</span><span class="tok-w"></span></code></pre>
@@ -875,7 +875,7 @@ readable:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">like_an_if_statement</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-p">-</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">like_an_if_statement</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -887,7 +887,7 @@ are entirely optional:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">more_succinct</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">-</span><span class="tok-nv">y</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">more_succinct</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">&gt;</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-nv">y</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -915,17 +915,17 @@ are entirely optional:</p>
 <div class="title">Examples</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># Access a single field:</span>
-<span class="tok-nv">simple</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">simple</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-p">;</span><span class="tok-w"></span>
 
 <span class="tok-c1"># Access a field within a field (within a field, within a field, ...):</span>
-<span class="tok-nv">nested</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">baz</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">nested</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">baz</span><span class="tok-p">;</span><span class="tok-w"></span>
 
 <span class="tok-c1"># Slightly more complicated things:</span>
-<span class="tok-nv">complex</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">something</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">bar</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-nv">baz</span><span class="tok-o">.</span><span class="tok-nv">wibble</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">complex</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">something</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">bar</span><span class="tok-p">)</span><span class="tok-o">.</span><span class="tok-nv">baz</span><span class="tok-o">.</span><span class="tok-nv">wibble</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-<span class="tok-nv">veryComplex</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">bar</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
+<span class="tok-nv">veryComplex</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">bar</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
 
 <span class="tok-w">	</span><span class="tok-nv">y</span><span class="tok-w"></span>
 <span class="tok-p">}</span><span class="tok-o">.</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">foo</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
@@ -965,7 +965,7 @@ builtin or collectively using the <code>files</code> construct.</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nb">file</span><span class="tok-p">(</span><span class="tok-s1">&#39;foo.c&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">cflags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-s1">&#39;-D&#39;</span><span class="tok-w"> </span><span class="tok-s1">&#39;FOO&#39;</span><span class="tok-w"> </span><span class="tok-p">]);</span><span class="tok-w"></span></code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nb">file</span><span class="tok-p">(</span><span class="tok-s1">&#39;foo.c&#39;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">cflags</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-s1">&#39;-D&#39;</span><span class="tok-w"> </span><span class="tok-s1">&#39;FOO&#39;</span><span class="tok-w"> </span><span class="tok-p">]);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -999,7 +999,7 @@ permits the use of raw filenames.</p>
 <span class="tok-w">	</span><span class="tok-nv">foo</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-nv">bar</span><span class="tok-o">.</span><span class="tok-nv">c</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-p">,</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">cflags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-s1">&#39;-Wall&#39;</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">arg2</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">cflags</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-s1">&#39;-Wall&#39;</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">arg2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-w"></span>
 <span class="tok-p">)</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
@@ -1040,13 +1040,13 @@ file list (e.g., <code>cflags</code> in the example above).</p>
 <div class="title">Examples</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># A somewhat verbose way to use foreach, a bit like a conventional for loop:</span>
-<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">&lt;-</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"></span>
+<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">&lt;</span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"></span>
 <span class="tok-p">{</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-w"> + </span><span class="tok-mi">1</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"></span>
 <span class="tok-p">};</span><span class="tok-w"></span>
 
 <span class="tok-c1"># Equivalently, a shorter way of expressing the same thing:</span>
-<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">&lt;-</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> + </span><span class="tok-mi">1</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-p">&lt;</span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1101,18 +1101,18 @@ higher-level abstractions (e.g., toolchains) from lower-level abstractions
 <div class="title">Examples</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># These default flags will be visible in the `compile` function below</span>
-<span class="tok-nv">default_flags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"></span>
+<span class="tok-nv">default_flags</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"></span>
 <span class="tok-p">{</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-nv">object</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-s1">&#39;-fPIC&#39;</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-nv">object</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-s1">&#39;-fPIC&#39;</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
 <span class="tok-p">};</span><span class="tok-w"></span>
 
-<span class="tok-nv">compile</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-p">(</span><span class="tok-nv">srcs</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">common_flags</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[],</span><span class="tok-w"></span>
-<span class="tok-w">                   </span><span class="tok-nv">deps</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">in</span><span class="tok-p">]]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[]):</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">]</span><span class="tok-w"></span>
+<span class="tok-nv">compile</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-p">(</span><span class="tok-nv">srcs</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">],</span><span class="tok-w"> </span><span class="tok-nv">common_flags</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[],</span><span class="tok-w"></span>
+<span class="tok-w">                   </span><span class="tok-nv">deps</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">[</span><span class="tok-kp">in</span><span class="tok-p">]]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[]):</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-nb">file</span><span class="tok-p">]</span><span class="tok-w"></span>
 <span class="tok-p">{</span><span class="tok-w"></span>
-<span class="tok-w">	</span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-p">&lt;-</span><span class="tok-w"> </span><span class="tok-nv">srcs</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-k">foreach</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-p">&lt;</span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-nv">srcs</span><span class="tok-w"></span>
 <span class="tok-w">	</span><span class="tok-p">{</span><span class="tok-w"></span>
-<span class="tok-w">		</span><span class="tok-nv">obj</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-w"> + </span><span class="tok-s1">&#39;.o&#39;</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-w">		</span><span class="tok-nv">flags</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-o">.</span><span class="tok-nv">cxxflags</span><span class="tok-w"> </span><span class="tok-err">?</span><span class="tok-w"> </span><span class="tok-nv">common_flags</span><span class="tok-p">)</span><span class="tok-w"> + </span><span class="tok-nv">default_flags</span><span class="tok-o">.</span><span class="tok-nv">object</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-w">		</span><span class="tok-nv">obj</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">src</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-s1">&#39;.o&#39;</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-w">		</span><span class="tok-nv">flags</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-o">.</span><span class="tok-nv">cxxflags</span><span class="tok-w"> </span><span class="tok-err">?</span><span class="tok-w"> </span><span class="tok-nv">common_flags</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-nv">default_flags</span><span class="tok-o">.</span><span class="tok-nv">object</span><span class="tok-p">;</span><span class="tok-w"></span>
 
 <span class="tok-w">		</span><span class="tok-nv">compile_one</span><span class="tok-p">(</span><span class="tok-nv">src</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">obj</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">flags</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">deps</span><span class="tok-p">);</span><span class="tok-w"></span>
 <span class="tok-w">		</span><span class="tok-nv">obj</span><span class="tok-w"></span>
@@ -1152,13 +1152,13 @@ integers and strings (single- or double-quoted).</p>
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">p</span><span class="tok-p">:</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-nv">integer</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-nv">single_quoted</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;double quotes (&quot;) are OK&#39;</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-nv">double_quoted</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-s2">&quot;single quotes (&#39;) are OK&quot;</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-nv">list_of_numbers</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
-<span class="tok-nv">list_of_bools</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span></code></pre>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">p</span><span class="tok-p">:</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">integer</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">single_quoted</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;double quotes (&quot;) are OK&#39;</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">double_quoted</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s2">&quot;single quotes (&#39;) are OK&quot;</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">list_of_numbers</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
+<span class="tok-nv">list_of_bools</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-kc">true</span><span class="tok-w"> </span><span class="tok-kc">false</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1194,10 +1194,10 @@ that contain quote characters.
 <div class="listingblock">
 <div class="title">Examples</div>
 <div class="content">
-<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
-<span class="tok-nv">y</span><span class="tok-p">:</span><span class="tok-nv">special_int</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">some_special_kind_of_int</span><span class="tok-p">();</span><span class="tok-w"></span>
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">y</span><span class="tok-p">:</span><span class="tok-nv">special_int</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">some_special_kind_of_int</span><span class="tok-p">();</span><span class="tok-w"></span>
 
-<span class="tok-nv">l</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">int</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w">   </span><span class="tok-c1"># the type of this is list[int]</span></code></pre>
+<span class="tok-nv">l</span><span class="tok-p">:</span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">int</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w">   </span><span class="tok-c1"># the type of this is list[int]</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1209,6 +1209,144 @@ list&#8217;s elements".</p>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Zero or more expressions of (some) like type</span><span class="tok-w"></span>
 <span class="tok-nl">list</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">BracketOpen</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-nv">values</span><span class="tok-o">+=</span><span class="tok-nv">expression</span><span class="tok-o">)*</span><span class="tok-w"> </span><span class="tok-no">BracketClose</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operations">Operations</h4>
+<div class="paragraph">
+<p>Operations are used to transform or combine expressions.
+Fabrique has both <a href="#_unary_operations">unary</a> and
+<a href="#_binary_operations">binary</a> operations.
+The equivalent to a C-style ternary operation is the Fabrique
+<a href="#_conditionals">conditional expression</a>.</p>
+</div>
+<div class="sect4">
+<h5 id="_unary_operations">Unary operations</h5>
+<div class="paragraph">
+<p>The unary operators in Fabrique are logical <code>not</code>, numeric minus (<code>-</code>) and
+numeric positive (<code>+</code>).</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">not</span><span class="tok-w"> </span><span class="tok-nv">q</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-nv">y</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">z</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-nv">y</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Logical operators in Fabrique are always written as keywords.
+Logical negation (\(p = \lnot q\)) is written with the keyword <code>not</code>
+(<code>p = not q</code>).
+Numeric unary operators are positive (<code>+</code>) and negative (<code>-</code>).</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-c">// Transform an expression with a single operator (e.g., logical `not`)</span><span class="tok-w"></span>
+<span class="tok-nl">unaryOperation</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nv">unaryOperator</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">unaryOperator</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">Not</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">Minus</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">Plus</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_binary_operations">Binary operations</h4>
+<div class="paragraph">
+<p>Fabrique supports a few arithmetic, composition and logical operators.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-nv">cons</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-o">::</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-o">::</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-o">::</span><span class="tok-w"> </span><span class="tok-p">[];</span><span class="tok-w"></span>
+<span class="tok-nv">list_ops</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-w"> </span><span class="tok-o">::</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-w"> </span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-p">[</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-w"> </span><span class="tok-mi">4</span><span class="tok-w"> </span><span class="tok-p">];</span><span class="tok-w"></span>
+
+<span class="tok-nv">eq</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-nv">q</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">neq</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-nv">q</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">s</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-ow">xor</span><span class="tok-w"> </span><span class="tok-nv">r</span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Many of the operators supported by Fabrique are similar to those of other
+programming languages, especially functional languages.
+The supported binary operators are listed below, in order of precedence:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Operator(s)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>*</code>, <code>/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The multiplication and division operators apply to integers.
+  There is currently no support for floating-point operations in Fabrique.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>+</code>, <code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Addition and subtraction operators also apply to integers.
+  The plus operator can also be used with lists.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>==</code>, <code>!=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Equality and inequality testing behaves much as you would expect.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>and</code>, <code>or</code>, <code>xor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logical operators are specified with keywords rather than symbols.
+  They have the meanings you&#8217;d expect.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>::</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <em>cons</em> operator, like <code>::</code> in ML and F# or like <code>:</code> in Haskell,
+  constructs a list out of a <em>head</em> (a list element) and a <em>tail</em> (a list).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-nl">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">multOp</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">addOp</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">compareOp</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">logicOp</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-err">&lt;</span><span class="tok-nv">assoc</span><span class="tok-o">=</span><span class="tok-nv">right</span><span class="tok-err">&gt;</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"> </span><span class="tok-nv">cons</span><span class="tok-o">=</span><span class="tok-no">Cons</span><span class="tok-w"> </span><span class="tok-nv">expression</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-c">/* ... */</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-nl">addOp</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">Plus</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">Minus</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">ScalarAdd</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">logicOp</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">And</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">Or</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">Xor</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">multOp</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-no">Multiply</span><span class="tok-w"> </span><span class="tok-o">|</span><span class="tok-w"> </span><span class="tok-no">Divide</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lexer tokens are defined for operators, some of which are used by both
+unary and binary operations:</p>
+</div>
+<div class="listingblock">
+<div class="title">Operator tokens</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-nl">And</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;and&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Cons</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;::&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Divide</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;/&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Equals</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;==&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Minus</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;-&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Multiply</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;*&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Not</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;not&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">NotEquals</span><span class="tok-w">	</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;!=&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Or</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;or&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Plus</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;+&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nl">Xor</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;xor&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 </div>
@@ -1225,13 +1363,13 @@ parentheses.</p>
 <div class="title">Examples</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># Specifying an order of operations:</span>
-<span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-ow">or</span><span class="tok-w"> </span><span class="tok-nv">r</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">p</span><span class="tok-w"> </span><span class="tok-ow">and</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">q</span><span class="tok-w"> </span><span class="tok-ow">or</span><span class="tok-w"> </span><span class="tok-nv">r</span><span class="tok-p">);</span><span class="tok-w"></span>
 
 <span class="tok-c1"># Choose which function we want to call:</span>
-<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">useF</span><span class="tok-w"> </span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">g</span><span class="tok-p">)(</span><span class="tok-nv">x</span><span class="tok-p">);</span><span class="tok-w"></span>
+<span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">useF</span><span class="tok-w"> </span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">g</span><span class="tok-p">)(</span><span class="tok-nv">x</span><span class="tok-p">);</span><span class="tok-w"></span>
 
 <span class="tok-c1"># Without parentheses, g(x) is evaluated before the if condition:</span>
-<span class="tok-nv">bad</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">useF</span><span class="tok-w"> </span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">g</span><span class="tok-p">(</span><span class="tok-nv">x</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
+<span class="tok-nv">bad</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-nv">useF</span><span class="tok-w"> </span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-nv">g</span><span class="tok-p">(</span><span class="tok-nv">x</span><span class="tok-p">);</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1268,18 +1406,18 @@ call target.</p>
 <div class="title">Examples</div>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># An empty record type:</span>
-<span class="tok-nv">foo</span><span class="tok-p">:</span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-p">[];</span><span class="tok-w"></span>
+<span class="tok-nv">foo</span><span class="tok-p">:</span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-p">[];</span><span class="tok-w"></span>
 
 <span class="tok-c1"># A more interesting record type:</span>
-<span class="tok-nv">bar</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-p">:</span><span class="tok-kt">string</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">z</span><span class="tok-p">:</span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">wibble</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">]];</span><span class="tok-w"></span>
+<span class="tok-nv">bar</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-p">:</span><span class="tok-kt">string</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-nv">z</span><span class="tok-p">:</span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">wibble</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">]];</span><span class="tok-w"></span>
 
 <span class="tok-c1"># A parameterized type:</span>
-<span class="tok-nv">baz</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">];</span><span class="tok-w"></span>
+<span class="tok-nv">baz</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kt">list</span><span class="tok-p">[</span><span class="tok-kt">string</span><span class="tok-p">];</span><span class="tok-w"></span>
 
 <span class="tok-c1"># A function type:</span>
-<span class="tok-nv">wibble</span><span class="tok-p">:</span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">baz</span><span class="tok-p">)-&gt;</span><span class="tok-kt">int</span><span class="tok-p">;</span><span class="tok-w"></span>
+<span class="tok-nv">wibble</span><span class="tok-p">:</span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">type</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">baz</span><span class="tok-p">)</span><span class="tok-o">-</span><span class="tok-p">&gt;</span><span class="tok-kt">int</span><span class="tok-p">;</span><span class="tok-w"></span>
 
-<span class="tok-nv">f</span><span class="tok-p">:</span><span class="tok-nv">wibble</span><span class="tok-w"> </span><span class="tok-kd">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">names</span><span class="tok-p">:</span><span class="tok-nv">baz</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">names</span><span class="tok-o">.</span><span class="tok-nv">size</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
+<span class="tok-nv">f</span><span class="tok-p">:</span><span class="tok-nv">wibble</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-nv">names</span><span class="tok-p">:</span><span class="tok-nv">baz</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">names</span><span class="tok-o">.</span><span class="tok-nv">size</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1298,10 +1436,6 @@ There is currently no support for parameterizing declared types
 </div>
 <div class="sect2">
 <h3 id="_todo">TODO</h3>
-<div class="sect3">
-<h4 id="_binary_operators">Binary operators</h4>
-
-</div>
 <div class="sect3">
 <h4 id="_field_queries">Field queries</h4>
 
@@ -1337,18 +1471,30 @@ There is currently no support for parameterizing declared types
 
 </div>
 </div>
-<div class="sect3">
-<h4 id="_unary_operations">Unary operations</h4>
-
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-22 15:48:22 NDT
+Last updated 2018-09-26 14:07:28 NDT
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
