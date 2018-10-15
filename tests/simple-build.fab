@@ -1,0 +1,93 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value src =
+# CHECK:    (call (term (nameReference file)) (
+# CHECK:      (arguments (positionalArguments
+# CHECK:          (literal 'Inputs/foo.c')
+# CHECK:      ))
+# CHECK:    ) )
+# CHECK:  ;)
+src = file('Inputs/foo.c');
+
+# CHECK:  (value cc =
+# CHECK:    (buildAction action (
+# CHECK:      (literal 'cc -c $src -o $obj')
+# CHECK:      <-
+# CHECK:      (parameters
+# CHECK:        (parameter src :
+# CHECK:          (parametricType (simpleType file)
+# CHECK:            [ (type_list (type (simpleType in))) ]
+# CHECK:          )
+# CHECK:        )
+# CHECK:        (parameter obj :
+# CHECK:          (parametricType (simpleType file)
+# CHECK:            [ (type_list (type (simpleType out))) ]
+# CHECK:          )
+# CHECK:        )
+# CHECK:      )
+# CHECK:    ))
+# CHECK:  ;)
+cc = action('cc -c $src -o $obj' <- src:file[in], obj:file[out]);
+
+
+# CHECK:  (value link =
+# CHECK:    (buildAction action (
+# CHECK:      (literal 'cc $objects -o $bin')
+# CHECK:      <-
+# CHECK:      (parameters
+# CHECK:        (parameter objects :
+# CHECK:          (parametricType (simpleType list)
+# CHECK:            [
+# CHECK               (parametricType (simpleType file)
+# CHECK:                [ (type_list (type (simpleType in))) ]
+# CHECK:              )
+# CHECK:            ]
+# CHECK:          )
+# CHECK:        )
+# CHECK:        (parameter bin :
+# CHECK:          (parametricType (simpleType file)
+# CHECK:            [ (type_list (type (simpleType out))) ]
+# CHECK:          )
+# CHECK:        )
+# CHECK:      )
+# CHECK:    ))
+# CHECK:  ;)
+link = action('cc $objects -o $bin' <- objects:list[file[in]], bin:file[out]);
+
+# CHECK:  (value obj =
+# CHECK:    (call (term (nameReference cc)) (
+# CHECK:      (arguments (positionalArguments
+# CHECK:          (nameReference src)
+# CHECK:          (call (term (nameReference file)) (
+# CHECK:            (arguments (positionalArguments
+# CHECK:              (literal 'foo.o')
+# CHECK:            ))
+# CHECK:          ))
+# CHECK:      ))
+# CHECK     ))
+# CHECK:  ;)
+obj = cc(src, file('foo.o'));
+
+# CHECK:  (value bin =
+# CHECK:    (call (term (nameReference link)) (
+# CHECK:      (positionalArguments
+# CHECK:        (list [
+# CHECK:          (nameReference obj)
+# CHECK:        ])
+# CHECK:      )
+# CHECK:      (keywordArgument bin =
+# CHECK:        (call
+# CHECK:          (nameReference file)
+# CHECK:          (
+# CHECK:            (positionalArguments
+# CHECK:              (literal 'foo')
+# CHECK:            )
+# CHECK:          )
+# CHECK:        )
+# CHECK:      )
+# CHECK:    ))
+# CHECK:  ;)
+bin = link([ obj ], bin = file('foo'));
