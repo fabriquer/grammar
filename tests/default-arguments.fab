@@ -1,0 +1,39 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value increment =
+# CHECK:    (function function
+# CHECK:      ( (parameters
+# CHECK:        (parameter x : (type (simpleType int)))
+# CHECK:        (parameter increment :
+# CHECK:          (type (simpleType int))
+# CHECK:          =
+# CHECK:          (literal 1)
+# CHECK:        )
+# CHECK:      ) )
+# CHECK:    )
+# CHECK:  ;)
+increment = function(x:int, increment:int = 1): int
+	x + increment;
+
+# CHECK:  (value concat =
+# CHECK:    (function function
+# CHECK:      ( (parameters
+# CHECK:        (parameter lhs : (type (simpleType string)))
+# CHECK:        (parameter ch :
+# CHECK:          (type (simpleType string))
+# CHECK:          =
+# CHECK:          (literal '.')
+# CHECK:        )
+# CHECK:        (parameter rhs :
+# CHECK:          (type (simpleType string))
+# CHECK:          =
+# CHECK:          (literal '')
+# CHECK:        )
+# CHECK:      ) )
+# CHECK:    )
+# CHECK:  ;)
+concat = function(lhs:string, ch:string = '.', rhs:string = ''): string
+	lhs + ch + rhs;
