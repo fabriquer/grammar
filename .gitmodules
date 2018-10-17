@@ -1,0 +1,6 @@
+[submodule "generated/cxx"]
+	path = generated/cxx
+	url = https://github.com/fabriquer/grammar
+[submodule "generated/java"]
+	path = generated/java
+	url = https://github.com/fabriquer/grammar
