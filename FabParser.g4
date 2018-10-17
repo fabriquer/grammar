@@ -117,8 +117,7 @@ term
 	;
 
 buildAction
-	: Action ParenOpen command=expression
-		(ArgSep keywordArguments)?
+	: Action ParenOpen arguments
 		(Input parameters)?
 		ParenClose
 	;
