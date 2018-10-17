@@ -1,0 +1,8 @@
+#
+# Our ANTLRv4 build generates four source files and corresponding headers:
+#
+basenames = [ 'Lexer' 'Parser' 'ParserBaseVisitor' 'ParserVisitor' ];
+names = foreach base <- basenames { 'Fab' + base };
+
+headers = foreach name <- names { file(name + '.h') };
+sources = foreach name <- names { file(name + '.cpp') };
