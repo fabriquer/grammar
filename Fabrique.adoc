@@ -6,6 +6,10 @@
 
 = The Fabrique build language
 
+Fabrique is a build language for complex systems.
+It is **functional**, statically **typed** and
+designed to require very **few dependencies**.
+
 == Motivation
 
 == Grammatical elements
