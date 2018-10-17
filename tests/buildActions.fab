@@ -14,8 +14,8 @@
 # CHECK:              (parametricType
 # CHECK:                (simpleType list)
 # CHECK:                [
-# CHECK:                  (type_list
-# CHECK:                    [[FILE_IN:\(type \(parametricType \(simpleType file\) \[ \(type_list \(type \(simpleType in\)\)\) \]\)\)]]
+# CHECK:                  (typeList
+# CHECK:                    [[FILE_IN:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType in\)\)\) \]\)\)]]
 # CHECK:                  )
 # CHECK:                ]
 # CHECK:            )
@@ -23,7 +23,7 @@
 # CHECK:          )
 # CHECK:          ,
 # CHECK:          (parameter obj : 
-# CHECK:            [[FILE_OUT:\(type \(parametricType \(simpleType file\) \[ \(type_list \(type \(simpleType out\)\)\) \]\)\)]]
+# CHECK:            [[FILE_OUT:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType out\)\)\) \]\)\)]]
 # CHECK:          )
 # CHECK:        )
 # CHECK:      )

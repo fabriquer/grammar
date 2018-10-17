@@ -30,7 +30,7 @@ bar = type record[x:int, y:string, z:record[wibble:int]];
 # CHECK: (value baz =
 # CHECK:   (typeDeclaration
 # CHECK:     (functionType
-# CHECK:       ( (type_list (type (simpleType int))) )
+# CHECK:       ( (typeList (type (simpleType int))) )
 # CHECK:       -> (type (simpleType int))
 # CHECK:     )
 # CHECK:   )
@@ -40,13 +40,13 @@ baz = type (int)->int;
 # CHECK: (value wibble =
 # CHECK:   (typeDeclaration
 # CHECK:     (functionType
-# CHECK:       ( (type_list (type (simpleType int))) )
+# CHECK:       ( (typeList (type (simpleType int))) )
 # CHECK:       ->
 # CHECK:       (functionType
-# CHECK:         (type_list (
+# CHECK:         (typeList (
 # CHECK:           (parametricType
 # CHECK:             (simpleType list)
-# CHECK:             [ (type_list (type (simpleType string))) ]
+# CHECK:             [ (typeList (type (simpleType string))) ]
 # CHECK:           )
 # CHECK:         ) )
 # CHECK:         -> (type (simpleType int))

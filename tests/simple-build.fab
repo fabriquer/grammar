@@ -19,12 +19,12 @@ src = file('Inputs/foo.c');
 # CHECK:      (parameters
 # CHECK:        (parameter src :
 # CHECK:          (parametricType (simpleType file)
-# CHECK:            [ (type_list (type (simpleType in))) ]
+# CHECK:            [ (typeList (type (simpleType in))) ]
 # CHECK:          )
 # CHECK:        )
 # CHECK:        (parameter obj :
 # CHECK:          (parametricType (simpleType file)
-# CHECK:            [ (type_list (type (simpleType out))) ]
+# CHECK:            [ (typeList (type (simpleType out))) ]
 # CHECK:          )
 # CHECK:        )
 # CHECK:      )
@@ -42,14 +42,14 @@ cc = action('cc -c $src -o $obj' <- src:file[in], obj:file[out]);
 # CHECK:          (parametricType (simpleType list)
 # CHECK:            [
 # CHECK               (parametricType (simpleType file)
-# CHECK:                [ (type_list (type (simpleType in))) ]
+# CHECK:                [ (typeList (type (simpleType in))) ]
 # CHECK:              )
 # CHECK:            ]
 # CHECK:          )
 # CHECK:        )
 # CHECK:        (parameter bin :
 # CHECK:          (parametricType (simpleType file)
-# CHECK:            [ (type_list (type (simpleType out))) ]
+# CHECK:            [ (typeList (type (simpleType out))) ]
 # CHECK:          )
 # CHECK:        )
 # CHECK:      )

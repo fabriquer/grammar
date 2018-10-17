@@ -9,7 +9,7 @@
 # CHECK:    (function function (
 # CHECK:      (parameters
 # CHECK:        (parameter ints :
-# CHECK:          [[INT_LIST:\(type \(parametricType \(simpleType list\) \[ \(type_list \(type \(simpleType int\)\)\) \]\)\)]]
+# CHECK:          [[INT_LIST:\(type \(parametricType \(simpleType list\) \[ \(typeList \(type \(simpleType int\)\)\) \]\)\)]]
 # CHECK:        )
 # CHECK:      )
 # CHECK:      : [[INT_LIST]]
@@ -50,10 +50,10 @@ foo = function(ints:list[int]): list[int]
 # CHECK:    (function function
 # CHECK:      (parameters
 # CHECK:        (parameter names :
-# CHECK:          [[STRING_LIST:\(type \(parametricType \(simpleType list\) \[ \(type_list \(type \(simpleType string\)\)\) \]\)\)]]
+# CHECK:          [[STRING_LIST:\(type \(parametricType \(simpleType list\) \[ \(typeList \(type \(simpleType string\)\)\) \]\)\)]]
 # CHECK:      )
 # CHECK:      :
-# CHECK:      [[FILE_LIST:\(type \(parametricType \(simpleType list\) \[ \(type_list \(type \(simpleType file\)\)\) \]\)\)]]
+# CHECK:      [[FILE_LIST:\(type \(parametricType \(simpleType list\) \[ \(typeList \(type \(simpleType file\)\)\) \]\)\)]]
 # CHECK:      (expression
 # CHECK:        (foreach foreach name <-
 # CHECK:          (nameReference names)
@@ -74,7 +74,7 @@ bar = function(names:list[string]): list[file]
 
 # CHECK: (value baz :
 # CHECK:   (functionType
-# CHECK:     ( (type_list (type (simpleType int))) )
+# CHECK:     ( (typeList (type (simpleType int))) )
 # CHECK:     ->
 # CHECK:     (simpleType int)
 # CHECK:   )
