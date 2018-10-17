@@ -553,10 +553,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Fabrique is a build language for complex systems.
+It is <strong>functional</strong>, statically <strong>typed</strong> and
+designed to require very <strong>few dependencies</strong>.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_motivation">Motivation</h2>
 <div class="sectionbody">
-
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bsdmake"><span></span><span class="tok-cp">.if !(${__objdir:M/*} == &quot;&quot; &amp;&amp; ${.OBJDIR:tA} == ${${.CURDIR}/${__objdir}:L:tA})</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="bsdmake"><span></span><span class="tok-cp">.if ${CC:N${CCACHE_BIN}:[1]:M/*} == &quot;&quot;</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1477,7 +1495,7 @@ There is currently no support for parameterizing declared types
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-09-26 14:07:28 NDT
+Last updated 2018-10-17 15:22:56 PDT
 </div>
 </div>
 <script type="text/x-mathjax-config">
