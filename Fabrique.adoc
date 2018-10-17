@@ -12,6 +12,17 @@ designed to require very **few dependencies**.
 
 == Motivation
 
+[source, bsdmake]
+----
+.if !(${__objdir:M/*} == "" && ${.OBJDIR:tA} == ${${.CURDIR}/${__objdir}:L:tA})
+----
+
+[source, bsdmake]
+----
+.if ${CC:N${CCACHE_BIN}:[1]:M/*} == ""
+----
+
+
 == Grammatical elements
 
 === Comments and whitespace
