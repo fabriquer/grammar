@@ -63,7 +63,7 @@ logicOp	: And | Or | Xor ;
 multOp	: Multiply | Divide ;
 
 // Anything with a function type can be called
-call	: term ParenOpen arguments? ParenClose ;
+call	: target=term ParenOpen arguments? ParenClose ;
 
 // Evaluates to one of two possibilities based on a condition
 conditional
@@ -164,7 +164,7 @@ keywordArguments: (args+=keywordArgument (ArgSep args+=keywordArgument)* ArgSep?
 positionalArguments	: expression (ArgSep expression)* ArgSep? ;
 
 parameters	: (parameter (ArgSep parameter)*)? ;
-parameter	: Identifier TypeSep type (Assign expression)? ;
+parameter	: Identifier TypeSep type (Assign defaultArgument=expression)? ;
 
 
 //
@@ -182,10 +182,10 @@ type
 	| simpleType
 	;
 
-functionType	: ParenOpen type_list? ParenClose Produces type ;
+functionType	: ParenOpen params=typeList? ParenClose Produces result=type ;
 recordType	: Record BracketOpen (fieldType (ArgSep fieldType)*)? ArgSep? BracketClose ;
 fieldType	: Identifier TypeSep type ;
-parametricType	: simpleType BracketOpen type_list BracketClose ;
+parametricType	: base=simpleType BracketOpen params=type_list BracketClose ;
 simpleType	: Identifier ;
 
 type_list	: type (ArgSep type)* ArgSep? ;
