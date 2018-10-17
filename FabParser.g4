@@ -36,7 +36,7 @@ options { tokenVocab = FabLexer; }
 file		: (values+=value)* EOF;
 
 // A value (optionally) binds a name to an expression
-value		: (name=Identifier (TypeSep type)* Assign)? expression End;
+value		: (name=Identifier (TypeSep type)? Assign)? expression End;
 
 //
 // Almost everything in Fabrique is an expression that can be evaluated
