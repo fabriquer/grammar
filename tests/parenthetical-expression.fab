@@ -1,0 +1,24 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+# CHECK: (value simple =
+# CHECK:   (parentheticalExpression ( (expression (term (literal 42))) )))
+# CHECK: ;)
+simple = (42);
+
+# CHECK: (value compoundExpr =
+# CHECK:   (parentheticalExpression
+# CHECK:     (compoundExpr {
+# CHECK:     })
+# CHECK:   )
+# CHECK: ;)
+compoundExpr = ({ x = 1; x });
+
+# TODO:
+#binaryOp = (1 + 2 + 3);
+
+# CHECK:  <EOF>)
