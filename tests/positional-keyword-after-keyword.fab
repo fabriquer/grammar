@@ -1,0 +1,9 @@
+#
+# RUN: %parse %s 2> %t
+# RUN: %check %t %s
+#
+
+cc = action('$CC -c $src -o $obj' <- src:file[in], obj:file[out]);
+
+# CHECK: missing '=' at '('
+obj = cc(src = file('foo.c'), file('foo.o'));
