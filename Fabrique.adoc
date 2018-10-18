@@ -357,6 +357,26 @@ fieldReference
 ----
 
 
+===== Field queries
+
+We can also provide a default value to be used in case the field doesn't exist.
+
+.Examples
+[source, fabrique]
+----
+debug = args.debug ? false;
+----
+
+.Grammar
+[source, antlr]
+----
+// Extracts a field's value if the field exists, or else a default value
+fieldQuery
+	: base=term '.' field=Identifier '?' defaultValue=expression
+	;
+----
+
+
 ==== Files
 
 Files are the primary artifacts of almost any build.
@@ -830,20 +850,6 @@ typeDeclaration	: 'type' type ;
 
 
 === TODO
-
-==== Field queries
-
-////
-/**
- * A field query lets us provide a default value for a record field that may
- * or may not exist.
- *
- * ```fab
- * debug = args.debug ? false;
- * ```
- */
-fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
-////
 
 ==== Terms
 

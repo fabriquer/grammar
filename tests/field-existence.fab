@@ -1,0 +1,44 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+foo = record
+{
+	hello = 'Hello, ';
+	world = 'world!';
+};
+
+# CHECK:  (value bar =
+# CHECK:    (fieldQuery
+# CHECK:      (term (nameReference foo))
+# CHECK:      . hello
+# CHECK:      ?
+# CHECK:      (literal 'default value for bar')
+# CHECK:    )
+# CHECK:  ;)
+bar = foo.hello ? 'default value for bar';
+
+# CHECK:  (value baz =
+# CHECK:    (fieldQuery
+# CHECK:      (term (nameReference foo))
+# CHECK:      . wibble
+# CHECK:      ?
+# CHECK:      (literal 'default value for wibble')
+# CHECK:    )
+# CHECK:  ;)
+baz = foo.wibble ? 'default value for wibble';
+
+# CHECK:  (value x =
+# CHECK:    (fieldQuery
+# CHECK:      (parentheticalExpression (
+# CHECK:        (record record {
+# CHECK:          (value hello = (expression (term (literal 'world'))) ;)
+# CHECK:        })
+# CHECK:      ))
+# CHECK:      . hello
+# CHECK:      ?
+# CHECK:      (literal 'default value')
+# CHECK:    )
+# CHECK:  ;)
+x = (record { hello = 'world'; }).hello ? 'default value';
