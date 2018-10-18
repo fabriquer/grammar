@@ -65,6 +65,8 @@ public:
 
     virtual antlrcpp::Any visitParentheticalExpression(FabParser::ParentheticalExpressionContext *context) = 0;
 
+    virtual antlrcpp::Any visitRecord(FabParser::RecordContext *context) = 0;
+
     virtual antlrcpp::Any visitTypeDeclaration(FabParser::TypeDeclarationContext *context) = 0;
 
     virtual antlrcpp::Any visitArguments(FabParser::ArgumentsContext *context) = 0;

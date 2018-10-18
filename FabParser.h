@@ -28,11 +28,11 @@ public:
     RuleFieldQuery = 9, RuleFieldReference = 10, RuleForeach = 11, RuleFunction = 12, 
     RuleUnaryOperation = 13, RuleUnaryOperator = 14, RuleTerm = 15, RuleBuildAction = 16, 
     RuleCompoundExpr = 17, RuleFileList = 18, RuleList = 19, RuleLiteral = 20, 
-    RuleNameReference = 21, RuleParentheticalExpression = 22, RuleTypeDeclaration = 23, 
-    RuleArguments = 24, RuleKeywordArgument = 25, RuleKeywordArguments = 26, 
-    RulePositionalArguments = 27, RuleParameters = 28, RuleParameter = 29, 
-    RuleType = 30, RuleFunctionType = 31, RuleRecordType = 32, RuleFieldType = 33, 
-    RuleParametricType = 34, RuleSimpleType = 35, RuleTypeList = 36
+    RuleNameReference = 21, RuleParentheticalExpression = 22, RuleRecord = 23, 
+    RuleTypeDeclaration = 24, RuleArguments = 25, RuleKeywordArgument = 26, 
+    RuleKeywordArguments = 27, RulePositionalArguments = 28, RuleParameters = 29, 
+    RuleParameter = 30, RuleType = 31, RuleFunctionType = 32, RuleRecordType = 33, 
+    RuleFieldType = 34, RuleParametricType = 35, RuleSimpleType = 36, RuleTypeList = 37
   };
 
   FabParser(antlr4::TokenStream *input);
@@ -68,6 +68,7 @@ public:
   class LiteralContext;
   class NameReferenceContext;
   class ParentheticalExpressionContext;
+  class RecordContext;
   class TypeDeclarationContext;
   class ArgumentsContext;
   class KeywordArgumentContext;
@@ -342,6 +343,7 @@ public:
     LiteralContext *literal();
     NameReferenceContext *nameReference();
     ParentheticalExpressionContext *parentheticalExpression();
+    RecordContext *record();
     TypeDeclarationContext *typeDeclaration();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -460,6 +462,24 @@ public:
   };
 
   ParentheticalExpressionContext* parentheticalExpression();
+
+  class  RecordContext : public antlr4::ParserRuleContext {
+  public:
+    FabParser::ValueContext *valueContext = nullptr;;
+    std::vector<ValueContext *> fields;;
+    RecordContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *Record();
+    antlr4::tree::TerminalNode *BraceOpen();
+    antlr4::tree::TerminalNode *BraceClose();
+    std::vector<ValueContext *> value();
+    ValueContext* value(size_t i);
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  RecordContext* record();
 
   class  TypeDeclarationContext : public antlr4::ParserRuleContext {
   public:

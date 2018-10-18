@@ -107,6 +107,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitRecord(FabParser::RecordContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitTypeDeclaration(FabParser::TypeDeclarationContext *ctx) override {
     return visitChildren(ctx);
   }
