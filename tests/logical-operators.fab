@@ -1,0 +1,42 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (value foo = (expression (term (literal true))) ;)
+foo = true;
+
+# CHECK:  (value bar =
+# CHECK:    (unaryOperation
+# CHECK:      (unaryOperator not)
+# CHECK:      (nameReference foo)
+# CHECK:    )
+# CHECK:  ;)
+bar = not foo;
+
+# CHECK:  (value baz =
+# CHECK:    (expression
+# CHECK:      (nameReference foo)
+# CHECK:      (logicOp or)
+# CHECK:      (nameReference bar)
+# CHECK:    )
+# CHECK:  ;)
+baz = foo or bar;
+
+# CHECK:  (value wibble =
+# CHECK:    (expression
+# CHECK:      (nameReference foo)
+# CHECK:      (logicOp and)
+# CHECK:      (nameReference bar)
+# CHECK:    )
+# CHECK:  ;)
+wibble = foo and bar;
+
+# CHECK:  (value wobble =
+# CHECK:    (expression
+# CHECK:      (nameReference foo)
+# CHECK:      (logicOp xor)
+# CHECK:      (nameReference bar)
+# CHECK:    )
+# CHECK:  ;)
+wobble = foo xor bar;
