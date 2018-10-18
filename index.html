@@ -536,13 +536,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_operations">Operations</a></li>
 <li><a href="#_binary_operations">Binary operations</a></li>
 <li><a href="#_parenthetical_expressions">Parenthetical expressions</a></li>
+<li><a href="#_records">Records</a></li>
 <li><a href="#_type_declarations">Type declarations</a></li>
 </ul>
 </li>
 <li><a href="#_todo">TODO</a>
 <ul class="sectlevel3">
 <li><a href="#_field_queries">Field queries</a></li>
-<li><a href="#_records">Records</a></li>
 <li><a href="#_terms">Terms</a></li>
 <li><a href="#_types">Types</a></li>
 </ul>
@@ -1415,6 +1415,47 @@ call target.</p>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_records">Records</h4>
+<div class="paragraph">
+<p>A <strong>record</strong> is a grouping of heterogeneous <a href="#_values">values</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Examples</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="fabrique"><span></span><span class="tok-c1"># A record contains values.</span>
+<span class="tok-nv">foo</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-kt">record</span><span class="tok-w"></span>
+<span class="tok-p">{</span><span class="tok-w"></span>
+<span class="tok-w">	</span><span class="tok-c1"># Like all values, each record field ends in a semicolon.</span>
+<span class="tok-w">	</span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-w">	</span><span class="tok-c1"># Also like other values, types may be specified or omitted.</span>
+<span class="tok-w">	</span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span><span class="tok-w"></span>
+
+<span class="tok-w">	</span><span class="tok-c1"># A record is a scope — this function will capture the local y value.</span>
+<span class="tok-w">	</span><span class="tok-nv">f</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">function</span><span class="tok-p">(</span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">):</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-nv">y</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span>
+<span class="tok-p">};</span><span class="tok-w"></span>
+
+<span class="tok-c1"># A record assigned to a value with a record type must have at *least* the</span>
+<span class="tok-c1"># fields specified by the type.</span>
+<span class="tok-nv">explicit_type</span><span class="tok-p">:</span><span class="tok-kt">record</span><span class="tok-p">[</span><span class="tok-nv">x</span><span class="tok-p">:</span><span class="tok-kt">int</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><span class="tok-nv">x</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-nv">extra</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-s1">&#39;not required by value type&#39;</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-p">};</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is much like a <code>struct</code> in imperative programming languages, but unlike
+a C <code>struct</code>, the Fabrique language makes no guarantees about how a record&#8217;s
+fields are laid out in memory.
+Records can contain any number of fields, of of which may have any type
+(including function types; there are currently no plans for supporting
+implicit <code>this</code> or <code>self</code> within such functions).</p>
+</div>
+<div class="listingblock">
+<div class="title">Grammar</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="antlr"><span></span><span class="tok-nl">record</span><span class="tok-w">		</span><span class="tok-p">:</span><span class="tok-w"> </span><span class="tok-s">&#39;record&#39;</span><span class="tok-w"> </span><span class="tok-s">&#39;{&#39;</span><span class="tok-w"> </span><span class="tok-o">(</span><span class="tok-nv">fields</span><span class="tok-o">+=</span><span class="tok-nv">value</span><span class="tok-o">)*</span><span class="tok-w"> </span><span class="tok-s">&#39;}&#39;</span><span class="tok-w"> </span><span class="tok-p">;</span><span class="tok-w"></span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_type_declarations">Type declarations</h4>
 <div class="paragraph">
 <p>Types can be declared using the keyword <code>type</code> followed by a normal
@@ -1459,10 +1500,6 @@ There is currently no support for parameterizing declared types
 
 </div>
 <div class="sect3">
-<h4 id="_records">Records</h4>
-
-</div>
-<div class="sect3">
 <h4 id="_terms">Terms</h4>
 
 </div>
@@ -1495,7 +1532,7 @@ There is currently no support for parameterizing declared types
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-10-17 15:22:56 PDT
+Last updated 2018-10-18 11:59:10 PDT
 </div>
 </div>
 <script type="text/x-mathjax-config">
