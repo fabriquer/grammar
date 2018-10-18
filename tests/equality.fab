@@ -1,0 +1,93 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value x =
+# CHECK:    (literal true)
+# CHECK:  ;)
+x = true;
+
+# CHECK:  (value y =
+# CHECK:    (literal false)
+# CHECK:  ;)
+y = false;
+
+# CHECK:  (value equal =
+# CHECK:    (parentheticalExpression (
+# CHECK:      (expression
+# CHECK:        (expression (term (nameReference x)))
+# CHECK:        (compareOp ==)
+# CHECK:        (expression (term (nameReference y))))
+# CHECK:      )
+# CHECK:    ))
+# CHECK:  ;)
+equal = (x == y);
+
+# CHECK:  (value nequal =
+# CHECK:    (parentheticalExpression (
+# CHECK:      (expression
+# CHECK:        (expression (term (nameReference x)))
+# CHECK:        (compareOp !=)
+# CHECK:        (expression (term (nameReference y))))
+# CHECK:    ))
+# CHECK:  ;)
+nequal = (x != y);
+
+# CHECK:  (value notequal =
+# CHECK:    (expression
+# CHECK:      (unaryOperation
+# CHECK:        (unaryOperator not)
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference x)))
+# CHECK:          (compareOp ==)
+# CHECK:          (expression (term (nameReference y)))
+# CHECK:        )
+# CHECK:      )
+# CHECK:    )
+# CHECK:  ;)
+notequal = not x == y;
+
+# CHECK:  (value hello = (expression (term (literal 'Hello'))) ;)
+hello = 'Hello';
+
+# CHECK:  (value world = (expression (term (literal 'World'))) ;)
+world = 'World';
+
+# CHECK:  (value strequal =
+# CHECK:    (expression
+# CHECK:      (parentheticalExpression (
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference hello)))
+# CHECK:          (compareOp ==) (expression (term (nameReference world))))
+# CHECK:      ))
+# CHECK:    )
+# CHECK:  ;)
+strequal = (hello == world);
+
+# CHECK:  (value strnequal =
+# CHECK:    (expression
+# CHECK:      (parentheticalExpression (
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference hello)))
+# CHECK:          (compareOp !=)
+# CHECK:          (expression (term (nameReference world)))
+# CHECK:        )
+# CHECK:      ))
+# CHECK:    )
+# CHECK:  ;)
+strnequal = (hello != world);
+
+# CHECK:  (value strnotequal =
+# CHECK:    (expression
+# CHECK:      (unaryOperation
+# CHECK:        (unaryOperator not)
+# CHECK:        (expression
+# CHECK:          (expression (term (nameReference hello)))
+# CHECK:          (compareOp ==)
+# CHECK:          (expression (term (nameReference world)))
+# CHECK:        )
+# CHECK:      )
+# CHECK:    )
+# CHECK:  ;)
+strnotequal = not hello == world;
