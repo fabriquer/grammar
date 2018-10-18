@@ -755,6 +755,45 @@ parentheticalExpression	: '(' expression ')' ;
 ----
 
 
+==== Records
+
+A *record* is a grouping of heterogeneous <<Values,values>>.
+
+.Examples
+[source, fabrique]
+----
+# A record contains values.
+foo = record
+{
+	# Like all values, each record field ends in a semicolon.
+	x:int = 42;
+
+	# Also like other values, types may be specified or omitted.
+	y = x + 1;
+
+	# A record is a scope — this function will capture the local y value.
+	f = function(x:int): int { x + y };
+};
+
+# A record assigned to a value with a record type must have at *least* the
+# fields specified by the type.
+explicit_type:record[x:int] = { x = 42; extra = 'not required by value type'; };
+----
+
+This is much like a `struct` in imperative programming languages, but unlike
+a C `struct`, the Fabrique language makes no guarantees about how a record's
+fields are laid out in memory.
+Records can contain any number of fields, of of which may have any type
+(including function types; there are currently no plans for supporting
+implicit `this` or `self` within such functions).
+
+.Grammar
+[source, antlr]
+----
+record		: 'record' '{' (fields+=value)* '}' ;
+----
+
+
 ==== Type declarations
 
 Types can be declared using the keyword `type` followed by a normal
@@ -805,9 +844,6 @@ typeDeclaration	: 'type' type ;
  */
 fieldQuery	: base=term '.' field=Identifier '?' defaultValue=expression ;
 ////
-
-
-==== Records
 
 ==== Terms
 

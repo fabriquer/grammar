@@ -113,6 +113,7 @@ term
 	| literal
 	| nameReference
 	| parentheticalExpression
+	| record
 	| typeDeclaration
 	;
 
@@ -144,6 +145,8 @@ literal
 nameReference	: Identifier ;
 
 parentheticalExpression	: ParenOpen expression ParenClose ;
+
+record		: Record BraceOpen (fields+=value)* BraceClose ;
 
 typeDeclaration	: Type type ;
 

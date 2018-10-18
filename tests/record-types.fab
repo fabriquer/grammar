@@ -1,0 +1,39 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value foo :
+# CHECK:    (type
+# CHECK:      (recordType record [
+# CHECK:        (fieldType foo : (type (simpleType string)))
+# CHECK:        (fieldType bar : (type (simpleType string)))
+# CHECK:      ])
+# CHECK:    )
+# CHECK:    =
+# CHECK:    (record record {
+# CHECK:      (value foo = (expression (term (literal 'hi'))) ;)
+# CHECK:  (value bar = (expression (term (literal 'world'))) ;)
+# CHECK:  }))) ;)
+foo:record[foo:string, bar:string] = record { foo = 'hi'; bar = 'world'; };
+
+# CHECK:  (value bar :
+# CHECK:    (type
+# CHECK:      (recordType record [
+# CHECK:        (fieldType def : (type (simpleType string)))
+# CHECK:        (fieldType ref : (type (simpleType string)))
+# CHECK:      ])
+# CHECK:    )
+# CHECK:    =
+# CHECK:    (record record {
+bar:record[def:string, ref:string] = record
+{
+	# CHECK: (value def = (expression (term (literal 'Hello, world!'))) ;)
+	def = 'Hello, world!';
+
+	# CHECK: (value ref = (expression (term (nameReference def))) ;)
+	ref = def;
+
+# CHECK:    })
+# CHECK:  ;)
+};

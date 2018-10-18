@@ -1,0 +1,44 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value foo =
+# CHECK:    (record record {
+foo = record
+{
+	# CHECK:  (value bar =
+	# CHECK:    (record record {
+	bar = record
+	{
+		# CHECK:  (value baz =
+		# CHECK:    (record record {
+		baz = record
+		{
+			# CHECK:  (value wibble =
+			# CHECK:    (literal 1)
+			# CHECK:  ;)
+			wibble = 1;
+		# CHECK: })
+		# CHECK: ;)
+		};
+	# CHECK: })
+	# CHECK: ;)
+	};
+# CHECK: })
+# CHECK: ;)
+};
+
+# CHECK:  (value the_wibble =
+# CHECK:    (fieldReference
+# CHECK:      (fieldReference
+# CHECK:        (fieldReference
+# CHECK:          (nameReference foo)
+# CHECK:          . bar
+# CHECK:        )
+# CHECK:        . baz
+# CHECK:      )
+# CHECK:      . wibble
+# CHECK:    )
+# CHECK:  ;)
+the_wibble = foo.bar.baz.wibble;
