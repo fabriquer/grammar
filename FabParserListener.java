@@ -237,6 +237,16 @@ public interface FabParserListener extends ParseTreeListener {
 	 */
 	void exitParentheticalExpression(FabParser.ParentheticalExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FabParser#record}.
+	 * @param ctx the parse tree
+	 */
+	void enterRecord(FabParser.RecordContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FabParser#record}.
+	 * @param ctx the parse tree
+	 */
+	void exitRecord(FabParser.RecordContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FabParser#typeDeclaration}.
 	 * @param ctx the parse tree
 	 */
