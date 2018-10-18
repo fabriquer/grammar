@@ -1,0 +1,89 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK:  (value cc =
+# CHECK:    (buildAction action (
+# CHECK:      (positionalArguments
+# CHECK:        (literal 'cc -c ${src} -o ${obj}')
+# CHECK:      )
+# CHECK:      <-
+# CHECK:     (parameters
+# CHECK:       (parameter src :
+# CHECK:         [[FILE_IN:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType in\)\)\) \]\)\)]]
+# CHECK:       )
+# CHECK:       (parameter obj :
+# CHECK:         [[FILE_OUT:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType out\)\)\) \]\)\)]]
+# CHECK:       )
+# CHECK:     )
+# CHECK:    ))
+# CHECK:  ;)
+cc = action('cc -c ${src} -o ${obj}' <- src:file[in], obj:file[out]);
+
+# CHECK:  (value link =
+# CHECK:    (buildAction action (
+# CHECK:      (positionalArguments
+# CHECK:        (literal 'cc ${objects} -o ${bin}')
+# CHECK:      )
+# CHECK:      <-
+# CHECK:      (parameters
+# CHECK:        (parameter objects :
+# CHECK:          (parametricType (simpleType list) [ (typeList [[FILE_IN]]) ]))
+# CHECK:        (parameter bin : [[FILE_OUT]])
+# CHECK:      )
+# CHECK:    ))
+# CHECK:  ;)
+link = action('cc ${objects} -o ${bin}'
+              <- objects:list[file[in]], bin:file[out]);
+
+# CHECK:  (value srcs =
+# CHECK:    (fileList files( hello.c world.c ))
+# CHECK:  ;)
+srcs = files(hello.c world.c);
+
+# CHECK:  (value objs =
+# CHECK:    (foreach
+# CHECK:      src <-
+# CHECK:      (nameReference srcs)
+# CHECK:      (call (term (nameReference cc)) (
+# CHECK:        (positionalArguments
+# CHECK:          (nameReference src)
+# CHECK:        )
+# CHECK:        (keywordArguments
+# CHECK:          (keywordArgument obj =
+# CHECK:            (nameReference src)
+# CHECK:            (addOp +)
+# CHECK:            (literal '.o')
+# CHECK:          )
+# CHECK:        )
+# CHECK:      ))
+# CHECK:    )
+# CHECK:  ;)
+objs = foreach src <- srcs
+	cc(src, obj = src + '.o')
+	;
+
+# CHECK:  (value helloworld =
+# CHECK:    (call
+# CHECK:      (nameReference link)
+# CHECK:      ( (arguments
+# CHECK:        (positionalArguments
+# CHECK:          (nameReference objs)
+# CHECK:        )
+# CHECK:        (keywordArguments
+# CHECK:          (keywordArgument bin =
+# CHECK:            (call
+# CHECK:              (nameReference file)
+# CHECK:              ( (arguments
+# CHECK:                (positionalArguments
+# CHECK:                  (literal 'hello-world')
+# CHECK:                )
+# CHECK:              ) )
+# CHECK:            )
+# CHECK:          )
+# CHECK:        )
+# CHECK:      ) )
+# CHECK:    )
+# CHECK:  ;)
+helloworld = link(objs, bin = file('hello-world'));
