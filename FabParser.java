@@ -988,10 +988,10 @@ public class FabParser extends Parser {
 			return getRuleContext(ParametersContext.class,0);
 		}
 		public TerminalNode ParenClose() { return getToken(FabParser.ParenClose, 0); }
+		public TerminalNode TypeSep() { return getToken(FabParser.TypeSep, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode TypeSep() { return getToken(FabParser.TypeSep, 0); }
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
@@ -1012,7 +1012,6 @@ public class FabParser extends Parser {
 	public final FunctionContext function() throws RecognitionException {
 		FunctionContext _localctx = new FunctionContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_function);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
@@ -1024,18 +1023,18 @@ public class FabParser extends Parser {
 			parameters();
 			setState(183);
 			match(ParenClose);
+			setState(184);
+			match(TypeSep);
 			setState(186);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==TypeSep) {
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			case 1:
 				{
-				setState(184);
-				match(TypeSep);
 				setState(185);
 				type();
 				}
+				break;
 			}
-
 			setState(188);
 			((FunctionContext)_localctx).body = expression(0);
 			}
@@ -2744,8 +2743,8 @@ public class FabParser extends Parser {
 		"\2\u00ad\u00b0\7)\2\2\u00ae\u00af\7(\2\2\u00af\u00b1\5@!\2\u00b0\u00ae"+
 		"\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b3\7#\2\2\u00b3"+
 		"\u00b4\5\6\4\2\u00b4\u00b5\5\6\4\2\u00b5\31\3\2\2\2\u00b6\u00b7\7\b\2"+
-		"\2\u00b7\u00b8\7$\2\2\u00b8\u00b9\5<\37\2\u00b9\u00bc\7%\2\2\u00ba\u00bb"+
-		"\7(\2\2\u00bb\u00bd\5@!\2\u00bc\u00ba\3\2\2\2\u00bc\u00bd\3\2\2\2\u00bd"+
+		"\2\u00b7\u00b8\7$\2\2\u00b8\u00b9\5<\37\2\u00b9\u00ba\7%\2\2\u00ba\u00bc"+
+		"\7(\2\2\u00bb\u00bd\5@!\2\u00bc\u00bb\3\2\2\2\u00bc\u00bd\3\2\2\2\u00bd"+
 		"\u00be\3\2\2\2\u00be\u00bf\5\6\4\2\u00bf\33\3\2\2\2\u00c0\u00c1\5\36\20"+
 		"\2\u00c1\u00c2\5\6\4\2\u00c2\35\3\2\2\2\u00c3\u00c4\t\6\2\2\u00c4\37\3"+
 		"\2\2\2\u00c5\u00cf\5\"\22\2\u00c6\u00cf\5$\23\2\u00c7\u00cf\5&\24\2\u00c8"+
