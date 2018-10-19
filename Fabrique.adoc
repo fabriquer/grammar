@@ -439,7 +439,7 @@ file list (e.g., `cflags` in the example above).
 ----
 // Some number of files with common properties
 fileList
-	: FileListStart FilenameLiteral*
+	: FileListStart (files+=FilenameLiteral)*
 	  (FileListEnd | (FileListArgs keywordArguments ')'))
 	;
 

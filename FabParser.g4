@@ -128,7 +128,7 @@ compoundExpr	: BraceOpen (values+=value)* result=expression BraceClose ;
 
 // Some number of files with common properties
 fileList
-	: FileListStart FilenameLiteral*
+	: FileListStart (files+=FilenameLiteral)*
 	  (FileListEnd | (FileListArgs keywordArguments ParenClose))
 	;
 
