@@ -1008,12 +1008,12 @@ tree::TerminalNode* FabParser::ForeachContext::Foreach() {
   return getToken(FabParser::Foreach, 0);
 }
 
-tree::TerminalNode* FabParser::ForeachContext::Identifier() {
-  return getToken(FabParser::Identifier, 0);
-}
-
 tree::TerminalNode* FabParser::ForeachContext::Input() {
   return getToken(FabParser::Input, 0);
+}
+
+tree::TerminalNode* FabParser::ForeachContext::Identifier() {
+  return getToken(FabParser::Identifier, 0);
 }
 
 std::vector<FabParser::ExpressionContext *> FabParser::ForeachContext::expression() {
@@ -1057,7 +1057,7 @@ FabParser::ForeachContext* FabParser::foreach() {
     setState(170);
     match(FabParser::Foreach);
     setState(171);
-    match(FabParser::Identifier);
+    dynamic_cast<ForeachContext *>(_localctx)->loopVarName = match(FabParser::Identifier);
     setState(174);
     _errHandler->sync(this);
 
@@ -1651,7 +1651,8 @@ FabParser::FileListContext* FabParser::fileList() {
     _la = _input->LA(1);
     while (_la == FabParser::FilenameLiteral) {
       setState(226);
-      match(FabParser::FilenameLiteral);
+      dynamic_cast<FileListContext *>(_localctx)->filenameliteralToken = match(FabParser::FilenameLiteral);
+      dynamic_cast<FileListContext *>(_localctx)->files.push_back(dynamic_cast<FileListContext *>(_localctx)->filenameliteralToken);
       setState(231);
       _errHandler->sync(this);
       _la = _input->LA(1);

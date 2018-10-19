@@ -269,13 +269,14 @@ public:
   FieldReferenceContext* fieldReference(int precedence);
   class  ForeachContext : public antlr4::ParserRuleContext {
   public:
+    antlr4::Token *loopVarName = nullptr;;
     FabParser::ExpressionContext *src = nullptr;;
     FabParser::ExpressionContext *body = nullptr;;
     ForeachContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *Foreach();
-    antlr4::tree::TerminalNode *Identifier();
     antlr4::tree::TerminalNode *Input();
+    antlr4::tree::TerminalNode *Identifier();
     std::vector<ExpressionContext *> expression();
     ExpressionContext* expression(size_t i);
     antlr4::tree::TerminalNode *TypeSep();
@@ -391,6 +392,8 @@ public:
 
   class  FileListContext : public antlr4::ParserRuleContext {
   public:
+    antlr4::Token *filenameliteralToken = nullptr;;
+    std::vector<antlr4::Token *> files;;
     FileListContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *FileListStart();
