@@ -908,11 +908,12 @@ public class FabParser extends Parser {
 	}
 
 	public static class ForeachContext extends ParserRuleContext {
+		public Token loopVarName;
 		public ExpressionContext src;
 		public ExpressionContext body;
 		public TerminalNode Foreach() { return getToken(FabParser.Foreach, 0); }
-		public TerminalNode Identifier() { return getToken(FabParser.Identifier, 0); }
 		public TerminalNode Input() { return getToken(FabParser.Input, 0); }
+		public TerminalNode Identifier() { return getToken(FabParser.Identifier, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -947,7 +948,7 @@ public class FabParser extends Parser {
 			setState(170);
 			match(Foreach);
 			setState(171);
-			match(Identifier);
+			((ForeachContext)_localctx).loopVarName = match(Identifier);
 			setState(174);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1409,6 +1410,8 @@ public class FabParser extends Parser {
 	}
 
 	public static class FileListContext extends ParserRuleContext {
+		public Token FilenameLiteral;
+		public List<Token> files = new ArrayList<Token>();
 		public TerminalNode FileListStart() { return getToken(FabParser.FileListStart, 0); }
 		public TerminalNode FileListEnd() { return getToken(FabParser.FileListEnd, 0); }
 		public List<TerminalNode> FilenameLiteral() { return getTokens(FabParser.FilenameLiteral); }
@@ -1450,7 +1453,8 @@ public class FabParser extends Parser {
 				{
 				{
 				setState(226);
-				match(FilenameLiteral);
+				((FileListContext)_localctx).FilenameLiteral = match(FilenameLiteral);
+				((FileListContext)_localctx).files.add(((FileListContext)_localctx).FilenameLiteral);
 				}
 				}
 				setState(231);
