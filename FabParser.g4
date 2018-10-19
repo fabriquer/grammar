@@ -87,7 +87,7 @@ fieldReference
 
 // Transforms one sequence into another
 foreach
-	: Foreach Identifier (TypeSep type)? Input src=expression
+	: Foreach loopVarName=Identifier (TypeSep type)? Input src=expression
 	  body=expression
 	;
 
