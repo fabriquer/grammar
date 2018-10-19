@@ -297,8 +297,8 @@ public:
     antlr4::tree::TerminalNode *ParenOpen();
     ParametersContext *parameters();
     antlr4::tree::TerminalNode *ParenClose();
-    ExpressionContext *expression();
     antlr4::tree::TerminalNode *TypeSep();
+    ExpressionContext *expression();
     TypeContext *type();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
