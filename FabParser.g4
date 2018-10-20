@@ -93,7 +93,7 @@ foreach
 
 // Transforms parameters into a result
 function
-	: Function ParenOpen parameters ParenClose TypeSep type?
+	: Function ParenOpen parameters ParenClose TypeSep type
 	  body=expression
 	;
 
