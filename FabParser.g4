@@ -63,7 +63,7 @@ logicOp	: And | Or | Xor ;
 multOp	: Multiply | Divide ;
 
 // Anything with a function type can be called
-call	: target=term ParenOpen arguments? ParenClose ;
+call	: target=term ParenOpen arguments ParenClose ;
 
 // Evaluates to one of two possibilities based on a condition
 conditional
@@ -157,7 +157,7 @@ typeDeclaration	: Type type ;
 arguments
 	: positionalArguments ArgSep keywordArguments
 	| positionalArguments
-	| keywordArguments
+	| keywordArguments?
 	;
 
 keywordArgument	: Identifier Assign expression ;
