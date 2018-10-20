@@ -298,8 +298,8 @@ public:
     ParametersContext *parameters();
     antlr4::tree::TerminalNode *ParenClose();
     antlr4::tree::TerminalNode *TypeSep();
-    ExpressionContext *expression();
     TypeContext *type();
+    ExpressionContext *expression();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
