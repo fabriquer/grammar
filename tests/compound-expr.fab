@@ -10,7 +10,7 @@
 foo = {
 
 	# CHECK: (value x =
-	# CHECK:   (call (term (nameReference foo)) ( )))
+	# CHECK:   (call (term (nameReference foo)) ( arguments )))
 	# CHECK: ;)
 	x = foo();
 

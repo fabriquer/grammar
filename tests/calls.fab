@@ -5,7 +5,7 @@
 
 # CHECK:  (value
 # CHECK-LABEL: (nameReference noArguments)
-# CHECK:    ( )
+# CHECK:    ( arguments )
 # CHECK:  )
 noArguments();
 
