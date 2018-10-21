@@ -56,4 +56,9 @@ baz = type (int)->int;
 # CHECK: ;)
 wibble = type (int)->(list[string])->int;
 
+# CHECK: (value wobble : (type (simpleType type)) =
+# CHECK:   (nameReference wibble)
+# CHECK: ;)
+wobble:type = wibble;
+
 # CHECK: <EOF>)
