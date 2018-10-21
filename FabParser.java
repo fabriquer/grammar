@@ -814,6 +814,7 @@ public class FabParser extends Parser {
 	}
 
 	public static class FieldReferenceContext extends ParserRuleContext {
+		public Token field;
 		public TermContext term() {
 			return getRuleContext(TermContext.class,0);
 		}
@@ -857,7 +858,7 @@ public class FabParser extends Parser {
 			setState(157);
 			match(FieldSep);
 			setState(158);
-			match(Identifier);
+			((FieldReferenceContext)_localctx).field = match(Identifier);
 			}
 			_ctx.stop = _input.LT(-1);
 			setState(165);
@@ -876,7 +877,7 @@ public class FabParser extends Parser {
 					setState(161);
 					match(FieldSep);
 					setState(162);
-					match(Identifier);
+					((FieldReferenceContext)_localctx).field = match(Identifier);
 					}
 					} 
 				}
