@@ -936,7 +936,7 @@ FabParser::FieldReferenceContext* FabParser::fieldReference(int precedence) {
     setState(157);
     match(FabParser::FieldSep);
     setState(158);
-    match(FabParser::Identifier);
+    dynamic_cast<FieldReferenceContext *>(_localctx)->field = match(FabParser::Identifier);
     _ctx->stop = _input->LT(-1);
     setState(165);
     _errHandler->sync(this);
@@ -954,7 +954,7 @@ FabParser::FieldReferenceContext* FabParser::fieldReference(int precedence) {
         setState(161);
         match(FabParser::FieldSep);
         setState(162);
-        match(FabParser::Identifier); 
+        dynamic_cast<FieldReferenceContext *>(_localctx)->field = match(FabParser::Identifier); 
       }
       setState(167);
       _errHandler->sync(this);
