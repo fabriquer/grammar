@@ -57,7 +57,7 @@ expression
 	| term
 	;
 
-addOp	: Minus | Plus | Cons ;
+addOp	: Minus | Plus ;
 compareOp : Equals | NotEquals ;
 logicOp	: And | Or | Xor ;
 multOp	: Multiply | Divide ;
