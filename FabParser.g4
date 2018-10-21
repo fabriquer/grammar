@@ -81,8 +81,8 @@ fieldQuery
 
 // Access a field within a record
 fieldReference
-	: term FieldSep Identifier
-	| fieldReference FieldSep Identifier     // explicitly left-recursive
+	: term FieldSep field=Identifier
+	| fieldReference FieldSep field=Identifier  // explicitly left-recursive
 	;
 
 // Transforms one sequence into another
