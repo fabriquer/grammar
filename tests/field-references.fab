@@ -7,21 +7,21 @@
 
 
 # CHECK: (value simple =
-# CHECK:   (fieldReference (term (nameReference foo)) . bar))
+# CHECK:   (term (term (nameReference foo)) . bar)
 # CHECK: ;)
 simple = foo.bar;
 
 # CHECK: (value nested =
-# CHECK:   (fieldReference
-# CHECK:     (fieldReference (term (nameReference foo)) . bar)
+# CHECK:   (term
+# CHECK:     (term (term (nameReference foo)) . bar)
 # CHECK:     . baz
 # CHECK:   )
 # CHECK: ;)
 nested = foo.bar.baz;
 
 # CHECK: (value complex =
-# CHECK:   (fieldReference
-# CHECK:     (fieldReference
+# CHECK:   (term
+# CHECK:     (term
 # CHECK:       (parentheticalExpression (
 # CHECK:         (conditional if
 # CHECK:           (nameReference something)

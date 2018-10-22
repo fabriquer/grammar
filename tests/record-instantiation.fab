@@ -12,7 +12,7 @@
 foo = record { foo = 'hi'; bar = 'world'; };
 
 # CHECK:  (value bar =
-# CHECK:    (fieldReference (term (nameReference foo)) . bar)
+# CHECK:    (term (term (nameReference foo)) . bar)
 # CHECK:  ;)
 bar = foo.bar;
 
@@ -38,7 +38,7 @@ scope_with_captures = record
 	# CHECK:     )
 	# CHECK:   )
 	# CHECK: ;)
-	f = function(prefix:string) string + def;
+	f = function(prefix:string): string string + def;
 
 # CHECK: })
 # CHECK: ;)

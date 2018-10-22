@@ -47,10 +47,9 @@ expression
 	| expression compareOp expression
 	| expression logicOp expression
 	| <assoc=right> expression cons=Cons expression
-	| call
+
 	| conditional
 	| fieldQuery
-	| fieldReference
 	| foreach
 	| function
 	| unaryOperation
@@ -61,9 +60,6 @@ addOp	: Minus | Plus ;
 compareOp : Equals | NotEquals ;
 logicOp	: And | Or | Xor ;
 multOp	: Multiply | Divide ;
-
-// Anything with a function type can be called
-call	: target=term ParenOpen arguments ParenClose ;
 
 // Evaluates to one of two possibilities based on a condition
 conditional
@@ -77,12 +73,6 @@ conditional
 // Extracts a field's value if the field exists, or else a default value
 fieldQuery
 	: base=term FieldSep field=Identifier Query defaultValue=expression
-	;
-
-// Access a field within a record
-fieldReference
-	: term FieldSep field=Identifier
-	| fieldReference FieldSep field=Identifier  // explicitly left-recursive
 	;
 
 // Transforms one sequence into another
@@ -107,7 +97,12 @@ unaryOperator	: Not | Minus | Plus ;
 //
 term
 	: buildAction
+	| /* call */ callTarget=term ParenOpen arguments ParenClose
 	| compoundExpr
+
+	// field reference:
+	| base=term FieldSep field=Identifier
+
 	| fileList
 	| list
 	| literal

@@ -1,0 +1,17 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (value x =
+# CHECK:   (term
+# CHECK:     (term
+# CHECK:       (term (nameReference foo))
+# CHECK:       . bar
+# CHECK:     )
+# CHECK:     ( (arguments
+# CHECK:       (literal 42)
+# CHECK:     ) )
+# CHECK:   )
+# CHECK: ;)
+x = foo.bar(42);

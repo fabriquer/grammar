@@ -5,11 +5,12 @@
 # CHECK: (file
 
 # CHECK: (value foo =
-# CHECK:   (call
-# CHECK:     (nameReference file)
-# CHECK:     (arguments (positionalArguments
-# CHECK:       (literal 'Inputs/foo.txt')
-# CHECK:     ))
+# CHECK:   (expression
+# CHECK:     (term (term (nameReference file))
+# CHECK:       ( (arguments (positionalArguments
+# CHECK:         (literal 'Inputs/foo.txt')
+# CHECK:       )) )
+# CHECK:     )
 # CHECK:   )
 # CHECK: ;)
 foo = file('Inputs/foo.txt');

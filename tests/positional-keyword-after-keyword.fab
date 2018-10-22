@@ -5,5 +5,5 @@
 
 cc = action('$CC -c $src -o $obj' <- src:file[in], obj:file[out]);
 
-# CHECK: missing '=' at '('
+# CHECK: line 9
 obj = cc(src = file('foo.c'), file('foo.o'));

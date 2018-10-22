@@ -30,9 +30,9 @@ foo = record
 };
 
 # CHECK:  (value the_wibble =
-# CHECK:    (fieldReference
-# CHECK:      (fieldReference
-# CHECK:        (fieldReference
+# CHECK:    (term
+# CHECK:      (term
+# CHECK:        (term
 # CHECK:          (nameReference foo)
 # CHECK:          . bar
 # CHECK:        )

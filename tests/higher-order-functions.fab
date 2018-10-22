@@ -30,7 +30,7 @@ copy = increment;
 # CHECK:          (parameter x : (type (simpleType int)))
 # CHECK:        )
 # CHECK:      ) : (type (simpleType int))
-# CHECK:      (call
+# CHECK:      (expression
 # CHECK:        (nameReference fn)
 # CHECK:        (
 # CHECK:          (arguments

@@ -46,7 +46,7 @@ srcs = files(hello.c world.c);
 # CHECK:    (foreach
 # CHECK:      src <-
 # CHECK:      (nameReference srcs)
-# CHECK:      (call (term (nameReference cc)) (
+# CHECK:      (expression (term (term (nameReference cc)) (
 # CHECK:        (positionalArguments
 # CHECK:          (nameReference src)
 # CHECK:        )
@@ -57,7 +57,7 @@ srcs = files(hello.c world.c);
 # CHECK:            (literal '.o')
 # CHECK:          )
 # CHECK:        )
-# CHECK:      ))
+# CHECK:      )))
 # CHECK:    )
 # CHECK:  ;)
 objs = foreach src <- srcs
@@ -65,16 +65,14 @@ objs = foreach src <- srcs
 	;
 
 # CHECK:  (value helloworld =
-# CHECK:    (call
-# CHECK:      (nameReference link)
+# CHECK:    (term (term (nameReference link))
 # CHECK:      ( (arguments
 # CHECK:        (positionalArguments
 # CHECK:          (nameReference objs)
 # CHECK:        )
 # CHECK:        (keywordArguments
 # CHECK:          (keywordArgument bin =
-# CHECK:            (call
-# CHECK:              (nameReference file)
+# CHECK:            (term (term (nameReference file))
 # CHECK:              ( (arguments
 # CHECK:                (positionalArguments
 # CHECK:                  (literal 'hello-world')

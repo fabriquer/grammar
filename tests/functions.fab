@@ -15,27 +15,13 @@
 # CHECK:      : [[INT_LIST]]
 # CHECK:      (compoundExpr {
 # CHECK:        (value local_var = (expression (term (literal 42))) ;)
-# FUBAR:        (expression
-# FUBAR:          (foreach
-# FUBAR:            foreach x <-
-# FUBAR:            (nameReference ints)
-# FUBAR:            (compoundExpr {
-# FUBAR:              (call
-# FUBAR:                (nameReference f)
-# FUBAR:                (
-# FUBAR:                (arguments
-# FUBAR:                  (positionalArguments
-# FUBAR:                    (nameReference x)
-# FUBAR:                  )
-# FUBAR:                )
-# FUBAR:                )
-# FUBAR:              )
-# FUBAR:            )
-# FUBAR:          )
-# FUBAR:        )
-# FUBAR:      })
-# FUBAR:    )
-# FUBAR: ;)
+# CHECK:        (expression
+# CHECK:          (foreach
+# CHECK:          )
+# CHECK:        )
+# CHECK:      })
+# CHECK:    )
+# CHECK: ;)
 foo = function(ints:list[int]): list[int]
 {
 	local_var = 42;
@@ -57,14 +43,13 @@ foo = function(ints:list[int]): list[int]
 # CHECK:      (expression
 # CHECK:        (foreach foreach name <-
 # CHECK:          (nameReference names)
-# CHECK:          (call
-# CHECK:            (nameReference file)
-# CHECK:            (arguments
+# CHECK:          (expression (term (term (nameReference file))
+# CHECK:            ( (arguments
 # CHECK:              (positionalArguments
 # CHECK:                (nameReference name)
 # CHECK:              )
-# CHECK:            )
-# CHECK:          )
+# CHECK:            ) )
+# CHECK:          ))
 # CHECK:        )
 # CHECK:      )
 # CHECK:   ;)
@@ -84,17 +69,15 @@ bar = function(names:list[string]): list[file]
 # CHECK:     :
 # CHECK:     (type (simpleType int))
 # CHECK:     (expression
-# CHECK:       (call
-# CHECK:         (nameReference f)
-# CHECK:         (
-# CHECK:         (arguments
+# CHECK:       (term (term (nameReference f))
+# CHECK:         ( (arguments
 # CHECK:           (positionalArguments
 # CHECK:             (nameReference x)
 # CHECK:           )
-# CHECK:         )
-# CHECK:         )
-# CHECK:      )
-# CHECK:    )
+# CHECK:         ) )
+# CHECK:       )
+# CHECK:     )
+# CHECK:   )
 # CHECK: ;)
 baz:(int)->int = function(x:int): int f(x);
 

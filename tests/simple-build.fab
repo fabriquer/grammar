@@ -4,7 +4,7 @@
 #
 
 # CHECK:  (value src =
-# CHECK:    (call (term (nameReference file)) (
+# CHECK:    (term (term (nameReference file)) (
 # CHECK:      (arguments (positionalArguments
 # CHECK:          (literal 'Inputs/foo.c')
 # CHECK:      ))
@@ -58,10 +58,10 @@ cc = action('cc -c $src -o $obj' <- src:file[in], obj:file[out]);
 link = action('cc $objects -o $bin' <- objects:list[file[in]], bin:file[out]);
 
 # CHECK:  (value obj =
-# CHECK:    (call (term (nameReference cc)) (
+# CHECK:    (term (term (nameReference cc)) (
 # CHECK:      (arguments (positionalArguments
 # CHECK:          (nameReference src)
-# CHECK:          (call (term (nameReference file)) (
+# CHECK:          (term (term (nameReference file)) (
 # CHECK:            (arguments (positionalArguments
 # CHECK:              (literal 'foo.o')
 # CHECK:            ))
@@ -72,15 +72,15 @@ link = action('cc $objects -o $bin' <- objects:list[file[in]], bin:file[out]);
 obj = cc(src, file('foo.o'));
 
 # CHECK:  (value bin =
-# CHECK:    (call (term (nameReference link)) (
+# CHECK:    (term (term (nameReference link)) (
 # CHECK:      (positionalArguments
 # CHECK:        (list [
 # CHECK:          (nameReference obj)
 # CHECK:        ])
 # CHECK:      )
 # CHECK:      (keywordArgument bin =
-# CHECK:        (call
-# CHECK:          (nameReference file)
+# CHECK:        (expression
+# CHECK:          (term (term (nameReference file))
 # CHECK:          (
 # CHECK:            (positionalArguments
 # CHECK:              (literal 'foo')

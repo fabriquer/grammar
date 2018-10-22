@@ -10,22 +10,24 @@
 foo = {
 
 	# CHECK: (value x =
-	# CHECK:   (call (term (nameReference foo)) ( arguments )))
+	# CHECK:   (term (term (nameReference foo)) ( arguments ))
 	# CHECK: ;)
 	x = foo();
 
 	# CHECK: (value y =
-	# CHECK:   (call
-	# CHECK:     (nameReference bar)
-	# CHECK:     (nameReference x)
+	# CHECK:   (term (term (nameReference bar))
+	# CHECK:     ( (arguments
+	# CHECK:       (nameReference x)
+	# CHECK:     ) )
 	# CHECK:   )
 	# CHECK: ;)
 	y = bar(x);
 
 	# CHECK: (value z =
-	# CHECK:   (call
-	# CHECK:     (nameReference baz)
+	# CHECK:   (term (term (nameReference baz))
+	# CHECK:     ( (arguments
 	# CHECK:     (nameReference y)
+	# CHECK:     ) )
 	# CHECK:   )
 	# CHECK: ;)
 	z = baz(y);
