@@ -43,19 +43,11 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCall(FabParser::CallContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitConditional(FabParser::ConditionalContext *ctx) override {
     return visitChildren(ctx);
   }
 
   virtual antlrcpp::Any visitFieldQuery(FabParser::FieldQueryContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitFieldReference(FabParser::FieldReferenceContext *ctx) override {
     return visitChildren(ctx);
   }
 

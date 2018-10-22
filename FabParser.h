@@ -24,15 +24,14 @@ public:
 
   enum {
     RuleFile = 0, RuleValue = 1, RuleExpression = 2, RuleAddOp = 3, RuleCompareOp = 4, 
-    RuleLogicOp = 5, RuleMultOp = 6, RuleCall = 7, RuleConditional = 8, 
-    RuleFieldQuery = 9, RuleFieldReference = 10, RuleForeach = 11, RuleFunction = 12, 
-    RuleUnaryOperation = 13, RuleUnaryOperator = 14, RuleTerm = 15, RuleBuildAction = 16, 
-    RuleCompoundExpr = 17, RuleFileList = 18, RuleList = 19, RuleLiteral = 20, 
-    RuleNameReference = 21, RuleParentheticalExpression = 22, RuleRecord = 23, 
-    RuleTypeDeclaration = 24, RuleArguments = 25, RuleKeywordArgument = 26, 
-    RuleKeywordArguments = 27, RulePositionalArguments = 28, RuleParameters = 29, 
-    RuleParameter = 30, RuleType = 31, RuleFunctionType = 32, RuleRecordType = 33, 
-    RuleFieldType = 34, RuleParametricType = 35, RuleSimpleType = 36, RuleTypeList = 37
+    RuleLogicOp = 5, RuleMultOp = 6, RuleConditional = 7, RuleFieldQuery = 8, 
+    RuleForeach = 9, RuleFunction = 10, RuleUnaryOperation = 11, RuleUnaryOperator = 12, 
+    RuleTerm = 13, RuleBuildAction = 14, RuleCompoundExpr = 15, RuleFileList = 16, 
+    RuleList = 17, RuleLiteral = 18, RuleNameReference = 19, RuleParentheticalExpression = 20, 
+    RuleRecord = 21, RuleTypeDeclaration = 22, RuleArguments = 23, RuleKeywordArgument = 24, 
+    RuleKeywordArguments = 25, RulePositionalArguments = 26, RuleParameters = 27, 
+    RuleParameter = 28, RuleType = 29, RuleFunctionType = 30, RuleRecordType = 31, 
+    RuleFieldType = 32, RuleParametricType = 33, RuleSimpleType = 34, RuleTypeList = 35
   };
 
   FabParser(antlr4::TokenStream *input);
@@ -52,10 +51,8 @@ public:
   class CompareOpContext;
   class LogicOpContext;
   class MultOpContext;
-  class CallContext;
   class ConditionalContext;
   class FieldQueryContext;
-  class FieldReferenceContext;
   class ForeachContext;
   class FunctionContext;
   class UnaryOperationContext;
@@ -123,10 +120,8 @@ public:
     antlr4::Token *cons = nullptr;;
     ExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    CallContext *call();
     ConditionalContext *conditional();
     FieldQueryContext *fieldQuery();
-    FieldReferenceContext *fieldReference();
     ForeachContext *foreach();
     FunctionContext *function();
     UnaryOperationContext *unaryOperation();
@@ -198,22 +193,6 @@ public:
 
   MultOpContext* multOp();
 
-  class  CallContext : public antlr4::ParserRuleContext {
-  public:
-    FabParser::TermContext *target = nullptr;;
-    CallContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *ParenOpen();
-    ArgumentsContext *arguments();
-    antlr4::tree::TerminalNode *ParenClose();
-    TermContext *term();
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  CallContext* call();
-
   class  ConditionalContext : public antlr4::ParserRuleContext {
   public:
     FabParser::ExpressionContext *condition = nullptr;;
@@ -251,22 +230,6 @@ public:
 
   FieldQueryContext* fieldQuery();
 
-  class  FieldReferenceContext : public antlr4::ParserRuleContext {
-  public:
-    antlr4::Token *field = nullptr;;
-    FieldReferenceContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    TermContext *term();
-    antlr4::tree::TerminalNode *FieldSep();
-    antlr4::tree::TerminalNode *Identifier();
-    FieldReferenceContext *fieldReference();
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  FieldReferenceContext* fieldReference();
-  FieldReferenceContext* fieldReference(int precedence);
   class  ForeachContext : public antlr4::ParserRuleContext {
   public:
     antlr4::Token *loopVarName = nullptr;;
@@ -336,6 +299,9 @@ public:
 
   class  TermContext : public antlr4::ParserRuleContext {
   public:
+    FabParser::TermContext *callTarget = nullptr;;
+    FabParser::TermContext *base = nullptr;;
+    antlr4::Token *field = nullptr;;
     TermContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     BuildActionContext *buildAction();
@@ -347,13 +313,19 @@ public:
     ParentheticalExpressionContext *parentheticalExpression();
     RecordContext *record();
     TypeDeclarationContext *typeDeclaration();
+    antlr4::tree::TerminalNode *ParenOpen();
+    ArgumentsContext *arguments();
+    antlr4::tree::TerminalNode *ParenClose();
+    TermContext *term();
+    antlr4::tree::TerminalNode *FieldSep();
+    antlr4::tree::TerminalNode *Identifier();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
   };
 
   TermContext* term();
-
+  TermContext* term(int precedence);
   class  BuildActionContext : public antlr4::ParserRuleContext {
   public:
     BuildActionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -703,7 +675,7 @@ public:
 
   virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;
   bool expressionSempred(ExpressionContext *_localctx, size_t predicateIndex);
-  bool fieldReferenceSempred(FieldReferenceContext *_localctx, size_t predicateIndex);
+  bool termSempred(TermContext *_localctx, size_t predicateIndex);
 
 private:
   static std::vector<antlr4::dfa::DFA> _decisionToDFA;

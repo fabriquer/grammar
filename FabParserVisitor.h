@@ -33,13 +33,9 @@ public:
 
     virtual antlrcpp::Any visitMultOp(FabParser::MultOpContext *context) = 0;
 
-    virtual antlrcpp::Any visitCall(FabParser::CallContext *context) = 0;
-
     virtual antlrcpp::Any visitConditional(FabParser::ConditionalContext *context) = 0;
 
     virtual antlrcpp::Any visitFieldQuery(FabParser::FieldQueryContext *context) = 0;
-
-    virtual antlrcpp::Any visitFieldReference(FabParser::FieldReferenceContext *context) = 0;
 
     virtual antlrcpp::Any visitForeach(FabParser::ForeachContext *context) = 0;
 
