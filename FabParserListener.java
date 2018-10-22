@@ -77,16 +77,6 @@ public interface FabParserListener extends ParseTreeListener {
 	 */
 	void exitMultOp(FabParser.MultOpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FabParser#call}.
-	 * @param ctx the parse tree
-	 */
-	void enterCall(FabParser.CallContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FabParser#call}.
-	 * @param ctx the parse tree
-	 */
-	void exitCall(FabParser.CallContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link FabParser#conditional}.
 	 * @param ctx the parse tree
 	 */
@@ -106,16 +96,6 @@ public interface FabParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFieldQuery(FabParser.FieldQueryContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FabParser#fieldReference}.
-	 * @param ctx the parse tree
-	 */
-	void enterFieldReference(FabParser.FieldReferenceContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FabParser#fieldReference}.
-	 * @param ctx the parse tree
-	 */
-	void exitFieldReference(FabParser.FieldReferenceContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FabParser#foreach}.
 	 * @param ctx the parse tree

@@ -99,18 +99,6 @@ public class FabParserBaseListener implements FabParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCall(FabParser.CallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCall(FabParser.CallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterConditional(FabParser.ConditionalContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -130,18 +118,6 @@ public class FabParserBaseListener implements FabParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFieldQuery(FabParser.FieldQueryContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFieldReference(FabParser.FieldReferenceContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFieldReference(FabParser.FieldReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
