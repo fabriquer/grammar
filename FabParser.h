@@ -19,7 +19,8 @@ public:
     ArgSep = 25, Assign = 26, BraceOpen = 27, BraceClose = 28, BracketOpen = 29, 
     BracketClose = 30, End = 31, FieldSep = 32, Input = 33, ParenOpen = 34, 
     ParenClose = 35, Produces = 36, Query = 37, TypeSep = 38, Identifier = 39, 
-    FileListArgs = 40, FileListEnd = 41, FilenameLiteral = 42, FileListWS = 43
+    ErrorChar = 40, FileListArgs = 41, FileListEnd = 42, FilenameLiteral = 43, 
+    FileListWS = 44, FileListError = 45
   };
 
   enum {
