@@ -22,7 +22,8 @@ public class FabParser extends Parser {
 		NotEquals=21, Or=22, Plus=23, Xor=24, ArgSep=25, Assign=26, BraceOpen=27, 
 		BraceClose=28, BracketOpen=29, BracketClose=30, End=31, FieldSep=32, Input=33, 
 		ParenOpen=34, ParenClose=35, Produces=36, Query=37, TypeSep=38, Identifier=39, 
-		FileListArgs=40, FileListEnd=41, FilenameLiteral=42, FileListWS=43;
+		ErrorChar=40, FileListArgs=41, FileListEnd=42, FilenameLiteral=43, FileListWS=44, 
+		FileListError=45;
 	public static final int
 		RULE_file = 0, RULE_value = 1, RULE_expression = 2, RULE_addOp = 3, RULE_compareOp = 4, 
 		RULE_logicOp = 5, RULE_multOp = 6, RULE_conditional = 7, RULE_fieldQuery = 8, 
@@ -56,8 +57,8 @@ public class FabParser extends Parser {
 		"And", "Cons", "Divide", "Equals", "Minus", "Multiply", "Not", "NotEquals", 
 		"Or", "Plus", "Xor", "ArgSep", "Assign", "BraceOpen", "BraceClose", "BracketOpen", 
 		"BracketClose", "End", "FieldSep", "Input", "ParenOpen", "ParenClose", 
-		"Produces", "Query", "TypeSep", "Identifier", "FileListArgs", "FileListEnd", 
-		"FilenameLiteral", "FileListWS"
+		"Produces", "Query", "TypeSep", "Identifier", "ErrorChar", "FileListArgs", 
+		"FileListEnd", "FilenameLiteral", "FileListWS", "FileListError"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -2592,7 +2593,7 @@ public class FabParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3-\u016c\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3/\u016c\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2667,9 +2668,9 @@ public class FabParser extends Parser {
 		"\2\2\2\u00cb\u00cf\7\35\2\2\u00cc\u00ce\5\4\3\2\u00cd\u00cc\3\2\2\2\u00ce"+
 		"\u00d1\3\2\2\2\u00cf\u00cd\3\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00d2\3\2"+
 		"\2\2\u00d1\u00cf\3\2\2\2\u00d2\u00d3\5\6\4\2\u00d3\u00d4\7\36\2\2\u00d4"+
-		"!\3\2\2\2\u00d5\u00d9\7\6\2\2\u00d6\u00d8\7,\2\2\u00d7\u00d6\3\2\2\2\u00d8"+
+		"!\3\2\2\2\u00d5\u00d9\7\6\2\2\u00d6\u00d8\7-\2\2\u00d7\u00d6\3\2\2\2\u00d8"+
 		"\u00db\3\2\2\2\u00d9\u00d7\3\2\2\2\u00d9\u00da\3\2\2\2\u00da\u00e1\3\2"+
-		"\2\2\u00db\u00d9\3\2\2\2\u00dc\u00e2\7+\2\2\u00dd\u00de\7*\2\2\u00de\u00df"+
+		"\2\2\u00db\u00d9\3\2\2\2\u00dc\u00e2\7,\2\2\u00dd\u00de\7+\2\2\u00de\u00df"+
 		"\5\64\33\2\u00df\u00e0\7%\2\2\u00e0\u00e2\3\2\2\2\u00e1\u00dc\3\2\2\2"+
 		"\u00e1\u00dd\3\2\2\2\u00e2#\3\2\2\2\u00e3\u00e7\7\37\2\2\u00e4\u00e6\5"+
 		"\6\4\2\u00e5\u00e4\3\2\2\2\u00e6\u00e9\3\2\2\2\u00e7\u00e5\3\2\2\2\u00e7"+
