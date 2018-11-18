@@ -90,7 +90,7 @@ mode FileList ;
 FileListArgs	: ',' -> popMode ;
 FileListEnd	: ')' -> popMode ;
 
-FilenameLiteral	: [A-Za-z0-9_./]+ ;
+FilenameLiteral	: [A-Za-z0-9_./\-]+ ;
 
 FileListWS	: [ \t\r\n]+ -> skip ;
 
