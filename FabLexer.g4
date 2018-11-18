@@ -81,6 +81,8 @@ TypeSep		: ':' ;
 // An identifier starts with [A-Za-z_] and contains [A-Za-z0-9_]
 Identifier	: [a-zA-Z] [a-zA-Z0-9_]* ;
 
+ErrorChar	: . ;
+
 
 // The syntax of file lists is different from that of everything else.
 mode FileList ;
@@ -91,3 +93,5 @@ FileListEnd	: ')' -> popMode ;
 FilenameLiteral	: [A-Za-z0-9_./]+ ;
 
 FileListWS	: [ \t\r\n]+ -> skip ;
+
+FileListError	: . ;
