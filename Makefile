@@ -4,8 +4,9 @@
 ADOC			= asciidoctor
 ADOCFLAGS		= -r ./system_pygments.rb
 ANTLR			= java -cp $(CLASSPATH) org.antlr.v4.Tool
+ANTLR_VERSION		= 4.7.1
 ANTLRFLAGS		= -no-listener -visitor
-CLASSPATH		= ./antlr/antlr-4.7.1-complete.jar
+CLASSPATH		= ./antlr/antlr-$(ANTLR_VERSION)-complete.jar
 RM			= rm -rf
 
 GENERATED_SRC_DIR	= generated
