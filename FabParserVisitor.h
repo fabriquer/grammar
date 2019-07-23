@@ -87,7 +87,7 @@ public:
 
     virtual antlrcpp::Any visitParametricType(FabParser::ParametricTypeContext *context) = 0;
 
-    virtual antlrcpp::Any visitSimpleType(FabParser::SimpleTypeContext *context) = 0;
+    virtual antlrcpp::Any visitTypeReference(FabParser::TypeReferenceContext *context) = 0;
 
     virtual antlrcpp::Any visitTypeList(FabParser::TypeListContext *context) = 0;
 

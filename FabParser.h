@@ -32,7 +32,8 @@ public:
     RuleRecord = 21, RuleTypeDeclaration = 22, RuleArguments = 23, RuleKeywordArgument = 24, 
     RuleKeywordArguments = 25, RulePositionalArguments = 26, RuleParameters = 27, 
     RuleParameter = 28, RuleType = 29, RuleFunctionType = 30, RuleRecordType = 31, 
-    RuleFieldType = 32, RuleParametricType = 33, RuleSimpleType = 34, RuleTypeList = 35
+    RuleFieldType = 32, RuleParametricType = 33, RuleTypeReference = 34, 
+    RuleTypeList = 35
   };
 
   FabParser(antlr4::TokenStream *input);
@@ -79,7 +80,7 @@ public:
   class RecordTypeContext;
   class FieldTypeContext;
   class ParametricTypeContext;
-  class SimpleTypeContext;
+  class TypeReferenceContext;
   class TypeListContext; 
 
   class  FileContext : public antlr4::ParserRuleContext {
@@ -570,7 +571,7 @@ public:
     FunctionTypeContext *functionType();
     RecordTypeContext *recordType();
     ParametricTypeContext *parametricType();
-    SimpleTypeContext *simpleType();
+    TypeReferenceContext *typeReference();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
@@ -630,13 +631,13 @@ public:
 
   class  ParametricTypeContext : public antlr4::ParserRuleContext {
   public:
-    FabParser::SimpleTypeContext *base = nullptr;;
+    FabParser::TypeReferenceContext *base = nullptr;;
     FabParser::TypeListContext *params = nullptr;;
     ParametricTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *BracketOpen();
     antlr4::tree::TerminalNode *BracketClose();
-    SimpleTypeContext *simpleType();
+    TypeReferenceContext *typeReference();
     TypeListContext *typeList();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -645,9 +646,9 @@ public:
 
   ParametricTypeContext* parametricType();
 
-  class  SimpleTypeContext : public antlr4::ParserRuleContext {
+  class  TypeReferenceContext : public antlr4::ParserRuleContext {
   public:
-    SimpleTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    TypeReferenceContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *Identifier();
     antlr4::tree::TerminalNode *Type();
@@ -656,7 +657,7 @@ public:
    
   };
 
-  SimpleTypeContext* simpleType();
+  TypeReferenceContext* typeReference();
 
   class  TypeListContext : public antlr4::ParserRuleContext {
   public:

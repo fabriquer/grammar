@@ -151,7 +151,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitSimpleType(FabParser::SimpleTypeContext *ctx) override {
+  virtual antlrcpp::Any visitTypeReference(FabParser::TypeReferenceContext *ctx) override {
     return visitChildren(ctx);
   }
 

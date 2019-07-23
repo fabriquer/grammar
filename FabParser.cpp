@@ -2419,8 +2419,8 @@ FabParser::ParametricTypeContext* FabParser::TypeContext::parametricType() {
   return getRuleContext<FabParser::ParametricTypeContext>(0);
 }
 
-FabParser::SimpleTypeContext* FabParser::TypeContext::simpleType() {
-  return getRuleContext<FabParser::SimpleTypeContext>(0);
+FabParser::TypeReferenceContext* FabParser::TypeContext::typeReference() {
+  return getRuleContext<FabParser::TypeReferenceContext>(0);
 }
 
 
@@ -2470,7 +2470,7 @@ FabParser::TypeContext* FabParser::type() {
     case 4: {
       enterOuterAlt(_localctx, 4);
       setState(311);
-      simpleType();
+      typeReference();
       break;
     }
 
@@ -2739,8 +2739,8 @@ tree::TerminalNode* FabParser::ParametricTypeContext::BracketClose() {
   return getToken(FabParser::BracketClose, 0);
 }
 
-FabParser::SimpleTypeContext* FabParser::ParametricTypeContext::simpleType() {
-  return getRuleContext<FabParser::SimpleTypeContext>(0);
+FabParser::TypeReferenceContext* FabParser::ParametricTypeContext::typeReference() {
+  return getRuleContext<FabParser::TypeReferenceContext>(0);
 }
 
 FabParser::TypeListContext* FabParser::ParametricTypeContext::typeList() {
@@ -2769,7 +2769,7 @@ FabParser::ParametricTypeContext* FabParser::parametricType() {
   try {
     enterOuterAlt(_localctx, 1);
     setState(343);
-    dynamic_cast<ParametricTypeContext *>(_localctx)->base = simpleType();
+    dynamic_cast<ParametricTypeContext *>(_localctx)->base = typeReference();
     setState(344);
     match(FabParser::BracketOpen);
     setState(345);
@@ -2787,35 +2787,35 @@ FabParser::ParametricTypeContext* FabParser::parametricType() {
   return _localctx;
 }
 
-//----------------- SimpleTypeContext ------------------------------------------------------------------
+//----------------- TypeReferenceContext ------------------------------------------------------------------
 
-FabParser::SimpleTypeContext::SimpleTypeContext(ParserRuleContext *parent, size_t invokingState)
+FabParser::TypeReferenceContext::TypeReferenceContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* FabParser::SimpleTypeContext::Identifier() {
+tree::TerminalNode* FabParser::TypeReferenceContext::Identifier() {
   return getToken(FabParser::Identifier, 0);
 }
 
-tree::TerminalNode* FabParser::SimpleTypeContext::Type() {
+tree::TerminalNode* FabParser::TypeReferenceContext::Type() {
   return getToken(FabParser::Type, 0);
 }
 
 
-size_t FabParser::SimpleTypeContext::getRuleIndex() const {
-  return FabParser::RuleSimpleType;
+size_t FabParser::TypeReferenceContext::getRuleIndex() const {
+  return FabParser::RuleTypeReference;
 }
 
-antlrcpp::Any FabParser::SimpleTypeContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any FabParser::TypeReferenceContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<FabParserVisitor*>(visitor))
-    return parserVisitor->visitSimpleType(this);
+    return parserVisitor->visitTypeReference(this);
   else
     return visitor->visitChildren(this);
 }
 
-FabParser::SimpleTypeContext* FabParser::simpleType() {
-  SimpleTypeContext *_localctx = _tracker.createInstance<SimpleTypeContext>(_ctx, getState());
-  enterRule(_localctx, 68, FabParser::RuleSimpleType);
+FabParser::TypeReferenceContext* FabParser::typeReference() {
+  TypeReferenceContext *_localctx = _tracker.createInstance<TypeReferenceContext>(_ctx, getState());
+  enterRule(_localctx, 68, FabParser::RuleTypeReference);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -2976,7 +2976,7 @@ std::vector<std::string> FabParser::_ruleNames = {
   "literal", "nameReference", "parentheticalExpression", "record", "typeDeclaration", 
   "arguments", "keywordArgument", "keywordArguments", "positionalArguments", 
   "parameters", "parameter", "type", "functionType", "recordType", "fieldType", 
-  "parametricType", "simpleType", "typeList"
+  "parametricType", "typeReference", "typeList"
 };
 
 std::vector<std::string> FabParser::_literalNames = {
