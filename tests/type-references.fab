@@ -1,0 +1,49 @@
+#
+# RUN: %parse %s > %t
+# RUN: %check %t %s
+#
+
+# CHECK: (file
+
+# CHECK: (value foo =
+# CHECK:   (expression (
+# CHECK:     term (
+# CHECK:       record record {
+# CHECK:       (value t :
+# CHECK:         (type (typeReference type))
+# CHECK:         =
+# CHECK:         (expression (term (nameReference int)))
+# CHECK:         ;)
+# CHECK:       })))
+# CHECK:   ;)
+foo = record { t:type = int; };
+
+# CHECK: (value bar :
+# CHECK:   (type (typeReference (term (term (nameReference foo)) . t)))
+# CHECK:   =
+# CHECK:   (expression (term (literal 42)))
+# CHECK:   ;)
+bar:foo.t = 42;
+
+# CHECK: (value f =
+# CHECK:   (expression (function
+# CHECK:     ( parameters )
+# CHECK:     : (type (typeReference type))
+# CHECK:     (expression
+# CHECK:       (term (compoundExpr {
+# CHECK:         (expression (term (nameReference int)))
+# CHECK:       }))
+# CHECK:     )
+# CHECK:   ))
+# CHECK: ;)
+f = function(): type
+{
+	int
+};
+
+# CHECK: (value baz :
+# CHECK:   (type (typeReference (term (term (nameReference f)) ( arguments ))))
+# CHECK:   =
+# CHECK:   (expression (term (literal 1)))
+# CHECK:   ;)
+baz:f() = 1;

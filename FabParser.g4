@@ -183,6 +183,6 @@ functionType	: ParenOpen params=typeList? ParenClose Produces result=type ;
 recordType	: Record BracketOpen (fieldType (ArgSep fieldType)*)? ArgSep? BracketClose ;
 fieldType	: Identifier TypeSep type ;
 parametricType	: base=typeReference BracketOpen params=typeList BracketClose ;
-typeReference	: Identifier | Type ;
+typeReference	: Identifier | Type | term ;
 
 typeList	: type (ArgSep type)* ArgSep? ;
