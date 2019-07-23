@@ -129,7 +129,7 @@ functionType
 recordType
 fieldType
 parametricType
-simpleType
+typeReference
 typeList
 
 

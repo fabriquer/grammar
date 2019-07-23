@@ -33,7 +33,8 @@ public class FabParser extends Parser {
 		RULE_record = 21, RULE_typeDeclaration = 22, RULE_arguments = 23, RULE_keywordArgument = 24, 
 		RULE_keywordArguments = 25, RULE_positionalArguments = 26, RULE_parameters = 27, 
 		RULE_parameter = 28, RULE_type = 29, RULE_functionType = 30, RULE_recordType = 31, 
-		RULE_fieldType = 32, RULE_parametricType = 33, RULE_simpleType = 34, RULE_typeList = 35;
+		RULE_fieldType = 32, RULE_parametricType = 33, RULE_typeReference = 34, 
+		RULE_typeList = 35;
 	public static final String[] ruleNames = {
 		"file", "value", "expression", "addOp", "compareOp", "logicOp", "multOp", 
 		"conditional", "fieldQuery", "foreach", "function", "unaryOperation", 
@@ -41,7 +42,7 @@ public class FabParser extends Parser {
 		"literal", "nameReference", "parentheticalExpression", "record", "typeDeclaration", 
 		"arguments", "keywordArgument", "keywordArguments", "positionalArguments", 
 		"parameters", "parameter", "type", "functionType", "recordType", "fieldType", 
-		"parametricType", "simpleType", "typeList"
+		"parametricType", "typeReference", "typeList"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -2116,8 +2117,8 @@ public class FabParser extends Parser {
 		public ParametricTypeContext parametricType() {
 			return getRuleContext(ParametricTypeContext.class,0);
 		}
-		public SimpleTypeContext simpleType() {
-			return getRuleContext(SimpleTypeContext.class,0);
+		public TypeReferenceContext typeReference() {
+			return getRuleContext(TypeReferenceContext.class,0);
 		}
 		public TypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2165,7 +2166,7 @@ public class FabParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(311);
-				simpleType();
+				typeReference();
 				}
 				break;
 			}
@@ -2384,12 +2385,12 @@ public class FabParser extends Parser {
 	}
 
 	public static class ParametricTypeContext extends ParserRuleContext {
-		public SimpleTypeContext base;
+		public TypeReferenceContext base;
 		public TypeListContext params;
 		public TerminalNode BracketOpen() { return getToken(FabParser.BracketOpen, 0); }
 		public TerminalNode BracketClose() { return getToken(FabParser.BracketClose, 0); }
-		public SimpleTypeContext simpleType() {
-			return getRuleContext(SimpleTypeContext.class,0);
+		public TypeReferenceContext typeReference() {
+			return getRuleContext(TypeReferenceContext.class,0);
 		}
 		public TypeListContext typeList() {
 			return getRuleContext(TypeListContext.class,0);
@@ -2415,7 +2416,7 @@ public class FabParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(343);
-			((ParametricTypeContext)_localctx).base = simpleType();
+			((ParametricTypeContext)_localctx).base = typeReference();
 			setState(344);
 			match(BracketOpen);
 			setState(345);
@@ -2435,26 +2436,26 @@ public class FabParser extends Parser {
 		return _localctx;
 	}
 
-	public static class SimpleTypeContext extends ParserRuleContext {
+	public static class TypeReferenceContext extends ParserRuleContext {
 		public TerminalNode Identifier() { return getToken(FabParser.Identifier, 0); }
 		public TerminalNode Type() { return getToken(FabParser.Type, 0); }
-		public SimpleTypeContext(ParserRuleContext parent, int invokingState) {
+		public TypeReferenceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_simpleType; }
+		@Override public int getRuleIndex() { return RULE_typeReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FabParserListener ) ((FabParserListener)listener).enterSimpleType(this);
+			if ( listener instanceof FabParserListener ) ((FabParserListener)listener).enterTypeReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FabParserListener ) ((FabParserListener)listener).exitSimpleType(this);
+			if ( listener instanceof FabParserListener ) ((FabParserListener)listener).exitTypeReference(this);
 		}
 	}
 
-	public final SimpleTypeContext simpleType() throws RecognitionException {
-		SimpleTypeContext _localctx = new SimpleTypeContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_simpleType);
+	public final TypeReferenceContext typeReference() throws RecognitionException {
+		TypeReferenceContext _localctx = new TypeReferenceContext(_ctx, getState());
+		enterRule(_localctx, 68, RULE_typeReference);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);

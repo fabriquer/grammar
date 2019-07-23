@@ -423,13 +423,13 @@ public class FabParserBaseListener implements FabParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSimpleType(FabParser.SimpleTypeContext ctx) { }
+	@Override public void enterTypeReference(FabParser.TypeReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSimpleType(FabParser.SimpleTypeContext ctx) { }
+	@Override public void exitTypeReference(FabParser.TypeReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

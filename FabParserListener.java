@@ -347,15 +347,15 @@ public interface FabParserListener extends ParseTreeListener {
 	 */
 	void exitParametricType(FabParser.ParametricTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FabParser#simpleType}.
+	 * Enter a parse tree produced by {@link FabParser#typeReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimpleType(FabParser.SimpleTypeContext ctx);
+	void enterTypeReference(FabParser.TypeReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FabParser#simpleType}.
+	 * Exit a parse tree produced by {@link FabParser#typeReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimpleType(FabParser.SimpleTypeContext ctx);
+	void exitTypeReference(FabParser.TypeReferenceContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FabParser#typeList}.
 	 * @param ctx the parse tree
