@@ -6,9 +6,9 @@
 # CHECK:  (value increment =
 # CHECK:    (function function
 # CHECK:      ( (parameters
-# CHECK:        (parameter x : (type (simpleType int)))
+# CHECK:        (parameter x : (type (typeReference int)))
 # CHECK:        (parameter increment :
-# CHECK:          (type (simpleType int))
+# CHECK:          (type (typeReference int))
 # CHECK:          =
 # CHECK:          (literal 1)
 # CHECK:        )
@@ -21,14 +21,14 @@ increment = function(x:int, increment:int = 1): int
 # CHECK:  (value concat =
 # CHECK:    (function function
 # CHECK:      ( (parameters
-# CHECK:        (parameter lhs : (type (simpleType string)))
+# CHECK:        (parameter lhs : (type (typeReference string)))
 # CHECK:        (parameter ch :
-# CHECK:          (type (simpleType string))
+# CHECK:          (type (typeReference string))
 # CHECK:          =
 # CHECK:          (literal '.')
 # CHECK:        )
 # CHECK:        (parameter rhs :
-# CHECK:          (type (simpleType string))
+# CHECK:          (type (typeReference string))
 # CHECK:          =
 # CHECK:          (literal '')
 # CHECK:        )

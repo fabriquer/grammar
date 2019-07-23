@@ -6,7 +6,7 @@
 # CHECK: (file
 
 # CHECK: (value p
-# CHECK:   : (type (simpleType bool))
+# CHECK:   : (type (typeReference bool))
 # CHECK:   =
 # CHECK:   (literal true)
 # CHECK: ;)

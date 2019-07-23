@@ -11,10 +11,10 @@
 # CHECK:      <-
 # CHECK:     (parameters
 # CHECK:       (parameter src :
-# CHECK:         [[FILE_IN:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType in\)\)\) \]\)\)]]
+# CHECK:         [[FILE_IN:\(type \(parametricType \(typeReference file\) \[ \(typeList \(type \(typeReference in\)\)\) \]\)\)]]
 # CHECK:       )
 # CHECK:       (parameter obj :
-# CHECK:         [[FILE_OUT:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType out\)\)\) \]\)\)]]
+# CHECK:         [[FILE_OUT:\(type \(parametricType \(typeReference file\) \[ \(typeList \(type \(typeReference out\)\)\) \]\)\)]]
 # CHECK:       )
 # CHECK:     )
 # CHECK:    ))
@@ -29,7 +29,7 @@ cc = action('cc -c ${src} -o ${obj}' <- src:file[in], obj:file[out]);
 # CHECK:      <-
 # CHECK:      (parameters
 # CHECK:        (parameter objects :
-# CHECK:          (parametricType (simpleType list) [ (typeList [[FILE_IN]]) ]))
+# CHECK:          (parametricType (typeReference list) [ (typeList [[FILE_IN]]) ]))
 # CHECK:        (parameter bin : [[FILE_OUT]])
 # CHECK:      )
 # CHECK:    ))

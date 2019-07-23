@@ -5,8 +5,8 @@
 
 # CHECK:  (value increment =
 # CHECK:    (function function (
-# CHECK:        (parameters (parameter x : (type (simpleType int))))
-# CHECK:      ) : (type (simpleType int))
+# CHECK:        (parameters (parameter x : (type (typeReference int))))
+# CHECK:      ) : (type (typeReference int))
 # CHECK:      (nameReference x)
 # CHECK:      (addOp +)
 # CHECK:      (literal 1)
@@ -22,14 +22,14 @@ copy = increment;
 # CHECK:        (parameters
 # CHECK:          (parameter fn :
 # CHECK:            (functionType
-# CHECK:              ( (typeList (type (simpleType int))) )
+# CHECK:              ( (typeList (type (typeReference int))) )
 # CHECK:              ->
-# CHECK               (type (simpleType int))
+# CHECK               (type (typeReference int))
 # CHECK:            )
 # CHECK:          )
-# CHECK:          (parameter x : (type (simpleType int)))
+# CHECK:          (parameter x : (type (typeReference int)))
 # CHECK:        )
-# CHECK:      ) : (type (simpleType int))
+# CHECK:      ) : (type (typeReference int))
 # CHECK:      (expression
 # CHECK:        (nameReference fn)
 # CHECK:        (

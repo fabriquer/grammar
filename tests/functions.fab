@@ -9,7 +9,7 @@
 # CHECK:    (function function (
 # CHECK:      (parameters
 # CHECK:        (parameter ints :
-# CHECK:          [[INT_LIST:\(type \(parametricType \(simpleType list\) \[ \(typeList \(type \(simpleType int\)\)\) \]\)\)]]
+# CHECK:          [[INT_LIST:\(type \(parametricType \(typeReference list\) \[ \(typeList \(type \(typeReference int\)\)\) \]\)\)]]
 # CHECK:        )
 # CHECK:      )
 # CHECK:      : [[INT_LIST]]
@@ -36,10 +36,10 @@ foo = function(ints:list[int]): list[int]
 # CHECK:    (function function
 # CHECK:      (parameters
 # CHECK:        (parameter names :
-# CHECK:          [[STRING_LIST:\(type \(parametricType \(simpleType list\) \[ \(typeList \(type \(simpleType string\)\)\) \]\)\)]]
+# CHECK:          [[STRING_LIST:\(type \(parametricType \(typeReference list\) \[ \(typeList \(type \(typeReference string\)\)\) \]\)\)]]
 # CHECK:      )
 # CHECK:      :
-# CHECK:      [[FILE_LIST:\(type \(parametricType \(simpleType list\) \[ \(typeList \(type \(simpleType file\)\)\) \]\)\)]]
+# CHECK:      [[FILE_LIST:\(type \(parametricType \(typeReference list\) \[ \(typeList \(type \(typeReference file\)\)\) \]\)\)]]
 # CHECK:      (expression
 # CHECK:        (foreach foreach name <-
 # CHECK:          (nameReference names)
@@ -59,15 +59,15 @@ bar = function(names:list[string]): list[file]
 
 # CHECK: (value baz :
 # CHECK:   (functionType
-# CHECK:     ( (typeList (type (simpleType int))) )
+# CHECK:     ( (typeList (type (typeReference int))) )
 # CHECK:     ->
-# CHECK:     (simpleType int)
+# CHECK:     (typeReference int)
 # CHECK:   )
 # CHECK:   =
 # CHECK:   (function
-# CHECK:     ( (parameters (parameter x : (type (simpleType int)))) )
+# CHECK:     ( (parameters (parameter x : (type (typeReference int)))) )
 # CHECK:     :
-# CHECK:     (type (simpleType int))
+# CHECK:     (type (typeReference int))
 # CHECK:     (expression
 # CHECK:       (term (term (nameReference f))
 # CHECK:         ( (arguments
@@ -89,19 +89,19 @@ baz:(int)->int = function(x:int): int f(x);
 # CHECK:     (functionType
 # CHECK:       ( )
 # CHECK:       ->
-# CHECK:       (simpleType int)
+# CHECK:       (typeReference int)
 # CHECK:     )
 # CHECK:   )
 # CHECK:   =
 # CHECK:   (function
 # CHECK:     ( parameters )
 # CHECK:     :
-# CHECK:     (functionType ( ) -> (type (simpleType int)))
+# CHECK:     (functionType ( ) -> (type (typeReference int)))
 # CHECK:       (compoundExpr {
 # CHECK:         (function
 # CHECK:           ( parameters )
 # CHECK:           :
-# CHECK:           (simpleType int)
+# CHECK:           (typeReference int)
 # CHECK:           (compoundExpr {
 # CHECK:             (literal 42)
 # CHECK:           })

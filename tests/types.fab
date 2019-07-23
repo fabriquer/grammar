@@ -13,13 +13,13 @@ foo = type record[];
 # CHECK: (value bar =
 # CHECK:   (typeDeclaration type
 # CHECK:     (recordType record [
-# CHECK:       (fieldType x : (type (simpleType int)))
+# CHECK:       (fieldType x : (type (typeReference int)))
 # CHECK:       ,
-# CHECK:       (fieldType y : (type (simpleType string)))
+# CHECK:       (fieldType y : (type (typeReference string)))
 # CHECK:       ,
 # CHECK:       (fieldType z :
 # CHECK:         (recordType record [
-# CHECK:           (fieldType wibble : (type (simpleType int)))
+# CHECK:           (fieldType wibble : (type (typeReference int)))
 # CHECK:         ])
 # CHECK:       )
 # CHECK:     ])
@@ -30,8 +30,8 @@ bar = type record[x:int, y:string, z:record[wibble:int]];
 # CHECK: (value baz =
 # CHECK:   (typeDeclaration
 # CHECK:     (functionType
-# CHECK:       ( (typeList (type (simpleType int))) )
-# CHECK:       -> (type (simpleType int))
+# CHECK:       ( (typeList (type (typeReference int))) )
+# CHECK:       -> (type (typeReference int))
 # CHECK:     )
 # CHECK:   )
 # CHECK: ;)
@@ -40,23 +40,23 @@ baz = type (int)->int;
 # CHECK: (value wibble =
 # CHECK:   (typeDeclaration
 # CHECK:     (functionType
-# CHECK:       ( (typeList (type (simpleType int))) )
+# CHECK:       ( (typeList (type (typeReference int))) )
 # CHECK:       ->
 # CHECK:       (functionType
 # CHECK:         (typeList (
 # CHECK:           (parametricType
-# CHECK:             (simpleType list)
-# CHECK:             [ (typeList (type (simpleType string))) ]
+# CHECK:             (typeReference list)
+# CHECK:             [ (typeList (type (typeReference string))) ]
 # CHECK:           )
 # CHECK:         ) )
-# CHECK:         -> (type (simpleType int))
+# CHECK:         -> (type (typeReference int))
 # CHECK:       )
 # CHECK:     )
 # CHECK:   )
 # CHECK: ;)
 wibble = type (int)->(list[string])->int;
 
-# CHECK: (value wobble : (type (simpleType type)) =
+# CHECK: (value wobble : (type (typeReference type)) =
 # CHECK:   (nameReference wibble)
 # CHECK: ;)
 wobble:type = wibble;

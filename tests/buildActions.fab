@@ -12,10 +12,10 @@
 # CHECK:          (parameter src :
 # CHECK:            (type
 # CHECK:              (parametricType
-# CHECK:                (simpleType list)
+# CHECK:                (typeReference list)
 # CHECK:                [
 # CHECK:                  (typeList
-# CHECK:                    [[FILE_IN:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType in\)\)\) \]\)\)]]
+# CHECK:                    [[FILE_IN:\(type \(parametricType \(typeReference file\) \[ \(typeList \(type \(typeReference in\)\)\) \]\)\)]]
 # CHECK:                  )
 # CHECK:                ]
 # CHECK:            )
@@ -23,7 +23,7 @@
 # CHECK:          )
 # CHECK:          ,
 # CHECK:          (parameter obj : 
-# CHECK:            [[FILE_OUT:\(type \(parametricType \(simpleType file\) \[ \(typeList \(type \(simpleType out\)\)\) \]\)\)]]
+# CHECK:            [[FILE_OUT:\(type \(parametricType \(typeReference file\) \[ \(typeList \(type \(typeReference out\)\)\) \]\)\)]]
 # CHECK:          )
 # CHECK:        )
 # CHECK:      )

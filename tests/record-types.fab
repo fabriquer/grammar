@@ -6,8 +6,8 @@
 # CHECK:  (value foo :
 # CHECK:    (type
 # CHECK:      (recordType record [
-# CHECK:        (fieldType foo : (type (simpleType string)))
-# CHECK:        (fieldType bar : (type (simpleType string)))
+# CHECK:        (fieldType foo : (type (typeReference string)))
+# CHECK:        (fieldType bar : (type (typeReference string)))
 # CHECK:      ])
 # CHECK:    )
 # CHECK:    =
@@ -20,8 +20,8 @@ foo:record[foo:string, bar:string] = record { foo = 'hi'; bar = 'world'; };
 # CHECK:  (value bar :
 # CHECK:    (type
 # CHECK:      (recordType record [
-# CHECK:        (fieldType def : (type (simpleType string)))
-# CHECK:        (fieldType ref : (type (simpleType string)))
+# CHECK:        (fieldType def : (type (typeReference string)))
+# CHECK:        (fieldType ref : (type (typeReference string)))
 # CHECK:      ])
 # CHECK:    )
 # CHECK:    =

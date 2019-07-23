@@ -29,7 +29,7 @@ scope_with_captures = record
 	# CHECK: (value f =
 	# CHECK:   (function function
 	# CHECK:     ( (parameters
-	# CHECK:         (parameter prefix : (type (simpleType string)))
+	# CHECK:         (parameter prefix : (type (typeReference string)))
 	# CHECK:     ) )
 	# CHECK:     (expression
 	# CHECK:       (nameReference string)

@@ -176,13 +176,13 @@ type
 	: functionType
 	| recordType
 	| parametricType
-	| simpleType
+	| typeReference
 	;
 
 functionType	: ParenOpen params=typeList? ParenClose Produces result=type ;
 recordType	: Record BracketOpen (fieldType (ArgSep fieldType)*)? ArgSep? BracketClose ;
 fieldType	: Identifier TypeSep type ;
-parametricType	: base=simpleType BracketOpen params=typeList BracketClose ;
-simpleType	: Identifier | Type ;
+parametricType	: base=typeReference BracketOpen params=typeList BracketClose ;
+typeReference	: Identifier | Type ;
 
 typeList	: type (ArgSep type)* ArgSep? ;
