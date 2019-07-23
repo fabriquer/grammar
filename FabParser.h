@@ -652,6 +652,7 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *Identifier();
     antlr4::tree::TerminalNode *Type();
+    TermContext *term();
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
    
