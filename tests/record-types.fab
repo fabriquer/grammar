@@ -37,3 +37,22 @@ bar:record[def:string, ref:string] = record
 # CHECK:    })
 # CHECK:  ;)
 };
+
+# CHECK: (value SomeRecordType :
+# CHECK:    (type (typeReference type))
+# CHECK:    =
+# CHECK:    (expression (
+# CHECK:      term (
+# CHECK:        typeDeclaration type (
+# CHECK:          type (
+# CHECK:            recordType record [
+# CHECK:            (fieldType hello : (type (typeReference string)))
+# CHECK:            ,
+# CHECK:            (fieldType goodbye : (
+# CHECK:              type (
+# CHECK:                recordType record [
+# CHECK:                (fieldType ok : (type (typeReference string)))
+# CHECK:                ])))
+# CHECK:            ])))))
+# CHECK:    ;)
+SomeRecordType:type = type record[hello:string, goodbye:record[ok:string]];
