@@ -25,7 +25,7 @@ check: java
 	lit -sv tests
 
 clean:
-	$(RM) $(GENERATED_SRC_DIR) *.html
+	$(RM) $(GENERATED_CXX_DIR)/*.* $(GENERATED_JAVA_DIR)/* *.html
 
 doc: Fabrique.html Fabrique.pdf
 
