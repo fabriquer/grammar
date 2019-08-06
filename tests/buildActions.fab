@@ -22,7 +22,7 @@
 # CHECK:           )
 # CHECK:          )
 # CHECK:          ,
-# CHECK:          (parameter obj : 
+# CHECK:          (parameter obj :
 # CHECK:            [[FILE_OUT:\(type \(parametricType \(typeReference file\) \[ \(typeList \(type \(typeReference out\)\)\) \]\)\)]]
 # CHECK:          )
 # CHECK:        )
