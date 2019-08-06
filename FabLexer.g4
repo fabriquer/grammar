@@ -37,10 +37,11 @@ WS		: [ \t\r\n]+ -> skip ;
 // Keywords:
 Action		: 'action' ;
 FileListStart	: 'files(' -> pushMode(FileList) ;   // enter "file list" mode
-Foreach		: 'foreach' ;
+For		: 'for' ;
 Function	: 'function' ;
 Else		: 'else' ;
 If		: 'if' ;
+In		: 'in' ;
 Record		: 'record' ;
 Type		: 'type' ;
 

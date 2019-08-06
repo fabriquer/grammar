@@ -7,7 +7,7 @@
 
 # CHECK: (value foo =
 # CHECK:   (expression (
-# CHECK:     foreach x <-
+# CHECK:     for x in
 # CHECK:       (expression
 # CHECK:         list [
 # CHECK:           (literal 1)
@@ -18,7 +18,7 @@
 # CHECK:         (nameReference x)
 # CHECK:       {{[)]+}}
 # CHECK: ;)
-foo = foreach x <- [ 1 2 3 ]
+foo = for x in [ 1 2 3 ]
 {
 	x
 };
@@ -30,7 +30,7 @@ foo = foreach x <- [ 1 2 3 ]
 
 # CHECK: (value bar =
 # CHECK:   (expression (
-# CHECK:     foreach x <-
+# CHECK:     for x in
 # CHECK:       (expression
 # CHECK:         list [
 # CHECK:           (literal 1)
@@ -39,6 +39,6 @@ foo = foreach x <- [ 1 2 3 ]
 # CHECK:         {{[)]+}}
 # CHECK:       (nameReference x)
 # CHECK: ;)
-bar = foreach x <- [ 1 2 3 ] x;
+bar = for x in [ 1 2 3 ] x;
 
 # CHECK: <EOF>)

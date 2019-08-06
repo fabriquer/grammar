@@ -16,7 +16,7 @@
 # CHECK:      (compoundExpr {
 # CHECK:        (value local_var = (expression (term (literal 42))) ;)
 # CHECK:        (expression
-# CHECK:          (foreach
+# CHECK:          (for
 # CHECK:          )
 # CHECK:        )
 # CHECK:      })
@@ -26,7 +26,7 @@ foo = function(ints:list[int]): list[int]
 {
 	local_var = 42;
 
-	foreach x <- ints
+	for x in ints
 	{
 		f(x)
 	}
@@ -41,7 +41,7 @@ foo = function(ints:list[int]): list[int]
 # CHECK:      :
 # CHECK:      [[FILE_LIST:\(type \(parametricType \(typeReference list\) \[ \(typeList \(type \(typeReference file\)\)\) \]\)\)]]
 # CHECK:      (expression
-# CHECK:        (foreach foreach name <-
+# CHECK:        (foreach for name in
 # CHECK:          (nameReference names)
 # CHECK:          (expression (term (term (nameReference file))
 # CHECK:            ( (arguments
@@ -54,7 +54,7 @@ foo = function(ints:list[int]): list[int]
 # CHECK:      )
 # CHECK:   ;)
 bar = function(names:list[string]): list[file]
-	foreach name <- names
+	for name in names
 		file(name);
 
 # CHECK: (value baz :

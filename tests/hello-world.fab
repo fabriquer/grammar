@@ -43,8 +43,8 @@ link = action('cc ${objects} -o ${bin}'
 srcs = files(hello.c world.c);
 
 # CHECK:  (value objs =
-# CHECK:    (foreach
-# CHECK:      src <-
+# CHECK:    (for
+# CHECK:      src in
 # CHECK:      (nameReference srcs)
 # CHECK:      (expression (term (term (nameReference cc)) (
 # CHECK:        (positionalArguments
@@ -60,7 +60,7 @@ srcs = files(hello.c world.c);
 # CHECK:      )))
 # CHECK:    )
 # CHECK:  ;)
-objs = foreach src <- srcs
+objs = for src in srcs
 	cc(src, obj = src + '.o')
 	;
 

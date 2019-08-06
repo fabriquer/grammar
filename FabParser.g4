@@ -77,7 +77,7 @@ fieldQuery
 
 // Transforms one sequence into another
 foreach
-	: Foreach loopVarName=Identifier (TypeSep type)? Input src=expression
+	: For loopVarName=Identifier (TypeSep type)? In src=expression
 	  body=expression
 	;
 
@@ -183,6 +183,6 @@ functionType	: ParenOpen params=typeList? ParenClose Produces result=type ;
 recordType	: Record BracketOpen (fieldType (ArgSep fieldType)*)? ArgSep? BracketClose ;
 fieldType	: Identifier TypeSep type ;
 parametricType	: base=typeReference BracketOpen params=typeList BracketClose ;
-typeReference	: Identifier | Type | term ;
+typeReference	: Identifier | In | Type | term ;
 
 typeList	: type (ArgSep type)* ArgSep? ;
